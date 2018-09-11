@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rutinas',
-    #Externas
-    'bootstrap4',
 ]
 
 MIDDLEWARE = [
