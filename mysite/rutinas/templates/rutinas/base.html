@@ -25,18 +25,20 @@
             <div class="fluid-container content">
                 <h3 class=text-center>Bienvenido a Action's</h3>
                 <hr />
-                <form method="POST">
+                <form method="POST" action="{% url 'login' %}">
                     {% csrf_token %}
                     <div class="col-sm-12 col-sm-offset-3">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Dirección de e-mail</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                            <!-- <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email"> -->
+                            {{ form.username }}
                         </div>
                     </div>
                     <div class="col-sm-12 col-sm-offset-3">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Contraseña</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+                            <!-- <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña"> -->
+                            {{ form.password }}
                         </div>
                     </div>
                     <div class="text-center col-sm-12 col-sm-offset-3">
@@ -45,6 +47,7 @@
                     </div>
                     <div class="text-center col-sm-12 col-sm-offset-3">
                         <button id="recuperar" type="button" class="btn btn-link">Recuperar contraseña</button>
+                        {{ form.errors }}
                     </div>
                 </form>
             </div>

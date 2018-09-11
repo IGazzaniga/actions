@@ -4,4 +4,4 @@ from django.shortcuts import render
 
 
 def index_view(request):
-    return render(request, "rutinas/base.html", context={"value1": "world"})
+    return render(request, "rutinas/rutina.html")
