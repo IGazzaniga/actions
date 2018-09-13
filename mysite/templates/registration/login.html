@@ -53,10 +53,12 @@
                     <button type="submit" class="center btn btn-primary">Ingresar</button>
                     <hr />
                 </div>
+                {% block recuperar %}
                 <div class="text-center col-sm-12 col-sm-offset-3">
                     <a href="{% url 'password_reset' %}"><button id="recuperar" type="button" class="btn btn-link">Recuperar
                             contraseña</button></a>
                 </div>
+                {% endblock %}
             </form>
             {% endblock %}
         </div>
