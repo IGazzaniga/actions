@@ -22,6 +22,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^rutinas/', include('rutinas.urls')),
-    url(r'^login/', LoginView.as_view(template_name = 'rutinas/base.html'), name='login')
+    url(r'^login/', LoginView.as_view(template_name = 'registration/login.html'), name='login')
 ]
 

@@ -23,10 +23,19 @@
     {% block contenido %}
     <div class="fluid-container back">
         <div class="col-8 col-sm-8 col-md-8 col-lg-4 col-xl-4 fluid-container div-center">
+            {% if next %}
+            {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+                please login with an account that has access.</p>
+            {% else %}
+            <p>Please login to see this page.</p>
+            {% endif %}
+            {% endif %}
+            {% block formulario %}
             <div class="fluid-container content">
-                <h3 class=text-center>Bienvenido a Action's</h3>
+                <h3 class=text-center>Action's Gym</h3>
                 <hr />
-                <form method="POST" action="{% url 'login' %}">
+                <form method="POST">
                     {% csrf_token %}
                     {% for hidden_field in form.hidden_fields %}
                         {{ hidden_field }}
@@ -65,9 +74,10 @@
                         <hr />
                     </div>
                     <div class="text-center col-sm-12 col-sm-offset-3">
-                        <button id="recuperar" type="button" class="btn btn-link">Recuperar contraseña</button>
+                        <a href="{% url 'password_reset' %}"><button id="recuperar" type="button" class="btn btn-link">Recuperar contraseña</button></a>
                     </div>
                 </form>
+                {% endblock %}
             </div>
             </span>
         </div>
