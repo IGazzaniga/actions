@@ -1,0 +1,67 @@
+{% extends "registration/login.html" %}
+{% load staticfiles %}
+    {% block contenido %}
+    <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <span><i class="fas fa-bars"></i></span>
+                </button>
+            </div>
+        </nav>
+    </div>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3 class="text-center">Action's</h3>
+            </div>
+            <div>
+                <img id="foto-perfil-menu" class="img-fluid" src="http://www.volker-bonacker.de/wp-content/uploads/2009/01/profil.jpg" alt="">
+            </div>    
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">Home 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="#">Page 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Portfolio</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+        </nav>
+    
+    </div>
+    {% endblock %}
+    {% block scripts %}
+    <script language="JavaScript" type="text/javascript" src="{% static 'rutinas/js/sidebar-toggle.js' %}"></script>
+    {% endblock %}
