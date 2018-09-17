@@ -51,6 +51,7 @@ div.content {
     min-width: 250px;
     max-width: 250px;
     min-height: 100vh;
+    border-top-right-radius: 15px;
 }
 #sidebar.active {
     margin-left: -250px;
@@ -133,4 +134,8 @@ ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
     background: rgb(136, 14, 14));
+}
+#img-actions {
+    width: 100%;
+    border-radius: 25px;
 }
