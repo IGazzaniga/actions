@@ -1,15 +1,5 @@
-{% extends "registration/login.html" %}
-{% load staticfiles %}
-    {% block contenido %}
-    <div id="content">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-info">
-                    <span><i class="fas fa-bars"></i></span>
-                </button>
-            </div>
-        </nav>
-    </div>
+{% extends "inicio-alumno.html" %}
+    {% load staticfiles %}
     {% block menu %}
     <div class="wrapper">
         <!-- Sidebar -->
@@ -18,17 +8,18 @@
                 <img src="../static/rutinas/img/a_marca.jpg" id="img-actions">
             </div>
             <div>
-                <img id="foto-perfil-menu" class="img-fluid" src="http://www.volker-bonacker.de/wp-content/uploads/2009/01/profil.jpg" alt="">
-            </div>    
+                <img id="foto-perfil-menu" class="img-fluid" src="http://www.volker-bonacker.de/wp-content/uploads/2009/01/profil.jpg"
+                    alt="">
+            </div>
             <ul class="list-unstyled components">
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <a href="#">Home asdasd</a>
+                            <a href="#">Frutillas</a>
                         </li>
                         <li>
-                            <a href="#">Home  asdasda2</a>
+                            <a href="#">Frutillasa2</a>
                         </li>
                         <li>
                             <a href="#">Home 3</a>
@@ -65,8 +56,4 @@
         </nav>
     
     </div>
-    {% endblock %}
-    {% endblock %}
-    {% block scripts %}
-    <script language="JavaScript" type="text/javascript" src="{% static 'rutinas/js/sidebar-toggle.js' %}"></script>
     {% endblock %}
