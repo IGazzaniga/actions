@@ -9,19 +9,20 @@ class Sucursal (models.Model):
     nombre = models.CharField(max_length=30, default='')
     domicilio = models.CharField(max_length=30, default='')
     telefono = models.BigIntegerField(default=0)
+
     def __str__(self):
         return '%s %s' % (self.nombre, self.domicilio)
-
-
+    
 class Proveedor(models.Model):
     id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=30, default='')
     apellido = models.CharField(max_length=30, default='')
     mail = models.EmailField(max_length=254, default='')
-    telefono = models.BigIntegerField(default=0)
+    telefono = models.BigIntegerField(help_text="Introduzca un número de teléfono válido", default=0)
 
     def __str__(self):
-        return '%s %s' % (self.nombre, self.apellido)
+        return self.nombre +" "+ self.apellido
+    
 class Producto (models.Model):
     id = models.AutoField(primary_key=True)
     TIPOS = (
@@ -41,7 +42,7 @@ class Producto (models.Model):
     sucursal = models.ForeignKey(Sucursal, on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.nombre
+        return self.nombre +", "+self.tipo_producto
 
 class Administrador(models.Model):
     id = models.AutoField(primary_key=True)
@@ -51,8 +52,8 @@ class Administrador(models.Model):
     sucursal = models.ForeignKey(Sucursal, on_delete=models.PROTECT)
 
     def __str__(self):
-        return '%s %s' % (self.nombre, self.apellido)
-
+        return self.nombre + " " + self.apellido
+    
 class Profesor(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -60,11 +61,12 @@ class Profesor(models.Model):
     apellido = models.CharField(max_length=30, default='')
     num_matricula = models.IntegerField(default=0)
     mail = models.EmailField(max_length=254, default='')
-    telefono = models.BigIntegerField(default=0)
+    telefono = models.BigIntegerField(help_text="Introduzca un número de teléfono válido", default=0)
     domicilio = models.CharField(max_length=30, default='')
 
     def __str__(self):
-        return '%s %s' % (self.nombre, self.apellido)
+        return self.nombre + " " + self.apellido + ", Matrícula: "+str(self.num_matricula)
+    
 class Rutina(models.Model):
     id = models.AutoField(primary_key=True)
     SESIONES = (
@@ -76,9 +78,7 @@ class Rutina(models.Model):
         choices=SESIONES
     )
 
-    def __str__(self):
-        return self.id
-
+    
 class Ejercicio(models.Model):
     id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=30, default='')
@@ -93,8 +93,8 @@ class Ejercicio(models.Model):
     )
 
     def __str__(self):
-        return self.nombre
-
+        return self.nombre + ", " + self.tren
+    
 class Cliente(models.Model):
     """Un cliente del gimnasio"""
     id = models.AutoField(primary_key=True)
@@ -103,13 +103,13 @@ class Cliente(models.Model):
     apellido = models.CharField(max_length=30, default='')
     dni = models.IntegerField(default=0)
     mail = models.EmailField(max_length=254, default='')
-    telefono = models.BigIntegerField(default=0)
+    telefono = models.BigIntegerField(help_text="Introduzca un número de teléfono válido", default=0)
     domicilio = models.CharField(max_length=30, default='')
     profesor = models.ForeignKey(Profesor, on_delete=models.PROTECT)
     rutinas = models.ManyToManyField(Rutina, blank=True)
 
     def __str__(self):
-        return self.nombre
+        return self.nombre + " " + self.apellido
 
 class Pago(models.Model):
     id = models.AutoField(primary_key=True)
@@ -127,13 +127,13 @@ class Pago(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
 
     def __str__(self):
-        return '%s %s' % (self.fecha, self.cliente)
-        
+        return str(self.fecha) + ", Medio de pago: " + self.medio_pago
+    
 class FichaMedica(models.Model):
     id = models.AutoField(primary_key=True)
     fecha_nacimiento = models.DateField(default= now)
-    altura = models.IntegerField()
-    peso = models.DecimalField(max_digits=5, decimal_places=2)
+    altura = models.IntegerField(help_text="Ingrese la altura en centímetros")
+    peso = models.IntegerField(help_text="Ingrese el peso en kg")
     SEXO = (
         ('Masculino', 'Masculino'),
         ('Femenino', 'Femenino'),
@@ -144,12 +144,10 @@ class FichaMedica(models.Model):
     )
     mutual = models.CharField(max_length=30, default='')
     observaciones = models.TextField(default='')
-    telefono_emergencia = models.BigIntegerField(default=0)
+    telefono_emergencia = models.BigIntegerField(help_text="Introduzca un número de teléfono válido", default=0)
     cliente = models.OneToOneField(Cliente, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.cliente
-
+    
 class RutinaCliente(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.PROTECT)
     rutina = models.ForeignKey(Rutina, on_delete=models.PROTECT)
