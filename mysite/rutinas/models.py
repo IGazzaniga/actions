@@ -4,18 +4,15 @@ from django.utils.timezone import now
 # Create your models here.
 
 
-class Inventario (models.Model):
-    id = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=30, default='')
-
 class Sucursal (models.Model):
     id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=30, default='')
     domicilio = models.CharField(max_length=30, default='')
     telefono = models.BigIntegerField(default=0)
-    inventario = models.OneToOneField(Inventario, on_delete=models.PROTECT)
-    
-    
+    def __str__(self):
+        return '%s %s' % (self.nombre, self.domicilio)
+
+
 class Proveedor(models.Model):
     id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=30, default='')
@@ -23,6 +20,8 @@ class Proveedor(models.Model):
     mail = models.EmailField(max_length=254, default='')
     telefono = models.BigIntegerField(default=0)
 
+    def __str__(self):
+        return '%s %s' % (self.nombre, self.apellido)
 class Producto (models.Model):
     id = models.AutoField(primary_key=True)
     TIPOS = (
@@ -39,7 +38,7 @@ class Producto (models.Model):
     )
     nombre = models.CharField(max_length=200, default='')
     proveedor = models.ForeignKey(Proveedor, on_delete=models.PROTECT)
-    inventario = models.ForeignKey(Inventario, on_delete=models.CASCADE)
+    sucursal = models.ForeignKey(Sucursal, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.nombre
@@ -51,6 +50,8 @@ class Administrador(models.Model):
     apellido = models.CharField(max_length=30, default='')
     sucursal = models.ForeignKey(Sucursal, on_delete=models.PROTECT)
 
+    def __str__(self):
+        return '%s %s' % (self.nombre, self.apellido)
 
 class Profesor(models.Model):
     id = models.AutoField(primary_key=True)
@@ -62,6 +63,8 @@ class Profesor(models.Model):
     telefono = models.BigIntegerField(default=0)
     domicilio = models.CharField(max_length=30, default='')
 
+    def __str__(self):
+        return '%s %s' % (self.nombre, self.apellido)
 class Rutina(models.Model):
     id = models.AutoField(primary_key=True)
     SESIONES = (
@@ -103,8 +106,10 @@ class Cliente(models.Model):
     telefono = models.BigIntegerField(default=0)
     domicilio = models.CharField(max_length=30, default='')
     profesor = models.ForeignKey(Profesor, on_delete=models.PROTECT)
-    rutinas = models.ManyToManyField(Rutina)
+    rutinas = models.ManyToManyField(Rutina, blank=True)
 
+    def __str__(self):
+        return self.nombre
 
 class Pago(models.Model):
     id = models.AutoField(primary_key=True)
@@ -121,6 +126,8 @@ class Pago(models.Model):
     )
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return '%s %s' % (self.fecha, self.cliente)
         
 class FichaMedica(models.Model):
     id = models.AutoField(primary_key=True)

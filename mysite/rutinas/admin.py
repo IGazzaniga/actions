@@ -2,11 +2,14 @@ from django.contrib import admin
 from .models import (Proveedor, Sucursal, Producto, 
 Administrador, Profesor, Rutina, Ejercicio, Cliente, Pago, FichaMedica)
 
+
+class AdministradorAdmin(admin.ModelAdmin):
+    fields = ['user','nombre', 'apellido', 'sucursal']
+admin.site.register(Administrador, AdministradorAdmin)
+
 class SucursalAdmin(admin.ModelAdmin):
-    fields = ['nombre', 'domicilio','telefono', 'inventario']
-
+    fields = ['nombre', 'domicilio', 'telefono']
 admin.site.register(Sucursal, SucursalAdmin)
-
 
 class ProveedorAdmin(admin.ModelAdmin):
     fields = ['nombre', 'apellido', 'mail','telefono']
@@ -14,8 +17,7 @@ class ProveedorAdmin(admin.ModelAdmin):
 admin.site.register(Proveedor, ProveedorAdmin)
 
 class ProductoAdmin(admin.ModelAdmin):
-    fields = ['nombre','tipo_producto', 'proveedor', 'inventario']
-
+    fields = ['nombre','tipo_producto', 'proveedor', 'sucursal']
 admin.site.register(Producto, ProductoAdmin)
 
 class ProfesorAdmin(admin.ModelAdmin):
