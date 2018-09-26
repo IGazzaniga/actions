@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import (url, include)
 from django.contrib import admin
 from rutinas import views
+from django.conf import settings
+from django.views.static import serve
 from django.contrib.auth.views import LoginView
 
 urlpatterns = [
@@ -25,3 +27,9 @@ urlpatterns = [
     url(r'^login/', LoginView.as_view(template_name = 'registration/login.html'), name='login')
 ]
 
+if settings.DEBUG:
+    urlpatterns += [
+        url(r'^media/(?P<path>.*)$', serve, {
+            'document_root': settings.MEDIA_ROOT,
+        }),
+    ]

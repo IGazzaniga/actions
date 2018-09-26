@@ -67,22 +67,11 @@ class Profesor(models.Model):
     def __str__(self):
         return self.nombre + " " + self.apellido + ", Matrícula: "+str(self.num_matricula)
     
-class Rutina(models.Model):
-    id = models.AutoField(primary_key=True)
-    SESIONES = (
-        ('3 días', '3 días'),
-        ('5 días', '5 días'),
-    )
-    sesiones = models.CharField(
-        max_length=20,
-        choices=SESIONES
-    )
 
-    
 class Ejercicio(models.Model):
     id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=30, default='')
-    gif = models.ImageField
+    gif = models.ImageField()
     TRENES = (
         ('Tren superior', 'Tren superior'),
         ('Tren inferior', 'Tren inferior'),
@@ -94,6 +83,20 @@ class Ejercicio(models.Model):
 
     def __str__(self):
         return self.nombre + ", " + self.tren
+
+class Rutina(models.Model):
+    id = models.AutoField(primary_key=True)
+    numero = models.IntegerField(default=0)
+    SESIONES = (
+        ('3 días', '3 días'),
+        ('5 días', '5 días'),
+    )
+    sesiones = models.CharField(
+        max_length=20,
+        choices=SESIONES
+    )
+    ejercicios = models.ManyToManyField(Ejercicio)
+    
     
 class Cliente(models.Model):
     """Un cliente del gimnasio"""

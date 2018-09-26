@@ -25,6 +25,15 @@ class ProfesorAdmin(admin.ModelAdmin):
 
 admin.site.register(Profesor, ProfesorAdmin)
 
+class EjercicioAdmin(admin.ModelAdmin):
+    fields = ['nombre', 'gif','tren']
+admin.site.register(Ejercicio, EjercicioAdmin)
+
+class RutinaAdmin(admin.ModelAdmin):
+    fields = ['numero','sesiones', 'ejercicios'] 
+    
+
+admin.site.register(Rutina, RutinaAdmin)
 
 class FichaMedicaInline(admin.TabularInline):
     model = FichaMedica
