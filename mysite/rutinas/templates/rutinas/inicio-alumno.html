@@ -1,5 +1,8 @@
-{% extends "registration/login.html" %}
+{% extends "base.html" %}
 {% load staticfiles %} <!-- Se cargan los archivos estáticos de CSS, HTML, etc -->
+{% block styles%}
+<link rel="stylesheet" href="{% static 'rutinas/css/style-alumno.css' %}">
+{% endblock %}
     {% block contenido %} <!-- Se define el bloque que encierra todo el contenido de esta vista -->
         <div id="content">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -10,6 +13,15 @@
                 </div>
             </nav>
         </div>
+        
+        <div class="col-8 col-sm-8 col-md-8 col-lg-4 col-xl-4 fluid-container div-center">
+            <h1 >¡Vamos!</h1>
+            <p >Arranca a entrenar</p><br>
+            <p >Tu cuota vence el xx/xx/xx</p><br>
+            <a href="{% url 'rutinaAlumno' %}"><button type="button" class="btn btn-success ">Ir a mis rutinas</button></a>
+        </div>
+
+
         {% block menu %} <!-- En este bloque se define el menú lateral -->
             <div class="wrapper">
                 <!-- Sidebar -->
@@ -22,41 +34,19 @@
                     </div>    
                     <ul class="list-unstyled components">
                         <li class="active">
-                            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                            <ul class="collapse list-unstyled" id="homeSubmenu">
-                                <li>
-                                    <a href="#">Home asdasd</a>
-                                </li>
-                                <li>
-                                    <a href="#">Home  asdasda2</a>
-                                </li>
-                                <li>
-                                    <a href="#">Home 3</a>
-                                </li>
-                            </ul>
+                            <a href="#">Home</a>
                         </li>
                         <li>
-                            <a href="#">About</a>
+                            <a href="#">Perfil</a>
                         </li>
                         <li>
-                            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-                            <ul class="collapse list-unstyled" id="pageSubmenu">
-                                <li>
-                                    <a href="#">Page 1</a>
-                                </li>
-                                <li>
-                                    <a href="#">Page 2</a>
-                                </li>
-                                <li>
-                                    <a href="#">Page 3</a>
-                                </li>
-                            </ul>
+                            <a href="#">Pagos</a>
                         </li>
                         <li>
-                            <a href="#">Portfolio</a>
+                            <a href="#">Rutinas</a>
                         </li>
                         <li>
-                            <a href="#">Contact</a>
+                            <a href="#">Historial de Rutinas</a>
                         </li>
                         <li>
                             <a href="{% url 'logout' %}">Cerrar Sesión</a>
