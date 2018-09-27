@@ -2,7 +2,7 @@
 {% load widget_tweaks %}
 <!doctype html>
 <html lang="es">
-
+<!-- Archivo base, a partir del cual heredan todos los otros templates -->
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    {% block contenido %}
+    {% block contenido %} <!-- Se define el bloque que encierra todo el contenido de esta vista -->
     <h1>Bienvenido a tus rutinas</h1>
     {% endblock %}
 
