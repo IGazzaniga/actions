@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from rutinas.models import Cliente
 
 # Create your views here.
 
@@ -10,4 +11,7 @@ def index_view(request):
     
 @login_required
 def rutina_view(request):
-    return render(request, "rutinas/rutina.html")
+    
+    return render(request, "rutinas/rutinas.html")
+
+
