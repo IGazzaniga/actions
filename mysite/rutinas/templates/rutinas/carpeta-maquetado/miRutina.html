@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/miRutina.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/popper.js/dist/umd/popper.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <script src="assets/js/effects.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="menu">
+        <span class="logo"><i class="fab fa-autoprefixer"></i></span>
+        <span class="exit" onclick="window.open('index.html', '_self')"><i class="fas fa-sign-out-alt"></i></span> 
+        <div class="burger-icon" onclick="openMenu()">
+            <div class="bar bar1"></div>
+            <div class="bar bar2"></div>
+            <div class="bar bar3"></div>
+        </div>
+    </div>
+
+    <div class="menu-lateral">
+        <i class="fas fa-times" onclick="closeMenu()"></i>
+        <div class="image">
+        <img src="assets/img/profile.jpeg" width="110%" style=" border-radius: 100%; ">
+        </div>
+        <ul>
+            <li onclick="window.open('home.html', '_self')">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </li>
+            <li>
+                <i class="fas fa-user"></i>
+                <span>Perfil</span>
+            </li>
+            <li>
+                <i class="fas fa-dumbbell"></i>
+                <span>Rutinas</span>
+            </li>
+            <li>
+                <i class="fas fa-dollar-sign"></i>
+                <span>Pagos</span>
+            </li>
+            <li>
+                <i class="fas fa-store"></i>
+                <span>Store</span>
+            </li>
+            <li>
+                <i class="fas fa-question"></i>
+                <span>FAQ</span>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="full-container semana">
+        <p>Semana 1</p>
+        <p>Semana 1</p>
+
+        <i class="fas fa-angle-right"></i>
+    </div>
+
+    <div class="container dia dia1" onclick="showExercise()">
+        <h1 onclick="showExercise()">Día 1 <i class="fas fa-angle-down"></i> </h1>
+    </div>
+
+    <div class="full-container ejercicios">
+        <div class="full-container ejercicio">
+            <span>PressPecho <i class="fas fa-check-circle"></i></span>
+            <i class="fas fa-angle-right arrowE"></i>
+        </div>
+
+        <div class="full-container ejercicio">
+            <span>PressMilitar <i class="fas fa-check-circle"></i></span>
+            <i class="fas fa-angle-right arrowE"></i>
+        </div>
+
+        <div class="full-container ejercicio">
+            <span>Dominadas <i class="fas fa-check-circle"></i></span>
+            <i class="fas fa-angle-right arrowE"></i>
+        </div>
+
+        <div class="full-container ejercicio">
+            <span>Remo <i class="fas fa-check-circle"></i></span>
+            <i class="fas fa-angle-right arrowE"></i>
+        </div>
+
+        <div class="full-container ejercicio ">
+            <span>Triceps <i class="fas fa-check-circle"></i></span>
+            <i class="fas fa-angle-right arrowE"></i>
+        </div>
+
+        <div class="full-container ejercicio ultimoE">
+            <span>Biceps <i class="fas fa-check-circle"></i></span>
+            <i class="fas fa-angle-right arrowE"></i>
+        </div>
+    </div>
+
+
+    <div class="container dia dia2" onclick="showExercise()">
+        <h1 onclick="showExercise()">Día 2 <i class="fas fa-angle-down"></i> </h1>
+    </div>
+
+    <div class="full-container ejercicios">
+        <div class="full-container ejercicio">
+            <span>Sentadilla <i class="fas fa-check-circle"></i></span>
+            <i class="fas fa-angle-right arrowE"></i>
+        </div>
+
+        <div class="full-container ejercicio">
+            <span>PesoMuerto</span>
+            <i class="fas fa-angle-right arrowE"></i>
+        </div>
+
+        <div class="full-container ejercicio">
+            <span>Femorales</span>
+            <i class="fas fa-angle-right arrowE"></i>
+        </div>
+
+        <div class="full-container ejercicio">
+            <span>Estocadas</span>
+            <i class="fas fa-angle-right arrowE"></i>
+        </div>
+
+        <div class="full-container ejercicio ">
+            <span>Gemelos</span>
+            <i class="fas fa-angle-right arrowE"></i>
+        </div>
+
+        <div class="full-container ejercicio ultimoE">
+            <span>Cinta</span>
+            <i class="fas fa-angle-right arrowE"></i>
+        </div>
+    </div>
+
+    <div class="container dia dia3" onclick="showExercise()">
+        <h1 onclick="showExercise()">Día 3 <i class="fas fa-angle-down"></i> </h1>
+    </div>
+    
+    <div class="full-container ejercicios">
+        <div class="full-container ejercicio">
+            <span>PressPecho <i class="fas fa-check-circle"></i></span>
+            <i class="fas fa-angle-right arrowE"></i>
+        </div>
+
+        <div class="full-container ejercicio">
+            <span>PressMilitar</span>
+            <i class="fas fa-angle-right arrowE"></i>
+        </div>
+
+        <div class="full-container ejercicio">
+            <span>Dominadas</span>
+            <i class="fas fa-angle-right arrowE"></i>
+        </div>
+
+        <div class="full-container ejercicio">
+            <span>Remo</span>
+            <i class="fas fa-angle-right arrowE"></i>
+        </div>
+
+        <div class="full-container ejercicio ">
+            <span>Triceps</span>
+            <i class="fas fa-angle-right arrowE"></i>
+        </div>
+
+        <div class="full-container ejercicio ultimoE">
+            <span>Biceps</span>
+            <i class="fas fa-angle-right arrowE"></i>
+        </div>
+    </div>
+
+
+
+</body>
+</html>

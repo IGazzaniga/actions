@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css?family=Righteous");
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Righteous", cursive; }
+
+*:focus {
+  outline: none; }
+
+.contenido {
+  position: absolute;
+  height: 600px;
+  width: 100vw;
+  overflow: hidden; }
+  .contenido img {
+    position: absolute;
+    top: 0;
+    right: -350px;
+    height: 100%; }
+  .contenido form {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background-color: #0d58e244; }
+    .contenido form i {
+      position: absolute;
+      top: 5%;
+      left: 50%;
+      -webkit-transform: translate(-50%, 0);
+      -ms-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+      font-size: 100px;
+      color: white; }
+    .contenido form .user, .contenido form .password, .contenido form .password2 {
+      position: absolute;
+      width: 70%;
+      height: 100px;
+      left: 50%;
+      -webkit-transform: translate(-50%, 0);
+      -ms-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+      /* background-color: black; */
+      /* h1{
+                text-align: left;
+                font-size: 20px;
+                color: white;
+            } */ }
+      .contenido form .user span, .contenido form .password span, .contenido form .password2 span {
+        position: absolute;
+        height: 50px;
+        width: 20%;
+        bottom: 0;
+        left: 0;
+        background-color: white;
+        border-radius: 200px 0px 0px 200px; }
+        .contenido form .user span i, .contenido form .password span i, .contenido form .password2 span i {
+          font-size: 30px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          -webkit-transform: translate(-50%, -50%);
+          -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+          color: blue; }
+      .contenido form .user input, .contenido form .password input, .contenido form .password2 input {
+        position: absolute;
+        height: 50px;
+        width: 80%;
+        right: 0;
+        bottom: 0;
+        border: none;
+        font-size: 20px;
+        border-radius: 0px 200px 200px 0px; }
+      .contenido form .user ::-webkit-input-placeholder, .contenido form .password ::-webkit-input-placeholder, .contenido form .password2 ::-webkit-input-placeholder {
+        font-size: 18px; }
+      .contenido form .user ::-moz-placeholder, .contenido form .password ::-moz-placeholder, .contenido form .password2 ::-moz-placeholder {
+        font-size: 18px; }
+      .contenido form .user :-ms-input-placeholder, .contenido form .password :-ms-input-placeholder, .contenido form .password2 :-ms-input-placeholder {
+        font-size: 18px; }
+      .contenido form .user ::-ms-input-placeholder, .contenido form .password ::-ms-input-placeholder, .contenido form .password2 ::-ms-input-placeholder {
+        font-size: 18px; }
+      .contenido form .user ::placeholder, .contenido form .password ::placeholder, .contenido form .password2 ::placeholder {
+        font-size: 18px; }
+    .contenido form .user {
+      top: 25%; }
+    .contenido form .password {
+      top: 40%; }
+    .contenido form .password2 {
+      top: 55%; }
+  .contenido .register {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    top: 80%;
+    width: 70%;
+    font-size: 30px;
+    border: none;
+    color: white;
+    background-color: #007bff;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    letter-spacing: 3px;
+    border-radius: 200px; }

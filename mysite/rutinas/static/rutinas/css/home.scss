@@ -1,0 +1,66 @@
+$red: #e22e0d;
+$font: 'Anton', sans-serif;
+
+*:focus {
+    outline: none;
+}
+
+.home {
+    background-image: url('../img/fondo6.jpg');
+    background-size: auto 120%;
+    background-position: 0 -75px;
+    background-repeat: no-repeat;  
+    position: absolute;
+    top: 75px;
+    height: calc(600px - 75px);
+    width: 100%;
+    p{
+        text-transform: uppercase;
+        line-height: 80px;
+        background-color: $red;
+        color: rgb(255, 255, 255);
+        mix-blend-mode: darken;
+        position: absolute;
+        top: 0%;
+        right: 0%;
+        width: 50%;
+        height: 525px;
+        text-align: left;
+        font-family: arial;
+        font-size: 80px;
+        margin: 0;
+        padding: 0;
+        opacity: 1;
+        
+    }
+    p:last-child {
+        mix-blend-mode: normal;
+        color: transparent;
+        background: none;
+        box-shadow: 0 0 16px #000, 0 0 32px #000;
+      }
+      
+    h1 {
+        background-color: #fff;
+        color: #000;
+        mix-blend-mode: screen;
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        width: 70%;
+        text-align: center;
+        transform: translate(-50%, 0%);
+        padding: 16px;
+        border-radius: 8px;
+        font-family: arial;
+        font-size: 3em;
+        margin: 0;
+        opacity: 0.9;
+      }
+      h1:last-child {
+        mix-blend-mode: normal;
+        color: transparent;
+        background: none;
+        box-shadow: 0 0 16px #000, 0 0 32px #000;
+      }
+  }
