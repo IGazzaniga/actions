@@ -129,6 +129,9 @@
     transition: .5s;
     /* cross */
     /* imagen superior */ }
+    .menu-lateral a{
+      color: white !important;
+    }
     .menu-lateral i {
       font-size: 50px;
       color: white;
@@ -156,7 +159,7 @@
       left: 0;
       top: 180px;
       color: white; }
-      .menu-lateral ul li {
+      .menu-lateral ul li  {
         position: relative;
         height: calc(100% / 6);
         line-height: 50px;
@@ -192,4 +195,10 @@
     -webkit-transition: .5s;
     -o-transition: .5s;
     transition: .5s; }
-  
+  a{
+    text-decoration: none;
+    color: black !important;
+  }
+  a:hover{
+    text-decoration: none !important;
+  }

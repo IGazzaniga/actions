@@ -42,6 +42,7 @@
     position: absolute;
     top: 30%;
     left: 50%;
+    text-align: center;
     -webkit-transform: translate(-50%, 0);
     -ms-transform: translate(-50%, 0);
     transform: translate(-50%, 0);
@@ -65,3 +66,48 @@
     letter-spacing: 3px;
     border-radius: 200px; 
 }
+.contenido form i {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    font-size: 100px;
+    color: white; }
+.contenido form .user, .contenido form .password {
+    position: absolute;
+    width: 70%;
+    height: 50px;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    /* background-color: black; */ }
+.contenido form .user span, .contenido form .password span {
+    position: absolute;
+    height: 50px;
+    width: 20%;
+    top: 0;
+    left: 0;
+    background-color: white;
+    border-radius: 200px 0 0 200px; }
+.contenido form .user i, .contenido form .password i {
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    color: #e22e0d; }
+.contenido form .user input, .contenido form .password input {
+    position: absolute;
+    height: 50px;
+    width: 80%;
+    right: 0;
+    border: none;
+    font-size: 20px;
+    border-radius: 0 200px 200px 0; }
+.contenido form .user {
+top: 50%; }

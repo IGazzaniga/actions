@@ -22,9 +22,9 @@
                         <img src="../../static/rutinas/img/profile.jpeg">
                     </div>
                     <ul>
-                        <li onclick="window.open('home.html', '_self')">
+                        <li>
                             <i class="fas fa-home"></i>
-                            <span>Home</span>
+                            <span><a href="{% url 'rutinas' %}">Home</a></span>
                         </li>
                         <li>
                             <i class="fas fa-user"></i>
@@ -48,14 +48,16 @@
                         </li>
                     </ul>
                 </div>
-     {% endblock %} 
+     {% endblock %}
+     {% block principal %} 
     <div class="home">
             <p> <span>Go</span> <br> <span>hard</span> <br> <span>or</span> <br> <span>Go</span> <br> <span>home</span></p>
             <p> <span>Go</span> <br> <span>hard</span> <br> <span>or</span> <br> <span>Go</span> <br> <span>home</span></p>
-            
-            <h1>Mi Rutina</h1>
-            <h1 onclick="window.open('miRutina.html', '_self')">Mi Rutina</h1>
+            {% block acceder_rutina %}
+            <h1><a href="{% url 'rutinaAlumno' %}">Mi Rutina</a></h1>
+            {% endblock %}
         </div>    
+    {% endblock%} <!-- Se cierra el bloque principal -->
     {% endblock %} <!-- Se cierra el bloque del contenido -->
     
     {% block scripts %}

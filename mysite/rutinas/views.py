@@ -11,7 +11,9 @@ def index_view(request):
     
 @login_required
 def rutina_view(request):
-    
-    return render(request, "rutinas/rutinas.html")
+    return render(request, "rutinas/rutina.html")
 
+@login_required
+def info_ejercicio_view(request):
+    return render(request, "rutinas/info-ejercicio.html")
 
