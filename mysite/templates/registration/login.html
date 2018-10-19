@@ -9,10 +9,11 @@
     <div class="contenido">
         {% if next %}
         {% if user.is_authenticated %}
-        <p>Your account doesn't have access to this page. To proceed,
-            please login with an account that has access.</p>
+        <p>No tenés permiso para acceder aquí</p>
         {% else %}
-        <p>Please login to see this page.</p>
+        <div class="alert alert-danger" role="alert">
+            <p>Logueate para acceder a este sitio</p>
+        </div>
         {% endif %}
         {% endif %}
         {% block formulario %}

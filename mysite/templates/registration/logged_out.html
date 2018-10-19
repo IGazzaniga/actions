@@ -1,8 +1,14 @@
 {% extends "registration/login.html" %}
-
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'rutinas/css/logout.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+{% endblock %}
 {% block formulario %}
-<h3 class=text-center>Action's Gym</h3>
-<br><br><br><br>
-<p class="text-center">¡Has cerrado sesión!</p>
-<p class="text-center"><a href="{% url 'login'%}">Click aquí para volver a iniciar sesión.</a></p>
+<img src="{% static 'rutinas/img/fondo-logout.jpeg' %}" alt="">
+<div>
+    <i class="fab fa-autoprefixer"></i>
+    <h2 class="text-center">¡Has cerrado sesión!</h2>
+    <a href="{% url 'login'%}"><button type="submit" class="login">Volver a ingresar</button></a>
+</div>
 {% endblock %}

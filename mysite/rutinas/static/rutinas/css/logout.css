@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css?family=Righteous");
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Righteous", cursive; 
+}
+.contenido {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+.contenido img {
+    position: absolute;
+    top: 0;
+    right: -200px;
+    height: 100%;
+}
+.contenido div{
+    position: absolute;
+    color: white;
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background-color: #e22d0d6c;
+}
+.contenido i{
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    font-size: 100px;
+    color: white;
+}
+.contenido h2{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    color: white;
+}
+.contenido .login {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    top: 60%;
+    left: 50%;
+    width: 70%;
+    font-size: 25px;
+    border: none;
+    color: white;
+    background-color: #007bff;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    letter-spacing: 3px;
+    border-radius: 200px; 
+}
