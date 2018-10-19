@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
-{% block contenido %}
-<div class="fluid-container back">
-    <div class="col-8 col-sm-8 col-md-8 col-lg-4 col-xl-4 fluid-container div-center">
+    {% load static %}
+    {% block styles %}
+    <link rel="stylesheet" href="{% static 'rutinas/css/login.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    {% endblock %}
+    {% block contenido %}
+    <div class="contenido">
         {% if next %}
         {% if user.is_authenticated %}
         <p>Your account doesn't have access to this page. To proceed,
@@ -12,26 +16,23 @@
         {% endif %}
         {% endif %}
         {% block formulario %}
-        <div class="fluid-container content">
-            <h3 class=text-center>Action's Gym</h3>
-            <hr />
-            <form method="POST">
-                {% csrf_token %}
-                {% for hidden_field in form.hidden_fields %}
-                {{ hidden_field }}
-                {% endfor %}
-                {% if form.non_field_errors %}
+        <img src="{% static 'rutinas/img/login.jpg' %}" alt="">
+        <form method="POST">
+            {% csrf_token %}
+            {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field }}
+            {% endfor %}
+            {% if form.non_field_errors %}
                 <div class="alert alert-danger" role="alert">
                     {% for error in form.non_field_errors %}
-                    {{ error }}
+                    <p>Usuario o contraseña incorrectos. Intente nuevamente</p>
                     {% endfor %}
                 </div>
-                {% endif %}
-
-                {% for field in form.visible_fields %}
-                <div class="col-sm-12 col-sm-offset-3">
-                    <div class="form-group">
-                        {{ field.label_tag }}
+            {% endif %}
+            <i class="fab fa-autoprefixer"></i>
+            <div class="user">
+                <span><i class="fas fa-at"></i></span> 
+                        {{ form.username }}
                         {% if form.is_bound %}
                         {% if field.errors %}
                         {% render_field field class="form-control is-invalid" %}
@@ -46,23 +47,33 @@
                         {% else %}
                         {% render_field field class="form-control" %}
                         {% endif %}
-                    </div>
-                </div>
-                {% endfor %}
-                <div class="text-center col-sm-12 col-sm-offset-3">
-                    <button type="submit" class="center btn btn-primary">Ingresar</button>
-                    <hr />
-                </div>
-                {% block recuperar %}
-                <div class="text-center col-sm-12 col-sm-offset-3">
-                    <a href="{% url 'password_reset' %}"><button id="recuperar" type="button" class="btn btn-link">Recuperar
-                            contraseña</button></a>
-                </div>
-                {% endblock %}
-            </form>
+            </div>
+            <div class="password">
+                <span><i class="fas fa-unlock-alt"></i></span>
+                        {{ form.password }}
+                        {% if form.is_bound %}
+                        {% if field.errors %}
+                        {% render_field field class="form-control is-invalid" %}
+                        {% for error in field.errors %}
+                        <div class="invalid-feedback">
+                            {{ error }}
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        {% render_field field class="form-control is-valid" %}
+                        {% endif %}
+                        {% else %}
+                        {% render_field field class="form-control" %}
+                        {% endif %}
+            </div>
+            <button type="submit" class="login">LOGIN</button>
+            <hr />
+            {% block recuperar %}
+                <a href="{% url 'password_reset' %}"><p class="register">Recuperar
+                        contraseña</p></a>
             {% endblock %}
-        </div>
-        </span>
+        </form>
+        {% endblock %}
     </div>
-</div>
-{% endblock %}
+    {% endblock %}
+    

@@ -6,10 +6,18 @@
 
 *:focus {
   outline: none; }
-
+.alert{
+  position: absolute !important;
+  width: 100vw;
+  font-size: 13px !important;
+  z-index: 1;
+  text-align: center;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
 .contenido {
   position: absolute;
-  height: 600px;
+  height: 100vh;
   width: 100vw;
   overflow: hidden; }
   .contenido img {
@@ -96,13 +104,10 @@
     -webkit-transform: translate(-50%, 0);
     -ms-transform: translate(-50%, 0);
     transform: translate(-50%, 0);
-    top: 80%;
+    top: 85%;
     width: 70%;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
     color: white;
-    background-color: #007bff;
-    padding-bottom: 5px;
-    padding-top: 5px;
-    letter-spacing: 3px;
-    border-radius: 200px; }
+    text-align: center;
+  }
