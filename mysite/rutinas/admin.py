@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import (Proveedor, Sucursal, Producto, 
-Administrador, Profesor, Rutina, Ejercicio, Cliente, Pago, FichaMedica)
+from .models import (Articulo, Proveedor, Sucursal, Producto, 
+Administrador, Profesor, Rutina, Ejercicio, Cliente, Venta, FichaMedica, DetalleVenta, Servicio)
 
 
 class AdministradorAdmin(admin.ModelAdmin):
@@ -16,9 +16,17 @@ class ProveedorAdmin(admin.ModelAdmin):
 
 admin.site.register(Proveedor, ProveedorAdmin)
 
+class ArticuloAdmin(admin.ModelAdmin):
+    model = Articulo
+admin.site.register(Articulo, ArticuloAdmin)
+
 class ProductoAdmin(admin.ModelAdmin):
-    fields = ['nombre','tipo_producto', 'proveedor', 'sucursal']
+    fields = ['nombre','descripcion','precio','tipo_producto', 'proveedor', 'sucursal', 'stock']
 admin.site.register(Producto, ProductoAdmin)
+
+class ServicioAdmin(admin.ModelAdmin):
+    fields = ['nombre','descripcion','precio']
+admin.site.register(Servicio, ServicioAdmin)
 
 class ProfesorAdmin(admin.ModelAdmin):
     fields = ['user', 'nombre', 'apellido', 'num_matricula', 'mail', 'telefono', 'domicilio']
@@ -45,9 +53,15 @@ class ClienteAdmin(admin.ModelAdmin):
 
 admin.site.register(Cliente, ClienteAdmin)
 
+class DetalleVentaInline(admin.TabularInline):
+    model = DetalleVenta
+    raw_id_fields = ("articulo",)
+    fields = ['articulo','cantidad','desde', 'hasta', 'precio']
+    
+    extra = 1
 
-class PagoAdmin(admin.ModelAdmin):
-    fields = ['monto', 'fecha', 'medio_pago', 'cliente']
-
-admin.site.register(Pago, PagoAdmin)
+class VentaAdmin(admin.ModelAdmin):
+    fields = ['monto', 'fecha', 'medio_pago', 'cliente', 'num_tarjeta', 'administrador']
+    inlines = [DetalleVentaInline]    
+admin.site.register(Venta, VentaAdmin)
 

@@ -22,9 +22,19 @@ class Proveedor(models.Model):
 
     def __str__(self):
         return self.nombre +" "+ self.apellido
-    
-class Producto (models.Model):
+
+class Articulo(models.Model):
     id = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=250)
+    descripcion = models.TextField()
+    precio = models.DecimalField(max_digits=7, decimal_places=2)
+    
+    
+    def __str__(self):
+        return self.nombre 
+
+class Producto(Articulo):
+    stock = models.IntegerField(default=0)
     TIPOS = (
         ('Suplemento', 'Suplemento'),
         ('Máquina', 'Máquina'),
@@ -37,12 +47,10 @@ class Producto (models.Model):
         max_length=30,
         choices=TIPOS
     )
-    nombre = models.CharField(max_length=200, default='')
     proveedor = models.ForeignKey(Proveedor, on_delete=models.PROTECT)
     sucursal = models.ForeignKey(Sucursal, on_delete=models.PROTECT)
-
-    def __str__(self):
-        return self.nombre +", "+self.tipo_producto
+class Servicio(Articulo):
+    pass
 
 class Administrador(models.Model):
     id = models.AutoField(primary_key=True)
@@ -53,7 +61,10 @@ class Administrador(models.Model):
 
     def __str__(self):
         return self.nombre + " " + self.apellido
-    
+class Calificacion(models.Model):
+    calificacion = models.IntegerField(default=0)
+    fecha = models.DateTimeField(default=now)  
+
 class Profesor(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -63,6 +74,7 @@ class Profesor(models.Model):
     mail = models.EmailField(max_length=254, default='')
     telefono = models.BigIntegerField(help_text="Introduzca un número de teléfono válido", default=0)
     domicilio = models.CharField(max_length=30, default='')
+    calificacion_promedio = models.DecimalField(max_digits=6, decimal_places=1)
 
     def __str__(self):
         return self.nombre + " " + self.apellido + ", Matrícula: "+str(self.num_matricula)
@@ -71,7 +83,7 @@ class Profesor(models.Model):
 class Ejercicio(models.Model):
     id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=30, default='')
-    gif = models.ImageField()
+    gif = models.ImageField(default='')
     TRENES = (
         ('Tren superior', 'Tren superior'),
         ('Tren inferior', 'Tren inferior'),
@@ -114,7 +126,7 @@ class Cliente(models.Model):
     def __str__(self):
         return self.nombre + " " + self.apellido
 
-class Pago(models.Model):
+class Venta(models.Model):
     id = models.AutoField(primary_key=True)
     monto = models.DecimalField(max_digits=7, decimal_places=2)
     fecha = models.DateTimeField(default= now)
@@ -127,11 +139,22 @@ class Pago(models.Model):
         max_length=30,
         choices=MEDIOS
     )
+    administrador = models.ForeignKey(Administrador, on_delete=models.CASCADE)
+    num_tarjeta = models.BigIntegerField(blank=True)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return str(self.fecha) + ", Medio de pago: " + self.medio_pago
     
+    def __str__(self):
+        return "Venta: " + str(self.id) + ", Fecha: " + str(self.fecha) + ", Cliente: " + self.cliente.nombre +" "+self.cliente.apellido + ", Medio de pago: " + self.medio_pago
+
+class DetalleVenta(models.Model):
+    id = models.AutoField(primary_key=True)
+    cantidad = models.IntegerField()
+    desde = models.DateField(blank=True)
+    hasta = models.DateField(blank=True)
+    precio = models.DecimalField(max_digits=7, decimal_places=2)
+    pago = models.ForeignKey(Venta, on_delete=models.CASCADE)
+    articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE)
+
 class FichaMedica(models.Model):
     id = models.AutoField(primary_key=True)
     fecha_nacimiento = models.DateField(default= now)
