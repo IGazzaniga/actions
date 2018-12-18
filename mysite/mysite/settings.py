@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rutinas',
     'widget_tweaks',
+    'star_ratings',
 ]
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

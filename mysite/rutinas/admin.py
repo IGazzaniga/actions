@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (Articulo, Proveedor, Sucursal, Producto, 
-Administrador, Profesor, Rutina, Ejercicio, Cliente, Venta, FichaMedica, DetalleVenta, Servicio)
+Administrador, Profesor, Rutina, Dia, RutinaEjercicio, Ejercicio, Cliente, Venta, FichaMedica, DetalleVenta, Servicio)
 
 
 class AdministradorAdmin(admin.ModelAdmin):
@@ -30,17 +30,21 @@ admin.site.register(Servicio, ServicioAdmin)
 
 class ProfesorAdmin(admin.ModelAdmin):
     fields = ['user', 'nombre', 'apellido', 'num_matricula', 'mail', 'telefono', 'domicilio']
-
 admin.site.register(Profesor, ProfesorAdmin)
 
 class EjercicioAdmin(admin.ModelAdmin):
-    fields = ['nombre', 'gif','tren']
+    fields = ['nombre', 'descripcion', 'gif']
 admin.site.register(Ejercicio, EjercicioAdmin)
 
-class RutinaAdmin(admin.ModelAdmin):
-    fields = ['numero','sesiones', 'ejercicios'] 
-    
+class DiaInline(admin.TabularInline):
+    model = Dia
+    fields = ['numero', 'ejercicios']
+    extra = 0
+    min_num = 3
 
+class RutinaAdmin(admin.ModelAdmin):
+    fields = ['numero', 'nombre']
+    inlines = [DiaInline] 
 admin.site.register(Rutina, RutinaAdmin)
 
 class FichaMedicaInline(admin.TabularInline):
@@ -48,7 +52,7 @@ class FichaMedicaInline(admin.TabularInline):
     fields = ['fecha_nacimiento', 'altura', 'peso', 'sexo', 'mutual', 'observaciones', 'telefono_emergencia']
 
 class ClienteAdmin(admin.ModelAdmin):
-    fields = ['user', 'nombre', 'apellido', 'dni', 'mail', 'telefono', 'domicilio', 'profesor', 'rutinas']
+    fields = ['user', 'nombre', 'apellido', 'dni', 'foto', 'mail', 'telefono', 'domicilio', 'profesor', 'rutinas']
     inlines = [FichaMedicaInline]
 
 admin.site.register(Cliente, ClienteAdmin)

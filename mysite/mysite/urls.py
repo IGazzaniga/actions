@@ -24,7 +24,9 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^rutinas/', include('rutinas.urls')),
-    url(r'^$', LoginView.as_view(template_name = 'registration/login.html'), name='login')
+    url(r'^$', LoginView.as_view(template_name = 'registration/login.html'), name='login'),
+    url(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
+
 ]
 
 if settings.DEBUG:

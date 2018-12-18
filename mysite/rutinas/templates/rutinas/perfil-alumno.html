@@ -1,0 +1,145 @@
+{% extends "../rutinas/inicio-alumno.html" %}
+{% load staticfiles %} <!-- Se cargan los archivos estáticos de CSS, HTML, etc -->
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'rutinas/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'rutinas/css/perfil.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+{% endblock %}
+{% block contenido %} <!-- Se define el bloque que encierra todo el contenido de esta vista -->
+{% block menu %} <!-- En este bloque se define el menú lateral -->
+<div class="menu">
+    <span class="logo"><img src="../../static/rutinas/img/APPTincho.svg" height="60px"></span>
+    <span class="exit" onclick="window.open('index.html', '_self')"><i class="fas fa-sign-out-alt"></i></span> 
+    <div class="burger-icon" onclick="openMenu()">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+    </div>
+</div>
+        
+<div class="menu-lateral">
+    <i class="fas fa-times" onclick="closeMenu()"></i>
+    
+    <div class="image">
+        <img src="../../static/rutinas/img/profile.jpeg">
+    </div>
+
+    <ul>
+        <li onclick="window.open('home.html', '_self')">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </li>
+        <li>
+            <i class="fas fa-user"></i>
+            <span>Perfil</span>
+        </li>
+        <br>
+        <li>
+            <i class="fas fa-dumbbell"></i>
+            <span>Añadir Rutinas</span>
+        </li>
+    </ul>
+</div>
+{% endblock %} <!-- Se cierra el bloque del menú -->
+{% block principal %}
+<div class="contenedor">
+    <div class="full-container fondo">
+        <div class="perfilcamara">
+            <img class="img-perfil" src="assets/img/profile.jpeg" >
+            <img src="assets/img/camera-change.svg" class="camera-change">
+        </div>
+    </div>
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-personales-tab" data-toggle="tab" href="#nav-personales" role="tab" aria-controls="nav-personales" aria-selected="true">Datos Personales</a>
+            <a class="nav-item nav-link" id="nav-ficha-tab" data-toggle="tab" href="#nav-ficha" role="tab" aria-controls="nav-ficha" aria-selected="false">Ficha Médica</a>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-personales" role="tabpanel" aria-labelledby="nav-personales-tab">
+            <div class="container-formulario"><br>
+                <h3 id="titulo-form" style="text-align: center;">{{cliente.nombre}} {{cliente.apellido}}</h3><br>
+                <div class="row row-formulario">
+                    <div class="col-sm-4 col-12">
+                        <label for="nombre">DNI:</label>
+                        <input type="text" size="26" placeholder={{usuario.dni}} class="form-control" id="email" name="email">
+                    </div>
+                    <div class="col-sm-4 col-12">
+                        <label for="apellido">Edad:</label>
+                        <input type="text" class="form-control" id="apellido" placeholder={{usuario.edad}} name="apellido">
+                    </div>
+                    <div class="col-sm-4 col-12">
+                        <label for="dni">DNI:</label>
+                        <input type="number" placeholder="38865263" class="form-control" id="dni" name="dni">
+                    </div>
+                </div>
+                <div class="row row-formulario">
+                    <div class="col-sm-6 col-12">
+                        <label for="localidad">Domicilio:</label>
+                        <input type="text" placeholder="20 331" class="form-control" id="pwd" name="pwd">
+                    </div>
+                    <div class="col-sm-6 col-12" >
+                        <label for="email">E-mail:</label>
+                        <input type="email" placeholder="mlucena@gmail.com" class="form-control" id="email" name="email">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-ficha" role="tabpanel" aria-labelledby="nav-ficha-tab">
+            <div class="container-formulario"><br>
+                <h3 id="titulo-form" style="text-align: center;">Martín Lucena</h3><br>
+                <div class="row row-formulario">
+                    <div class="col-sm-4 col-12">
+                        <label for="nombre">Fecha de Nacimiento:</label>
+                        <input type="text" size="26" placeholder="16/03/1995" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="col-sm-4 col-12">
+                        <label for="apellido">Sexo:</label>
+                        <input type="text" class="form-control" id="apellido" placeholder="Masculino" name="apellido">
+                    </div>
+                    <div class="col-sm-4 col-12">
+                        <label for="dni">Peso:</label>
+                        <input type="number" placeholder="89kg" class="form-control" id="dni" name="dni">
+                    </div>
+                </div>
+                <div class="row row-formulario">
+                    <div class="col-sm-6 col-12">
+                        <label for="localidad">Altura:</label>
+                        <input type="text" placeholder="1,75 cm" class="form-control" id="pwd" name="pwd">
+                    </div>
+                    <div class="col-sm-6 col-12" >
+                        <label for="email">Mutual/Obra Social:</label>
+                        <input type="email" placeholder="AMFFA" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="col-sm-6 col-12" >
+                        <label for="email">Telefono de emergencia:</label>
+                        <input type="email" placeholder="221 483 3239" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="col-sm-6 col-12" >
+                        <label for="comment">Observaciones:</label>
+                        <textarea class="form-control" id="comment" style="height: 100%;">Tendinitis aguda rodilla izquierda. Desgarro mal curado cuadriceps pierna derecha</textarea>
+                    </div>
+                </div>
+            </div>   
+        </div> 
+    </div>
+</div>
+<script>
+            
+ 
+        $(function(){
+            $('.editText').dblclick( function(){
+                var text = $(this).text();
+                $(this).empty().html('<input type="text" value="'+text+'">').find('input').focus();
+            }).keypress( function(e){
+                if(e.keyCode == 13){
+                    var text = $('input', this).val();
+                    $(this).html( text );
+                }
+            });
+        });
+    </script>
+{% endblock%}
+{% endblock%}

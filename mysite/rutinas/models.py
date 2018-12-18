@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import now
+from django.core.signals import request_finished
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 # Create your models here.
 
 
@@ -79,43 +82,37 @@ class Profesor(models.Model):
     def __str__(self):
         return self.nombre + " " + self.apellido + ", Matrícula: "+str(self.num_matricula)
     
-
 class Ejercicio(models.Model):
     id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=30, default='')
+    descripcion = models.TextField(default='')
     gif = models.ImageField(default='')
-    TRENES = (
-        ('Tren superior', 'Tren superior'),
-        ('Tren inferior', 'Tren inferior'),
-    )
-    tren = models.CharField(
-        max_length=20,
-        choices=TRENES
-    )
-
+    
     def __str__(self):
-        return self.nombre + ", " + self.tren
+        return self.nombre
+
 
 class Rutina(models.Model):
     id = models.AutoField(primary_key=True)
     numero = models.IntegerField(default=0)
-    SESIONES = (
-        ('3 días', '3 días'),
-        ('5 días', '5 días'),
-    )
-    sesiones = models.CharField(
-        max_length=20,
-        choices=SESIONES
-    )
+    nombre = models.CharField(max_length=30, default='')
+    
+    def __str__(self):
+        return self.nombre
+
+class Dia(models.Model):
+    numero = models.IntegerField(default=0)
     ejercicios = models.ManyToManyField(Ejercicio)
-    
-    
+    rutina = models.ForeignKey(Rutina, on_delete=models.CASCADE)
+
+
 class Cliente(models.Model):
     """Un cliente del gimnasio"""
     id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=30, default='')
     apellido = models.CharField(max_length=30, default='')
+    foto = models.ImageField(default='')
     dni = models.IntegerField(default=0)
     mail = models.EmailField(max_length=254, default='')
     telefono = models.BigIntegerField(help_text="Introduzca un número de teléfono válido", default=0)
@@ -125,7 +122,7 @@ class Cliente(models.Model):
 
     def __str__(self):
         return self.nombre + " " + self.apellido
-
+   
 class Venta(models.Model):
     id = models.AutoField(primary_key=True)
     monto = models.DecimalField(max_digits=7, decimal_places=2)
@@ -177,11 +174,12 @@ class FichaMedica(models.Model):
 class RutinaCliente(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.PROTECT)
     rutina = models.ForeignKey(Rutina, on_delete=models.PROTECT)
-
+    actual = models.BooleanField()
 
 class RutinaEjercicio(models.Model):
     ejercicio = models.ForeignKey(Ejercicio, on_delete=models.PROTECT)
     rutina = models.ForeignKey(Rutina, on_delete=models.PROTECT)
+    dia = models.ForeignKey(Dia, on_delete=models.PROTECT)
 
 class Registro(models.Model):
     id = models.AutoField(primary_key=True)
