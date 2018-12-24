@@ -77,7 +77,7 @@ class Profesor(models.Model):
     mail = models.EmailField(max_length=254, default='')
     telefono = models.BigIntegerField(help_text="Introduzca un número de teléfono válido", default=0)
     domicilio = models.CharField(max_length=30, default='')
-    calificacion_promedio = models.DecimalField(max_digits=6, decimal_places=1)
+    calificacion_promedio = models.DecimalField(default=0,max_digits=6, decimal_places=1)
 
     def __str__(self):
         return self.nombre + " " + self.apellido + ", Matrícula: "+str(self.num_matricula)
@@ -137,7 +137,7 @@ class Venta(models.Model):
         choices=MEDIOS
     )
     administrador = models.ForeignKey(Administrador, on_delete=models.CASCADE)
-    num_tarjeta = models.BigIntegerField(blank=True)
+    num_tarjeta = models.BigIntegerField(null=True, blank=True)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     
     def __str__(self):
@@ -146,8 +146,8 @@ class Venta(models.Model):
 class DetalleVenta(models.Model):
     id = models.AutoField(primary_key=True)
     cantidad = models.IntegerField()
-    desde = models.DateField(blank=True)
-    hasta = models.DateField(blank=True)
+    desde = models.DateField(null=True, blank=True)
+    hasta = models.DateField(null=True, blank=True)
     precio = models.DecimalField(max_digits=7, decimal_places=2)
     pago = models.ForeignKey(Venta, on_delete=models.CASCADE)
     articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE)

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from rutinas.models import Cliente, Profesor, RutinaCliente, Rutina
+from rutinas.models import Cliente, Profesor, RutinaCliente, Rutina, Venta
 
 # Create your views here.
 
@@ -55,3 +55,11 @@ def historial_rutinas_view(request):
     if request.user.is_authenticated:
         rutinas = Cliente.objects.get(user=request.user).rutinas.all()
         return render(request, 'rutinas/historial-rutinas.html', {'usuario': usuario, 'rutinas': rutinas})
+
+@login_required
+def pagos_view(request):
+    usuario= None
+    if request.user.is_authenticated:
+        cliente = Cliente.objects.get(user=request.user)
+        pagos = Venta.objects.filter(cliente=cliente)
+        return render(request, 'rutinas/pagos.html', {'usuario': usuario, 'pagos': pagos})

@@ -3,7 +3,7 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 from . import views
-from rutinas.views import index_view, historial_rutinas_view, info_ejercicio_view, perfil_alumno_view, calificar_view, inicio_profesor_view, rutina_view, nueva_rutina_view #Importamos las vistas
+from rutinas.views import index_view, pagos_view, historial_rutinas_view, info_ejercicio_view, perfil_alumno_view, calificar_view, inicio_profesor_view, rutina_view, nueva_rutina_view #Importamos las vistas
 
 
 
@@ -16,4 +16,6 @@ urlpatterns = [
     url(r'^perfil_alumno', perfil_alumno_view, name="perfil_alumno"),
     url(r'^nueva_rutina', nueva_rutina_view, name="nueva_rutina"),
     url(r'^historialRutinas', historial_rutinas_view, name="historial_rutinas"),
+    url(r'^pagos', pagos_view, name="pagos"),
+    
 ]
