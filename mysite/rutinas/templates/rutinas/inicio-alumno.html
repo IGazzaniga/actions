@@ -32,11 +32,11 @@
                         </li>
                         <li>
                             <i class="fas fa-dumbbell"></i>
-                            <span>Rutinas</span>
+                            <span><a href="{% url 'historial_rutinas' %}">Rutinas</a></span>
                         </li>
                         <li>
                             <i class="fas fa-dollar-sign"></i>
-                            <span>Pagos</span>
+                            <span><a href="{% url 'pagos' %}">Pagos</a></span>
                         </li>
                         <li>
                             <i class="fas fa-store"></i>
@@ -47,7 +47,7 @@
                             <span>Calificar</span>
                         </li>
                     </ul>
-                </div>
+            </div>
      {% endblock %}
      {% block principal %} 
     <div class="home">

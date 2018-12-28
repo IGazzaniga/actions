@@ -10,41 +10,7 @@
     <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
     {% endblock %}
 {% block contenido %} <!-- Se define el bloque que encierra todo el contenido de esta vista -->
-{% block menu %} <!-- En este bloque se define el menú lateral -->
-<div class="menu">
-    <span class="logo"><img src="../../static/rutinas/img/APPTincho.svg" height="60px"></span>
-    <span class="exit" onclick="window.open('index.html', '_self')"><i class="fas fa-sign-out-alt"></i></span> 
-    <div class="burger-icon" onclick="openMenu()">
-        <div class="bar bar1"></div>
-        <div class="bar bar2"></div>
-        <div class="bar bar3"></div>
-    </div>
-</div>
-        
-<div class="menu-lateral">
-    <i class="fas fa-times" onclick="closeMenu()"></i>
-    
-    <div class="image">
-        <img src="../../static/rutinas/img/profile.jpeg">
-    </div>
-
-    <ul>
-        <li onclick="window.open('home.html', '_self')">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-        </li>
-        <li>
-            <i class="fas fa-user"></i>
-            <span>Perfil</span>
-        </li>
-        <br>
-        <li>
-            <i class="fas fa-dumbbell"></i>
-            <span>Añadir Rutinas</span>
-        </li>
-    </ul>
-</div>
-{% endblock %} <!-- Se cierra el bloque del menú -->
+{% block menu %} {{ block.super }} {% endblock %} <!-- Se cierra el bloque del menú -->
 {% block principal %}
 <div class="buscador">
     <h2>Entrenadores</h2>

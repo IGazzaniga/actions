@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from rutinas.models import Cliente, Profesor, RutinaCliente, Rutina, Venta
+from rutinas.models import Cliente, Profesor, RutinaCliente, Rutina, Venta, DetalleVenta
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -63,3 +64,12 @@ def pagos_view(request):
         cliente = Cliente.objects.get(user=request.user)
         pagos = Venta.objects.filter(cliente=cliente)
         return render(request, 'rutinas/pagos.html', {'usuario': usuario, 'pagos': pagos})
+
+@login_required
+def detalle_pago_view(request,id):
+    usuario= None
+    if request.user.is_authenticated:
+        cliente = Cliente.objects.get(user=request.user)
+        pago = Venta.objects.get(id=id)
+        detalle = DetalleVenta.objects.filter(pago=pago)
+        return render(request, 'rutinas/detalle-pago.html', {'usuario': usuario, 'detalle': detalle})
