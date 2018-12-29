@@ -38,7 +38,7 @@ admin.site.register(Ejercicio, EjercicioAdmin)
 
 class DiaInline(admin.TabularInline):
     model = Dia
-    fields = ['numero', 'ejercicios']
+    fields = ['ejercicios']
     extra = 0
     min_num = 3
 

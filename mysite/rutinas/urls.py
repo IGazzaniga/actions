@@ -9,7 +9,7 @@ from rutinas.views import detalle_pago_view, index_view, pagos_view, historial_r
 
 urlpatterns = [
     url(r'^$', index_view, name="rutinas"),
-    url(r'^rutinaAlumno', rutina_view, name="rutinaAlumno"),
+    url(r'^rutinaAlumno/(?P<id>[\w-]+)$', rutina_view, name="rutinaAlumno"),
     url(r'^infoEjercicio', info_ejercicio_view, name="infoEjercicio"),
     url(r'^inicioProfe', inicio_profesor_view, name="inicioProfe"),
     url(r'^calificar', calificar_view, name="calificar"),

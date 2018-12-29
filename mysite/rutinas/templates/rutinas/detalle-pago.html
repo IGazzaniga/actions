@@ -18,7 +18,7 @@
     <h2>Detalle pago</h2>
     <ul id="listClient">
         {% for det in detalle %}
-            <li class="row">{{det.articulo}}, Desde:{{det.desde}}, Hasta:{{det.hasta}} Cantidad: {{det.cantidad}}, ${{det.precio}}</li>
+        <li class="row"><a class="nombre">{{det.articulo}}, Desde:{{det.desde}}, Hasta:{{det.hasta}} Cantidad: {{det.cantidad}}, ${{det.precio}}<a href="#" class="icono2"></a></a></li>
         {% endfor %}
     </ul>
 </div>

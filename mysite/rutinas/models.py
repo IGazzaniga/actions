@@ -101,7 +101,6 @@ class Rutina(models.Model):
         return self.nombre
 
 class Dia(models.Model):
-    numero = models.IntegerField(default=0)
     ejercicios = models.ManyToManyField(Ejercicio)
     rutina = models.ForeignKey(Rutina, on_delete=models.CASCADE)
 
@@ -112,7 +111,7 @@ class Cliente(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=30, default='')
     apellido = models.CharField(max_length=30, default='')
-    foto = models.ImageField(default='')
+    foto = models.ImageField(upload_to="foto_perfil", default='')
     dni = models.IntegerField(default=0)
     mail = models.EmailField(max_length=254, default='')
     telefono = models.BigIntegerField(help_text="Introduzca un número de teléfono válido", default=0)
@@ -187,4 +186,9 @@ class Registro(models.Model):
     repeticiones = models.IntegerField(default=0)
     cliente = models.ForeignKey(Cliente, on_delete=models.PROTECT)
     rutina = models.ForeignKey(Rutina, on_delete=models.PROTECT)
+    ejercicio = models.ForeignKey(Ejercicio, on_delete=models.PROTECT)
+    completado = models.BooleanField(default=False)
+
+class DiaEjercicio(models.Model):
+    dia = models.ForeignKey(Dia, on_delete=models.PROTECT)
     ejercicio = models.ForeignKey(Ejercicio, on_delete=models.PROTECT)

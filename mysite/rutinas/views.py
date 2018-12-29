@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from rutinas.models import Cliente, Profesor, RutinaCliente, Rutina, Venta, DetalleVenta
+from rutinas.models import Cliente, Profesor, RutinaCliente, Rutina, Venta, DetalleVenta, Dia
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
@@ -8,11 +8,25 @@ from django.shortcuts import get_object_or_404
 
 @login_required
 def index_view(request):
-    return render(request, "rutinas/inicio-alumno.html")
+    usuario= None
+    if request.user.is_authenticated:
+        usuario = request.user
+        cliente = Cliente.objects.get(user=usuario)
+        return render(request, "rutinas/inicio-alumno.html", {'usuario': usuario, 'cliente': cliente})
     
 @login_required
-def rutina_view(request):
-    return render(request, "rutinas/rutina.html")
+def rutina_view(request, id):
+    usuario= None
+    if request.user.is_authenticated:
+        cliente = Cliente.objects.get(user=request.user)
+        rutinas = Rutina.objects.get(id=id)
+        dia1 = Dia.objects.filter(rutina=rutinas)[0]
+        dia1 = dia1.ejercicios.all()
+        dia2 = Dia.objects.filter(rutina=rutinas)[1]
+        dia2 = dia2.ejercicios.all()
+        dia3 = Dia.objects.filter(rutina=rutinas)[2]
+        dia3 = dia3.ejercicios.all()
+        return render(request, "rutinas/rutina.html", {'cliente': cliente, 'dia1': dia1, 'dia2': dia2, 'dia3': dia3, 'rutinas': rutinas})
 
 @login_required
 def info_ejercicio_view(request):

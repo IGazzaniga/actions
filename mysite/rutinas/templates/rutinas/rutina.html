@@ -14,7 +14,6 @@
         <div class="full-container semana">
             <p>Semana 1</p>
             <p>Semana 1</p>
-
             <i class="fas fa-angle-right" onclick="cambiarSem('1','2')"></i>
         </div>
 
@@ -22,73 +21,28 @@
             <h1 onclick="showExercise()">Día 1 <i class="fas fa-angle-down"></i> </h1>
         </div>
 
+        
         <div class="full-container ejercicios">
+            {% for ejercicio in dia1 %}
             <div class="full-container ejercicio">
-                <span>PressPecho <i class="fas fa-check-circle"></i></span>
+                <span>{{ejercicio.nombre}} <i class="fas fa-check-circle"></i></span>
                 <i class="fas fa-angle-right arrowE"></i>
             </div>
-
-            <div class="full-container ejercicio">
-                <span>PressMilitar <i class="fas fa-check-circle"></i></span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio">
-                <span>Dominadas <i class="fas fa-check-circle"></i></span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio">
-                <span>Remo <i class="fas fa-check-circle"></i></span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio ">
-                <span>Triceps <i class="fas fa-check-circle"></i></span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio ultimoE">
-                <span>Biceps <i class="fas fa-check-circle"></i></span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
+            {% endfor %}
         </div>
-
+        
 
         <div class="container dia dia2" onclick="showExercise()">
             <h1 onclick="showExercise()">Día 2 <i class="fas fa-angle-down"></i> </h1>
         </div>
 
         <div class="full-container ejercicios">
+            {% for ejercicio2 in dia2 %}
             <div class="full-container ejercicio">
-                <span>Sentadilla <i class="fas fa-check-circle"></i></span>
+                <span>{{ejercicio2.nombre}} <i class="fas fa-check-circle"></i></span>
                 <i class="fas fa-angle-right arrowE"></i>
             </div>
-
-            <div class="full-container ejercicio">
-                <span><a href="{% url 'infoEjercicio' %}">PesoMuerto</a></span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio">
-                <span>Femorales</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio">
-                <span>Estocadas</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio ">
-                <span>Gemelos</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio ultimoE">
-                <span>Cinta</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
+            {% endfor %}
         </div>
 
         <div class="container dia dia3" onclick="showExercise()">
@@ -96,119 +50,51 @@
         </div>
         
         <div class="full-container ejercicios">
+            {% for ejercicio3 in dia3 %}
             <div class="full-container ejercicio">
-                <span>PressPecho <i class="fas fa-check-circle"></i></span>
+                <span>{{ejercicio3.nombre}}<i class="fas fa-check-circle"></i></span>
                 <i class="fas fa-angle-right arrowE"></i>
             </div>
-
-            <div class="full-container ejercicio">
-                <span>PressMilitar</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio">
-                <span>Dominadas</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio">
-                <span>Remo</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio ">
-                <span>Triceps</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio ultimoE">
-                <span>Biceps</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
+            {% endfor %}
         </div>
+</div>
+
+
+<div class="semana2">
+    <div class="full-container semana">
+        <p>Semana 2</p>
+        <p>Semana 2</p>
+
+        <i class="fas fa-angle-left" onclick="cambiarSem('2','1')"></i>
+        <i class="fas fa-angle-right" onclick="cambiarSem('2','3')"></i>
     </div>
 
-
-    <div class="semana2">
-        <div class="full-container semana">
-            <p>Semana 2</p>
-            <p>Semana 2</p>
-
-            <i class="fas fa-angle-left" onclick="cambiarSem('2','1')"></i>
-            <i class="fas fa-angle-right" onclick="cambiarSem('2','3')"></i>
-        </div>
-    
-        <div class="container dia dia1" onclick="showExercise()">
+    <div class="container dia dia1" onclick="showExercise()">
             <h1 onclick="showExercise()">Día 1 <i class="fas fa-angle-down"></i> </h1>
         </div>
 
+        
         <div class="full-container ejercicios">
+            {% for ejercicio in dia1 %}
             <div class="full-container ejercicio">
-                <span>PressPecho</span>
+                <span>{{ejercicio.nombre}} <i class="fas fa-check-circle"></i></span>
                 <i class="fas fa-angle-right arrowE"></i>
             </div>
-
-            <div class="full-container ejercicio">
-                <span>PressMilitar</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio">
-                <span>Dominadas</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio">
-                <span>Remo</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio ">
-                <span>Triceps</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio ultimoE">
-                <span>Biceps</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
+            {% endfor %}
         </div>
-
+        
 
         <div class="container dia dia2" onclick="showExercise()">
             <h1 onclick="showExercise()">Día 2 <i class="fas fa-angle-down"></i> </h1>
         </div>
 
         <div class="full-container ejercicios">
+            {% for ejercicio2 in dia2 %}
             <div class="full-container ejercicio">
-                <span>Sentadilla</span>
+                <span>{{ejercicio2.nombre}} <i class="fas fa-check-circle"></i></span>
                 <i class="fas fa-angle-right arrowE"></i>
             </div>
-
-            <div class="full-container ejercicio">
-                <span><a href="{% url 'infoEjercicio' %}">PesoMuerto</a></span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio">
-                <span>Femorales</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio">
-                <span>Estocadas</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio ">
-                <span>Gemelos</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio ultimoE">
-                <span>Cinta</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
+            {% endfor %}
         </div>
 
         <div class="container dia dia3" onclick="showExercise()">
@@ -216,37 +102,14 @@
         </div>
         
         <div class="full-container ejercicios">
+            {% for ejercicio3 in dia3 %}
             <div class="full-container ejercicio">
-                <span>PressPecho <i class="fas fa-check-circle"></i></span>
+                <span>{{ejercicio3.nombre}}<i class="fas fa-check-circle"></i></span>
                 <i class="fas fa-angle-right arrowE"></i>
             </div>
-
-            <div class="full-container ejercicio">
-                <span>PressMilitar</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio">
-                <span>Dominadas</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio">
-                <span>Remo</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio ">
-                <span>Triceps</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio ultimoE">
-                <span>Biceps</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
+            {% endfor %}
         </div>
-    </div>
+</div>
 
     <div class="semana3">
         <div class="full-container semana">
@@ -257,113 +120,45 @@
         </div>
     
         <div class="container dia dia1" onclick="showExercise()">
-            <h1 onclick="showExercise()">Día 1 <i class="fas fa-angle-down"></i> </h1>
-        </div>
-
-        <div class="full-container ejercicios">
-            <div class="full-container ejercicio">
-                <span>PressPecho </span>
-                <i class="fas fa-angle-right arrowE"></i>
+                <h1 onclick="showExercise()">Día 1 <i class="fas fa-angle-down"></i> </h1>
             </div>
-
-            <div class="full-container ejercicio">
-                <span>PressMilitar </span>
-                <i class="fas fa-angle-right arrowE"></i>
+    
+            
+            <div class="full-container ejercicios">
+                {% for ejercicio in dia1 %}
+                <div class="full-container ejercicio">
+                    <span>{{ejercicio.nombre}} <i class="fas fa-check-circle"></i></span>
+                    <i class="fas fa-angle-right arrowE"></i>
+                </div>
+                {% endfor %}
             </div>
-
-            <div class="full-container ejercicio">
-                <span>Dominadas </span>
-                <i class="fas fa-angle-right arrowE"></i>
+            
+    
+            <div class="container dia dia2" onclick="showExercise()">
+                <h1 onclick="showExercise()">Día 2 <i class="fas fa-angle-down"></i> </h1>
             </div>
-
-            <div class="full-container ejercicio">
-                <span>Remo </span>
-                <i class="fas fa-angle-right arrowE"></i>
+    
+            <div class="full-container ejercicios">
+                {% for ejercicio2 in dia2 %}
+                <div class="full-container ejercicio">
+                    <span>{{ejercicio2.nombre}} <i class="fas fa-check-circle"></i></span>
+                    <i class="fas fa-angle-right arrowE"></i>
+                </div>
+                {% endfor %}
             </div>
-
-            <div class="full-container ejercicio ">
-                <span>Triceps </span>
-                <i class="fas fa-angle-right arrowE"></i>
+    
+            <div class="container dia dia3" onclick="showExercise()">
+                <h1 onclick="showExercise()">Día 3 <i class="fas fa-angle-down"></i> </h1>
             </div>
-
-            <div class="full-container ejercicio ultimoE">
-                <span>Biceps </span>
-                <i class="fas fa-angle-right arrowE"></i>
+            
+            <div class="full-container ejercicios">
+                {% for ejercicio3 in dia3 %}
+                <div class="full-container ejercicio">
+                    <span>{{ejercicio3.nombre}}<i class="fas fa-check-circle"></i></span>
+                    <i class="fas fa-angle-right arrowE"></i>
+                </div>
+                {% endfor %}
             </div>
-        </div>
-
-
-        <div class="container dia dia2" onclick="showExercise()">
-            <h1 onclick="showExercise()">Día 2 <i class="fas fa-angle-down"></i> </h1>
-        </div>
-
-        <div class="full-container ejercicios">
-            <div class="full-container ejercicio">
-                <span>Sentadilla </span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio">
-                <span><a href="{% url 'infoEjercicio' %}">PesoMuerto</a></span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio">
-                <span>Femorales</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio">
-                <span>Estocadas</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio ">
-                <span>Gemelos</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio ultimoE">
-                <span>Cinta</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-        </div>
-
-        <div class="container dia dia3" onclick="showExercise()">
-            <h1 onclick="showExercise()">Día 3 <i class="fas fa-angle-down"></i> </h1>
-        </div>
-        
-        <div class="full-container ejercicios">
-            <div class="full-container ejercicio">
-                <span>PressPecho <i class="fas fa-check-circle"></i></span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio">
-                <span>PressMilitar</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio">
-                <span>Dominadas</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio">
-                <span>Remo</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio ">
-                <span>Triceps</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-
-            <div class="full-container ejercicio ultimoE">
-                <span>Biceps</span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-        </div>
     </div>
 {% endblock %} <!-- Se cierra el bloque principal -->
 {% endblock %} <!-- Se cierra el bloque del contenido -->

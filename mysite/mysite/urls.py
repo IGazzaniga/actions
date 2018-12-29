@@ -19,6 +19,8 @@ from rutinas import views
 from django.conf import settings
 from django.views.static import serve
 from django.contrib.auth.views import LoginView
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,7 +29,7 @@ urlpatterns = [
     url(r'^$', LoginView.as_view(template_name = 'registration/login.html'), name='login'),
     url(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     urlpatterns += [
