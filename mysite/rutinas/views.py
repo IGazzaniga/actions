@@ -11,8 +11,17 @@ def index_view(request):
     usuario= None
     if request.user.is_authenticated:
         usuario = request.user
-        cliente = Cliente.objects.get(user=usuario)
-        return render(request, "rutinas/inicio-alumno.html", {'usuario': usuario, 'cliente': cliente})
+        if usuario.groups.filter(name='Clientes').exists():
+        #Si pertenece al grupo Clientes, va a inicio-alumno
+                cliente = Cliente.objects.get(user=usuario)
+                return render(request, "rutinas/inicio-alumno.html",
+        {'cliente': cliente, 'usuario': usuario})
+
+        elif usuario.groups.filter(name='Profesores').exists():
+        #Si pertenece al grupo Profesores, va a inicio-profe
+                profesor = Profesor.objects.get(user=usuario)
+        return render(request, "rutinas/inicio-profe.html",
+         {'usuario': usuario, 'profesor': profesor})
     
 @login_required
 def rutina_view(request, id):
@@ -34,7 +43,7 @@ def info_ejercicio_view(request):
 
 @login_required
 def inicio_profesor_view(request):
-    clientes = Cliente.objects.all().order_by('-nombre')
+    usuario.groups.filter(name='clientes').exists()
     return render(request, 'rutinas/inicio-profe.html', {'clientes': clientes})
 
 @login_required
