@@ -20,8 +20,9 @@ def index_view(request):
         elif usuario.groups.filter(name='Profesores').exists():
         #Si pertenece al grupo Profesores, va a inicio-profe
                 profesor = Profesor.objects.get(user=usuario)
+                lista_clientes = Cliente.objects.filter(profesor=profesor)
         return render(request, "rutinas/inicio-profe.html",
-         {'usuario': usuario, 'profesor': profesor})
+         {'usuario': usuario, 'profesor': profesor, 'lista_clientes': lista_clientes})
     
 @login_required
 def rutina_view(request, id):
@@ -38,13 +39,21 @@ def rutina_view(request, id):
         return render(request, "rutinas/rutina.html", {'cliente': cliente, 'dia1': dia1, 'dia2': dia2, 'dia3': dia3, 'rutinas': rutinas})
 
 @login_required
+def detalle_pago_view(request,id):
+    usuario= None
+    if request.user.is_authenticated:
+        cliente = Cliente.objects.get(user=request.user)
+        pago = Venta.objects.get(id=id)
+        detalle = DetalleVenta.objects.filter(pago=pago)
+        return render(request, 'rutinas/detalle-pago.html', {'usuario': usuario, 'detalle': detalle})
+
+@login_required
 def info_ejercicio_view(request):
     return render(request, "rutinas/info-ejercicio.html")
 
 @login_required
 def inicio_profesor_view(request):
-    usuario.groups.filter(name='clientes').exists()
-    return render(request, 'rutinas/inicio-profe.html', {'clientes': clientes})
+        return render(request, 'rutinas/inicio-profe.html', {'clientes': clientes})
 
 @login_required
 def calificar_view(request):
@@ -88,11 +97,4 @@ def pagos_view(request):
         pagos = Venta.objects.filter(cliente=cliente)
         return render(request, 'rutinas/pagos.html', {'usuario': usuario, 'pagos': pagos})
 
-@login_required
-def detalle_pago_view(request,id):
-    usuario= None
-    if request.user.is_authenticated:
-        cliente = Cliente.objects.get(user=request.user)
-        pago = Venta.objects.get(id=id)
-        detalle = DetalleVenta.objects.filter(pago=pago)
-        return render(request, 'rutinas/detalle-pago.html', {'usuario': usuario, 'detalle': detalle})
+
