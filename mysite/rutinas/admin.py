@@ -51,9 +51,12 @@ class FichaMedicaInline(admin.TabularInline):
     model = FichaMedica
     fields = ['fecha_nacimiento', 'altura', 'peso', 'sexo', 'mutual', 'observaciones', 'telefono_emergencia']
 
+class RutinaInline(admin.TabularInline):
+    model = Cliente.rutinas.through
+
 class ClienteAdmin(admin.ModelAdmin):
-    fields = ['user', 'nombre', 'apellido', 'dni', 'foto', 'mail', 'telefono', 'domicilio', 'profesor', 'rutinas']
-    inlines = [FichaMedicaInline]
+    fields = ['user', 'nombre', 'apellido', 'dni', 'foto', 'mail', 'telefono', 'domicilio', 'profesor']
+    inlines = [FichaMedicaInline, RutinaInline]
 
 admin.site.register(Cliente, ClienteAdmin)
 

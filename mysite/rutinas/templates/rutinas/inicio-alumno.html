@@ -50,11 +50,11 @@
             </div>
      {% endblock %}
      {% block principal %} 
-    <div class="home">
+        <div class="home">
             <p> <span>Go</span> <br> <span>hard</span> <br> <span>or</span> <br> <span>Go</span> <br> <span>home</span></p>
             <p> <span>Go</span> <br> <span>hard</span> <br> <span>or</span> <br> <span>Go</span> <br> <span>home</span></p>
             {% block acceder_rutina %}
-            <h1><a href="{% url 'rutinaAlumno' %}">Mi Rutina</a></h1>
+            <h1><a href="{% url 'rutinaAlumno' rutina %}">Mi Rutina</a></h1>
             {% endblock %}
         </div>    
     {% endblock%} <!-- Se cierra el bloque principal -->

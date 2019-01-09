@@ -117,7 +117,7 @@ class Cliente(models.Model):
     telefono = models.BigIntegerField(help_text="Introduzca un número de teléfono válido", default=0)
     domicilio = models.CharField(max_length=30, default='')
     profesor = models.ForeignKey(Profesor, on_delete=models.PROTECT)
-    rutinas = models.ManyToManyField(Rutina, blank=True)
+    rutinas = models.ManyToManyField(Rutina, through='RutinaCliente', blank=True)
 
     def __str__(self):
         return self.nombre + " " + self.apellido
@@ -188,7 +188,3 @@ class Registro(models.Model):
     rutina = models.ForeignKey(Rutina, on_delete=models.PROTECT)
     ejercicio = models.ForeignKey(Ejercicio, on_delete=models.PROTECT)
     completado = models.BooleanField(default=False)
-
-class DiaEjercicio(models.Model):
-    dia = models.ForeignKey(Dia, on_delete=models.PROTECT)
-    ejercicio = models.ForeignKey(Ejercicio, on_delete=models.PROTECT)
