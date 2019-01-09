@@ -174,6 +174,11 @@ class RutinaCliente(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.PROTECT)
     rutina = models.ForeignKey(Rutina, on_delete=models.PROTECT)
     actual = models.BooleanField()
+    def save(self, *args, **kwargs):
+        if self.actual:
+            RutinaCliente.objects.filter(
+                actual=True).update(actual=False)
+        super(RutinaCliente, self).save(*args, **kwargs)  
 
 class RutinaEjercicio(models.Model):
     ejercicio = models.ForeignKey(Ejercicio, on_delete=models.PROTECT)

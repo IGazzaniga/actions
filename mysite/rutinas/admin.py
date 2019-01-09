@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (Articulo, Proveedor, Sucursal, Producto, 
-Administrador, Profesor, Rutina, Dia, RutinaEjercicio, Ejercicio, Cliente, Venta, FichaMedica, DetalleVenta, Servicio, Registro)
+Administrador, Profesor, Rutina, Dia, RutinaEjercicio, Ejercicio, Cliente, Venta, FichaMedica, DetalleVenta, Servicio, Registro, RutinaCliente)
 
 
 class AdministradorAdmin(admin.ModelAdmin):
@@ -75,3 +75,7 @@ admin.site.register(Venta, VentaAdmin)
 class RegistroAdmin(admin.ModelAdmin):
     fields = ['peso_levantado', 'repeticiones', 'cliente', 'rutina', 'ejercicio', 'completado']
 admin.site.register(Registro, RegistroAdmin)
+
+class RutinaClienteAdmin(admin.ModelAdmin):
+    fields = ['cliente', 'rutina', 'actual']
+admin.site.register(RutinaCliente, RutinaClienteAdmin)
