@@ -14,7 +14,7 @@ def index_view(request):
         if usuario.groups.filter(name='Clientes').exists():
         #Si pertenece al grupo Clientes, va a inicio-alumno
                 cliente = Cliente.objects.get(user=usuario)
-                rutinas = RutinaCliente.objects.filter(cliente=cliente, actual=True).first()
+                rutinas = RutinaCliente.objects.filter(cliente=cliente, actual=True)
                 rutina = rutinas.rutina.id
                 return render(request, "rutinas/inicio-alumno.html",
         {'cliente': cliente, 'usuario': usuario, 'rutina': rutina})
@@ -99,4 +99,19 @@ def pagos_view(request):
         pagos = Venta.objects.filter(cliente=cliente)
         return render(request, 'rutinas/pagos.html', {'usuario': usuario, 'pagos': pagos})
 
-
+@login_required
+def registro_view(request):
+    if request.method == "POST":
+        form = RegistroForm(request.POST)
+        if form.is_valid():
+            registro = form.save(commit=False)
+            cliente = Cliente.objects.get(user=usuario)
+            registro.cliente = cliente
+            rutina = RutinaCliente.objects.filter(cliente=cliente, actual=True)
+            registro.rutina = rutina
+            registro.ejercicio = rutina
+            rutina.save()
+            return redirect('blog.views.rutina_detail', pk=rutina.pk)
+    else:
+        form = RegistroForm()          
+    return render(request, 'rutinas/nueva-rutina.html', {'form': form})

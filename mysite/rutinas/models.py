@@ -185,11 +185,16 @@ class RutinaEjercicio(models.Model):
     rutina = models.ForeignKey(Rutina, on_delete=models.PROTECT)
     dia = models.ForeignKey(Dia, on_delete=models.PROTECT)
 
-class Registro(models.Model):
-    id = models.AutoField(primary_key=True)
+class Serie(models.Model):
+    numero = models.IntegerField(default=1)
     peso_levantado = models.IntegerField(default=0)
     repeticiones = models.IntegerField(default=0)
+
+class Registro(models.Model):
+    id = models.AutoField(primary_key=True)
+    serie = models.ForeignKey(Serie, on_delete=models.PROTECT, null=True)
     cliente = models.ForeignKey(Cliente, on_delete=models.PROTECT)
     rutina = models.ForeignKey(Rutina, on_delete=models.PROTECT)
     ejercicio = models.ForeignKey(Ejercicio, on_delete=models.PROTECT)
     completado = models.BooleanField(default=False)
+

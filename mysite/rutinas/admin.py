@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (Articulo, Proveedor, Sucursal, Producto, 
-Administrador, Profesor, Rutina, Dia, RutinaEjercicio, Ejercicio, Cliente, Venta, FichaMedica, DetalleVenta, Servicio, Registro, RutinaCliente)
+Administrador, Profesor, Rutina, Dia, RutinaEjercicio, Ejercicio, Cliente, Venta, FichaMedica, DetalleVenta, Servicio, Registro, RutinaCliente, Serie)
 
 
 class AdministradorAdmin(admin.ModelAdmin):
@@ -72,10 +72,20 @@ class VentaAdmin(admin.ModelAdmin):
     inlines = [DetalleVentaInline]    
 admin.site.register(Venta, VentaAdmin)
 
-class RegistroAdmin(admin.ModelAdmin):
-    fields = ['peso_levantado', 'repeticiones', 'cliente', 'rutina', 'ejercicio', 'completado']
-admin.site.register(Registro, RegistroAdmin)
 
 class RutinaClienteAdmin(admin.ModelAdmin):
     fields = ['cliente', 'rutina', 'actual']
 admin.site.register(RutinaCliente, RutinaClienteAdmin)
+
+#fsdfdsfdsfsfdsfds
+""" class SerieInline(admin.TabularInline):
+    model = Serie
+    raw_id_fields = ("numero",)
+    fields = ['numero', 'peso_levantado', 'repeticiones']
+    extra = 1
+
+class RegistroAdmin(admin.ModelAdmin):
+    fields = ['cliente', 'rutina', 'ejercicio', 'completado']
+    inlines = [SerieInline]
+    admin.site.register(Registro, RegistroAdmin) """
+
