@@ -21,7 +21,7 @@ class ArticuloAdmin(admin.ModelAdmin):
 admin.site.register(Articulo, ArticuloAdmin)
 
 class ProductoAdmin(admin.ModelAdmin):
-    fields = ['nombre','descripcion','precio','tipo_producto', 'proveedor', 'sucursal', 'stock']
+    fields = ['nombre','descripcion','precio','tipo_producto', 'proveedor', 'sucursal', 'stock', 'imagen']
 admin.site.register(Producto, ProductoAdmin)
 
 class ServicioAdmin(admin.ModelAdmin):

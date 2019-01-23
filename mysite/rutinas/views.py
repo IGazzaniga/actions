@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from rutinas.models import Cliente, Profesor, RutinaCliente, Rutina, Venta, DetalleVenta, Dia
+from rutinas.models import Cliente, Profesor, RutinaCliente, Producto, Rutina, Venta, DetalleVenta, Dia, Articulo
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 
 # Create your views here.
 
@@ -39,15 +40,6 @@ def rutina_view(request, id):
         dia3 = Dia.objects.filter(rutina=rutinas)[2]
         dia3 = dia3.ejercicios.all()
         return render(request, "rutinas/rutina.html", {'cliente': cliente, 'dia1': dia1, 'dia2': dia2, 'dia3': dia3, 'rutinas': rutinas})
-
-@login_required
-def detalle_pago_view(request,id):
-    usuario= None
-    if request.user.is_authenticated:
-        cliente = Cliente.objects.get(user=request.user)
-        pago = Venta.objects.get(id=id)
-        detalle = DetalleVenta.objects.filter(pago=pago)
-        return render(request, 'rutinas/detalle-pago.html', {'usuario': usuario, 'detalle': detalle})
 
 @login_required
 def info_ejercicio_view(request):
@@ -99,4 +91,21 @@ def pagos_view(request):
         pagos = Venta.objects.filter(cliente=cliente)
         return render(request, 'rutinas/pagos.html', {'usuario': usuario, 'pagos': pagos})
 
+@login_required
+def detalle_pago_view(request,id):
+    usuario= None
+    if request.user.is_authenticated:
+        cliente = Cliente.objects.get(user=request.user)
+        pago = Venta.objects.get(id=id)
+        detalle = DetalleVenta.objects.filter(pago=pago)
+        return render(request, 'rutinas/detalle-pago.html', {'usuario': usuario, 'detalle': detalle})
 
+@login_required
+def catalog_view(request):
+    productos = Producto.objects.filter(stock__gt= 0)
+    return render(request, 'rutinas/catalogo.html', {'productos': productos})
+
+@login_required
+def detalle_producto_view(request, id):
+    producto = get_object_or_404(Producto, id=id)
+    return render(request, 'rutinas/detalle-producto.html', {'producto': producto})

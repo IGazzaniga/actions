@@ -4,6 +4,7 @@ from django.utils.timezone import now
 from django.core.signals import request_finished
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.urls import reverse
 # Create your models here.
 
 
@@ -28,15 +29,16 @@ class Proveedor(models.Model):
 
 class Articulo(models.Model):
     id = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=250)
+    nombre = models.CharField(max_length=250, db_index=True)
     descripcion = models.TextField()
+    creado = models.DateTimeField(auto_now_add=True)
     precio = models.DecimalField(max_digits=7, decimal_places=2)
-    
-    
+        
     def __str__(self):
         return self.nombre 
 
 class Producto(Articulo):
+    imagen = models.ImageField(default='')
     stock = models.IntegerField(default=0)
     TIPOS = (
         ('Suplemento', 'Suplemento'),
@@ -52,6 +54,13 @@ class Producto(Articulo):
     )
     proveedor = models.ForeignKey(Proveedor, on_delete=models.PROTECT)
     sucursal = models.ForeignKey(Sucursal, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.nombre 
+
+    def get_absolute_url(self):
+        return reverse('detalle_producto_view', args=[self.id])
+
 class Servicio(Articulo):
     pass
 
