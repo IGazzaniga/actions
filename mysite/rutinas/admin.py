@@ -25,11 +25,11 @@ class ProductoAdmin(admin.ModelAdmin):
 admin.site.register(Producto, ProductoAdmin)
 
 class ServicioAdmin(admin.ModelAdmin):
-    fields = ['nombre','descripcion','precio']
+    fields = ['nombre','descripcion','precio', 'imagen']
 admin.site.register(Servicio, ServicioAdmin)
 
 class ProfesorAdmin(admin.ModelAdmin):
-    fields = ['user', 'nombre', 'apellido', 'num_matricula', 'mail', 'telefono', 'domicilio']
+    fields = ['user', 'nombre', 'apellido', 'num_matricula', 'mail', 'telefono', 'domicilio', 'foto']
 admin.site.register(Profesor, ProfesorAdmin)
 
 class EjercicioAdmin(admin.ModelAdmin):

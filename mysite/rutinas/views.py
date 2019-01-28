@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from rutinas.models import Cliente, Profesor, RutinaCliente, Producto, Rutina, Venta, DetalleVenta, Dia, Articulo
+from rutinas.models import Cliente, Servicio, Profesor, RutinaCliente, Producto, Rutina, Venta, DetalleVenta, Dia, Articulo
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 
@@ -44,10 +44,6 @@ def rutina_view(request, id):
 @login_required
 def info_ejercicio_view(request):
     return render(request, "rutinas/info-ejercicio.html")
-
-@login_required
-def inicio_profesor_view(request):
-        return render(request, 'rutinas/inicio-profe.html', {'clientes': clientes})
 
 @login_required
 def calificar_view(request):
@@ -103,9 +99,45 @@ def detalle_pago_view(request,id):
 @login_required
 def catalog_view(request):
     productos = Producto.objects.filter(stock__gt= 0)
-    return render(request, 'rutinas/catalogo.html', {'productos': productos})
+    servicios = Servicio.objects.all()
+    return render(request, 'rutinas/catalogo.html', {'productos': productos, 'servicios': servicios})
 
 @login_required
 def detalle_producto_view(request, id):
     producto = get_object_or_404(Producto, id=id)
     return render(request, 'rutinas/detalle-producto.html', {'producto': producto})
+
+@login_required
+def detalle_servicio_view(request, id):
+    servicio = get_object_or_404(Servicio, id=id)
+    return render(request, 'rutinas/detalle-servicio.html', {'servicio': servicio})
+
+@login_required
+def comprar_view(request, id):
+    producto = get_object_or_404(Producto, id=id)
+    usuario= None
+    if request.user.is_authenticated:
+        cliente = Cliente.objects.get(user=request.user)
+    return render(request, 'rutinas/comprar.html', {'usuario': usuario,'producto': producto})
+
+@login_required
+def pagar_view(request, id):
+    servicio = get_object_or_404(Servicio, id=id)
+    usuario= None
+    if request.user.is_authenticated:
+        cliente = Cliente.objects.get(user=request.user)
+    return render(request, 'rutinas/pagar.html', {'usuario': usuario,'servicio': servicio})
+
+@login_required
+def pago_procesado_view(request, id):
+    producto = get_object_or_404(Producto, id=id)
+    stock = Producto.objects.get(id=id).stock
+    usuario= None
+    if request.user.is_authenticated:
+        cliente = Cliente.objects.get(user=request.user)
+    return render(request, 'rutinas/detalle-producto.html', {'usuario': usuario,'producto': producto})
+
+@login_required
+def perfil_profe_view(request,id):
+    profesor = get_object_or_404(Profesor, id=id)
+    return render(request, 'rutinas/perfil-profe.html', {'profesor': profesor})

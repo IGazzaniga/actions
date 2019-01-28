@@ -2,11 +2,25 @@
 @import url("https://fonts.googleapis.com/css?family=Anton");
 *:focus {
   outline: none; }
+
+.calificacion{
+  border-radius: 50%;
+  width: 250px !important;
+  height: 250px !important;
+}
+.centrado{
+  position: relative;
+  top: 75px;
+  width: 100%;
+  padding-top: 30px;
+  text-align: center;
+}
 #producto{
   text-align: center;
   border: 1px solid black;
   margin: 15px;
   display: inline-block;
+  width: 47%;
 }
 .img-catalogo{
   height: 200px !important;

@@ -15,12 +15,12 @@
 {% endblock %} 
 {% block principal %}
 <div class="buscador">
-    <h2>Detalle producto</h2>
-    <img class="img-fluid img-detalle" src={{producto.imagen.url}} alt="">
-    <p><b>Producto:</b> {{producto.nombre}}</p>
-    <p><b>Descripción:</b> {{producto.descripcion}}</p>
-    <p><b>Precio:</b> ${{producto.precio}}</p>
-    <a href="{% url 'comprar' producto.id %}"><button type="button" class="col-sm-12 btn btn-success">Comprar</button></a>  
+    <h2>Detalle servicio</h2>
+    <img class="img-fluid img-detalle" src={{servicio.imagen.url}} alt="">
+    <p><b>Servicio:</b> {{servicio.nombre}}</p>
+    <p><b>Descripción:</b> {{servicio.descripcion}}</p>
+    <p><b>Precio:</b> ${{servicio.precio}}</p>
+    <a href="{% url 'pagar' servicio.id %}"><button type="button" class="col-sm-12 btn btn-success">Comprar</button></a>  
 </div>
 {% endblock%}
 {% endblock%}

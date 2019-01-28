@@ -62,7 +62,7 @@ class Producto(Articulo):
         return reverse('detalle_producto_view', args=[self.id])
 
 class Servicio(Articulo):
-    pass
+    imagen = models.ImageField(default='')
 
 class Administrador(models.Model):
     id = models.AutoField(primary_key=True)
@@ -83,6 +83,7 @@ class Profesor(models.Model):
     nombre = models.CharField(max_length=30, default='')
     apellido = models.CharField(max_length=30, default='')
     num_matricula = models.IntegerField(default=0)
+    foto = models.ImageField(upload_to="foto_perfil", default='')
     mail = models.EmailField(max_length=254, default='')
     telefono = models.BigIntegerField(help_text="Introduzca un número de teléfono válido", default=0)
     domicilio = models.CharField(max_length=30, default='')
@@ -144,7 +145,7 @@ class Venta(models.Model):
         max_length=30,
         choices=MEDIOS
     )
-    administrador = models.ForeignKey(Administrador, on_delete=models.CASCADE)
+    administrador = models.ForeignKey(Administrador, on_delete=models.CASCADE, blank=True)
     num_tarjeta = models.BigIntegerField(null=True, blank=True)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     

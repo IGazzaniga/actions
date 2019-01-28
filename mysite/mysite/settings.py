@@ -134,6 +134,9 @@ LOGIN_REDIRECT_URL = '/rutinas'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL= '/media/'
 
+#django-ratings settings
+STAR_RATINGS_RANGE = 5
+
 #django-paypal settings
 PAYPAL_RECEIVER_EMAIL = 'ignagazzaniga@hotmail.com.ar'
 PAYPAL_TEST = True
