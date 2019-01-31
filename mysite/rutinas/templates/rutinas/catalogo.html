@@ -27,6 +27,7 @@
         <a class="nombre"  href="{% url 'detalle_producto' producto.id %}">
             <img src="{{producto.imagen.url}}" class="img-fluid img-catalogo" alt="">
             <h3>{{producto.nombre}}</h3> 
+            <p>Stock: {{producto.stock}}</p>
             <h6>${{producto.precio}}</h6>
         </a>
         </div>

@@ -16,28 +16,20 @@
 {% block principal %}
 <div class="buscador">
     <h2>Comprar</h2>
-    <form action="POST">
+    <form method="POST">
+        {% csrf_token %}
         <h3><b>Producto:</b> {{producto.nombre}}</h3>
         <h3><b>Precio unitario:</b> ${{producto.precio}}</h3><br>
-        <h3>Paga con</h3>
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-            <label class="form-check-label" for="exampleRadios1">
-              <h3>Tarjeta de crédito</h3>
-            </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-            <label class="form-check-label" for="exampleRadios2">
-                <h3>Tarjeta de débito</h3>
-            </label>
+            {{ form.medio_pago.label }}
+            {{ form.medio_pago }}
         </div>
         <br>
         <div class="form-group">
-            <label for="exampleInputEmail1"><h3>Número de tarjeta</h3></label>
-            <input type="number" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Número de tarjeta" maxlength="16">
+            {{ form.num_tarjeta.label }}
+            {{ form.num_tarjeta }}
         </div>
-        <a href=""><button type="button" class="col-sm-12 btn btn-success">Pagar</button></a>  
+        <button type="submit" class="col-sm-12 btn btn-success">Pagar</button>
     </form>
 </div>
 {% endblock%}

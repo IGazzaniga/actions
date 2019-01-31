@@ -20,6 +20,8 @@
     <p><b>Servicio:</b> {{servicio.nombre}}</p>
     <p><b>Descripción:</b> {{servicio.descripcion}}</p>
     <p><b>Precio:</b> ${{servicio.precio}}</p>
+    <p><b>Desde:</b> {{desde}}</p>
+    <p><b>Hasta:</b> {{hasta}}</p>
     <a href="{% url 'pagar' servicio.id %}"><button type="button" class="col-sm-12 btn btn-success">Comprar</button></a>  
 </div>
 {% endblock%}

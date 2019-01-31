@@ -5,6 +5,8 @@ from django.core.signals import request_finished
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.urls import reverse
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 # Create your models here.
 
 
@@ -145,8 +147,8 @@ class Venta(models.Model):
         max_length=30,
         choices=MEDIOS
     )
-    administrador = models.ForeignKey(Administrador, on_delete=models.CASCADE, blank=True)
-    num_tarjeta = models.BigIntegerField(null=True, blank=True)
+    administrador = models.ForeignKey(Administrador, on_delete=models.CASCADE, null=True)
+    num_tarjeta = models.BigIntegerField(null=True, blank=True, validators=[MaxValueValidator(9999999999999999), MinValueValidator(1111111111111111)])
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     
     def __str__(self):

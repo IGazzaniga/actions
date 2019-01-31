@@ -134,6 +134,9 @@ LOGIN_REDIRECT_URL = '/rutinas'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL= '/media/'
 
+DATE_FORMAT = ['%d-%m-%Y']
+DATE_INPUT_FORMATS = ['%d-%m-%Y']
+
 #django-ratings settings
 STAR_RATINGS_RANGE = 5
 
