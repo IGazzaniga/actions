@@ -8,11 +8,7 @@ class RutinaForm(forms.ModelForm):
         model = Rutina
         fields = '__all__'
 
-class RegistroForm(forms.ModelForm):
-    class Meta:
-        model = Registro
-        fields = ('peso_levantado', 'repeticiones')
-        
+
 class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
