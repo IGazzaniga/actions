@@ -72,26 +72,34 @@ class VentaAdmin(admin.ModelAdmin):
     inlines = [DetalleVentaInline]    
 admin.site.register(Venta, VentaAdmin)
 
+class SerieInline(admin.TabularInline):
+    model = Serie
+    fields = ['numero', 'peso_levantado', 'repeticiones']
+    extra = 1
+
+class SemanaInline(admin.StackedInline):
+    model = Semana
+    inlines = [SerieInline]
+    fields = ['numero']
+    extra = 1
+
+class SemanaAdmin(admin.ModelAdmin):
+    model = Semana
+    inlines = [SerieInline]
+admin.site.register(Semana, SemanaAdmin)
 
 class RutinaClienteAdmin(admin.ModelAdmin):
     fields = ['cliente', 'rutina', 'actual']
+    inlines = [SemanaInline]
 admin.site.register(RutinaCliente, RutinaClienteAdmin)
 
 class SerieAdmin(admin.ModelAdmin):
     model = Serie
 admin.site.register(Serie, SerieAdmin)
 
-class SerieInline(admin.TabularInline):
-    model = Serie
-    fields = ['numero', 'peso_levantado', 'repeticiones']
-    extra = 1
 
-class SemanaInline(admin.TabularInline):
-    model = Semana
-    fields = ['numero', 'serie']
 
 class RegistroAdmin(admin.ModelAdmin):
     fields = ['cliente', 'rutina', 'ejercicio', 'completado']
-    inlines = [SemanaInline]
 admin.site.register(Registro, RegistroAdmin)
 
