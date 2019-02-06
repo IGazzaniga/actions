@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rutinas',
     'widget_tweaks',
     'star_ratings',
+    'paypal.standard.ipn'
 ]
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -132,3 +133,13 @@ LOGIN_REDIRECT_URL = '/rutinas'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL= '/media/'
+
+DATE_FORMAT = ['%d-%m-%Y']
+DATE_INPUT_FORMATS = ['%d-%m-%Y']
+
+#django-ratings settings
+STAR_RATINGS_RANGE = 5
+
+#django-paypal settings
+PAYPAL_RECEIVER_EMAIL = 'ignagazzaniga@hotmail.com.ar'
+PAYPAL_TEST = True

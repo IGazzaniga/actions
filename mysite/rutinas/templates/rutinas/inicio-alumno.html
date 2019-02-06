@@ -8,13 +8,14 @@
     {% block menu %}
         <div class="menu">
                 <span class="logo"><i class="fab fa-autoprefixer"></i></span>
+                <!-- <span><a class="carro" href="#"><i class="fas fa-shopping-cart"></i></a></span> --> 
                 <span><a class="exit" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a></span> 
                 <div class="burger-icon" onclick="openMenu()">
                     <div class="bar bar1"></div>
                     <div class="bar bar2"></div>
                     <div class="bar bar3"></div>
                 </div>
-            </div>
+        </div>
 
             <div class="menu-lateral">
                     <i class="fas fa-times" onclick="closeMenu()"></i>
@@ -40,11 +41,11 @@
                         </li>
                         <li>
                             <i class="fas fa-store"></i>
-                            <span>Store</span>
+                            <span><a href="{% url 'catalogo' %}">Store</a></span>
                         </li>
                         <li>
                             <i class="fas fa-star"></i>
-                            <span>Calificar</span>
+                            <span><a href="{% url 'calificar' %}">Calificar</a> </span>
                         </li>
                     </ul>
             </div>

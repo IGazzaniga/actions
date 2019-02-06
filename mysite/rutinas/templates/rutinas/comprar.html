@@ -15,19 +15,22 @@
 {% endblock %} 
 {% block principal %}
 <div class="buscador">
-    <h2>Detalle pago</h2>
-    <ul id="listClient">
-        {% for det in detalle %}
-            <li class="row"><a class="nombre">{{det.articulo}},
-            {% if det.hasta %}
-               <b>Desde: </b>{{det.desde}}, <b>Hasta: </b>{{det.hasta}},
-            {% endif %}
-            {% if not det.hasta %}
-                <b>Cantidad: </b> {{det.cantidad}},
-            {% endif %}
-            ${{det.precio}}<a href="#" class="icono2"></a></a></li>
-        {% endfor %}
-    </ul>
+    <h2>Comprar</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <h3><b>Producto:</b> {{producto.nombre}}</h3>
+        <h3><b>Precio unitario:</b> ${{producto.precio}}</h3><br>
+        <div class="form-check">
+            {{ form.medio_pago.label }}
+            {{ form.medio_pago }}
+        </div>
+        <br>
+        <div class="form-group">
+            {{ form.num_tarjeta.label }}
+            {{ form.num_tarjeta }}
+        </div>
+        <button type="submit" class="col-sm-12 btn btn-success">Pagar</button>
+    </form>
 </div>
 {% endblock%}
 {% endblock%}

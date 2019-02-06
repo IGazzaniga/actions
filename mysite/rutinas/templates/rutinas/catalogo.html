@@ -1,0 +1,53 @@
+{% extends "../rutinas/inicio-alumno.html" %}
+{% load staticfiles %} <!-- Se cargan los archivos estáticos de CSS, HTML, etc -->
+{% load static %}
+{% load ratings %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'rutinas/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'rutinas/css/inicioProfe.css' %}">
+    <link rel="stylesheet" href="{% static 'rutinas/css/tabs.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+{% endblock %}
+{% block contenido %} <!-- Se define el bloque que encierra todo el contenido de esta vista -->
+{% block menu %}
+{{ block.super }} 
+{% endblock %} 
+{% block principal %}
+<div class="buscador">
+    <div class="tab fluid-container">
+        <button class="tablinks" onclick="showTable(event, 'Productos')" id="defaultOpen">Productos</button>
+        <button class="tablinks" onclick="showTable(event, 'Servicios')" id="pos">Servicios</button>
+    </div>
+    <div id="Productos" class="centrado tabcontent">
+        <h2>Productos</h2>
+        {% for producto in productos %}
+        <div class="col-sm-12 col-md-12 col-lg-6 col-lg-6" id="producto">
+        <a class="nombre"  href="{% url 'detalle_producto' producto.id %}">
+            <img src="{{producto.imagen.url}}" class="img-fluid img-catalogo" alt="">
+            <h3>{{producto.nombre}}</h3> 
+            <p>Stock: {{producto.stock}}</p>
+            <h6>${{producto.precio}}</h6>
+        </a>
+        </div>
+        {% endfor %}
+    </div>
+    <div id="Servicios" class="centrado tabcontent">
+    {% for servicio in servicios %}
+    <div class="col-sm-12 col-md-12 col-lg-6 col-lg-6" id="producto">
+        <a class="nombre" href="{% url 'detalle_servicio' servicio.id %}">
+            <img src="{{servicio.imagen.url}}" class="img-fluid img-catalogo" alt="">
+            <h3>{{servicio.nombre}}</h3> 
+            <h6>${{servicio.precio}}</h6>
+        </a>
+    </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock%}
+{% endblock%}
+{% block scripts %}
+  {{ block.super }}
+  <script src="{% static 'rutinas/js/tabs.js' %}"></script>
+{% endblock %}

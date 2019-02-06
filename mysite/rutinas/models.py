@@ -4,6 +4,9 @@ from django.utils.timezone import now
 from django.core.signals import request_finished
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.urls import reverse
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 # Create your models here.
 
 
@@ -28,15 +31,16 @@ class Proveedor(models.Model):
 
 class Articulo(models.Model):
     id = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=250)
+    nombre = models.CharField(max_length=250, db_index=True)
     descripcion = models.TextField()
+    creado = models.DateTimeField(auto_now_add=True)
     precio = models.DecimalField(max_digits=7, decimal_places=2)
-    
-    
+        
     def __str__(self):
         return self.nombre 
 
 class Producto(Articulo):
+    imagen = models.ImageField(default='')
     stock = models.IntegerField(default=0)
     TIPOS = (
         ('Suplemento', 'Suplemento'),
@@ -52,8 +56,15 @@ class Producto(Articulo):
     )
     proveedor = models.ForeignKey(Proveedor, on_delete=models.PROTECT)
     sucursal = models.ForeignKey(Sucursal, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.nombre 
+
+    def get_absolute_url(self):
+        return reverse('detalle_producto_view', args=[self.id])
+
 class Servicio(Articulo):
-    pass
+    imagen = models.ImageField(default='')
 
 class Administrador(models.Model):
     id = models.AutoField(primary_key=True)
@@ -74,6 +85,7 @@ class Profesor(models.Model):
     nombre = models.CharField(max_length=30, default='')
     apellido = models.CharField(max_length=30, default='')
     num_matricula = models.IntegerField(default=0)
+    foto = models.ImageField(upload_to="foto_perfil", default='')
     mail = models.EmailField(max_length=254, default='')
     telefono = models.BigIntegerField(help_text="Introduzca un número de teléfono válido", default=0)
     domicilio = models.CharField(max_length=30, default='')
@@ -135,8 +147,8 @@ class Venta(models.Model):
         max_length=30,
         choices=MEDIOS
     )
-    administrador = models.ForeignKey(Administrador, on_delete=models.CASCADE)
-    num_tarjeta = models.BigIntegerField(null=True, blank=True)
+    administrador = models.ForeignKey(Administrador, on_delete=models.CASCADE, null=True)
+    num_tarjeta = models.BigIntegerField(null=True, blank=True, validators=[MaxValueValidator(9999999999999999), MinValueValidator(1111111111111111)])
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     
     def __str__(self):

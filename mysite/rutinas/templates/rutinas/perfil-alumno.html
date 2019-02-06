@@ -12,9 +12,9 @@
 {% block principal %}
 <div class="contenedor">
     <div class="full-container fondo">
+        <h3 id="titulo-form" style="text-align: center;">{{cliente.nombre}} {{cliente.apellido}}</h3><br>
         <div class="perfilcamara">
-            <img class="img-perfil" src="assets/img/profile.jpeg" >
-            <img src="assets/img/camera-change.svg" class="camera-change">
+            <img class="img-perfil" src="{{ cliente.foto.url }}" >
         </div>
     </div>
     <nav>
@@ -23,65 +23,77 @@
             <a class="nav-item nav-link" id="nav-ficha-tab" data-toggle="tab" href="#nav-ficha" role="tab" aria-controls="nav-ficha" aria-selected="false">Ficha Médica</a>
         </div>
     </nav>
+    
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-personales" role="tabpanel" aria-labelledby="nav-personales-tab">
             <div class="container-formulario"><br>
-                <h3 id="titulo-form" style="text-align: center;">{{cliente.nombre}} {{cliente.apellido}}</h3><br>
                 <div class="row row-formulario">
                     <div class="col-sm-4 col-12">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" size="26" value="{{ cliente.nombre }}" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="col-sm-4 col-12">
+                        <label for="nombre">Apellido:</label>
+                        <input type="text" size="26" value="{{ cliente.apellido }}" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="col-sm-4 col-12">
                         <label for="nombre">DNI:</label>
-                        <input type="text" size="26" placeholder={{usuario.dni}} class="form-control" id="email" name="email">
+                        <input type="number" size="26" value="{{ cliente.dni }}" class="form-control" id="email" name="email">
                     </div>
+                </div>
+                <div class="row row-formulario">
                     <div class="col-sm-4 col-12">
-                        <label for="apellido">Edad:</label>
-                        <input type="text" class="form-control" id="apellido" placeholder={{usuario.edad}} name="apellido">
+                        <label for="nombre">Foto de perfil:</label>
+                        <input type="file" value= "{{ cliente.foto }}" name="myImage" accept="image/*" />
                     </div>
-                    <div class="col-sm-4 col-12">
-                        <label for="dni">DNI:</label>
-                        <input type="number" placeholder="38865263" class="form-control" id="dni" name="dni">
-                    </div>
+                    <div class="col-sm-8 col-12">
+                        <label for="nombre">Telefono:</label>
+                        <input type="number" size="26" value="{{ cliente.telefono }}" class="form-control" id="email" name="email">
+                    </div>                    
                 </div>
                 <div class="row row-formulario">
                     <div class="col-sm-6 col-12">
                         <label for="localidad">Domicilio:</label>
-                        <input type="text" placeholder="20 331" class="form-control" id="pwd" name="pwd">
+                        <input type="text" value="{{ cliente.domicilio }}" class="form-control" id="pwd" name="pwd">
                     </div>
                     <div class="col-sm-6 col-12" >
                         <label for="email">E-mail:</label>
-                        <input type="email" placeholder="mlucena@gmail.com" class="form-control" id="email" name="email">
+                        <input type="email" value="{{ cliente.mail }}" class="form-control" id="email" name="email">
                     </div>
                 </div>
             </div>
         </div>
         <div class="tab-pane fade" id="nav-ficha" role="tabpanel" aria-labelledby="nav-ficha-tab">
             <div class="container-formulario"><br>
-                <h3 id="titulo-form" style="text-align: center;">Martín Lucena</h3><br>
                 <div class="row row-formulario">
                     <div class="col-sm-4 col-12">
                         <label for="nombre">Fecha de Nacimiento:</label>
-                        <input type="text" size="26" placeholder="16/03/1995" class="form-control" id="email" name="email">
+                        <input type="text" size="26" value="{{ ficha.fecha_nacimiento }}" class="form-control" id="email" name="email">
                     </div>
                     <div class="col-sm-4 col-12">
                         <label for="apellido">Sexo:</label>
-                        <input type="text" class="form-control" id="apellido" placeholder="Masculino" name="apellido">
+                        <select>
+                                <option value="masculino">Masculino</option>
+                                <option value="femenino">Femenino</option>
+                        </select>                    
                     </div>
                     <div class="col-sm-4 col-12">
                         <label for="dni">Peso:</label>
-                        <input type="number" placeholder="89kg" class="form-control" id="dni" name="dni">
+                        <input type="number" value="{{ ficha.peso }}" class="form-control" id="dni" name="dni">
                     </div>
                 </div>
                 <div class="row row-formulario">
                     <div class="col-sm-6 col-12">
                         <label for="localidad">Altura:</label>
-                        <input type="text" placeholder="1,75 cm" class="form-control" id="pwd" name="pwd">
+                        <input type="text" value="1,75 cm" class="form-control" id="pwd" name="pwd">
                     </div>
                     <div class="col-sm-6 col-12" >
                         <label for="email">Mutual/Obra Social:</label>
-                        <input type="email" placeholder="AMFFA" class="form-control" id="email" name="email">
+                        <input type="email" value="AMFFA" class="form-control" id="email" name="email">
                     </div>
                     <div class="col-sm-6 col-12" >
                         <label for="email">Telefono de emergencia:</label>
-                        <input type="email" placeholder="221 483 3239" class="form-control" id="email" name="email">
+                        <input type="email" value="221 483 3239" class="form-control" id="email" name="email">
                     </div>
                     <div class="col-sm-6 col-12" >
                         <label for="comment">Observaciones:</label>

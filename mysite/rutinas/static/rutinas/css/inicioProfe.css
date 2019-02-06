@@ -3,6 +3,39 @@
 *:focus {
   outline: none; }
 
+.calificacion{
+  border-radius: 50%;
+  width: 250px !important;
+  height: 250px !important;
+}
+.centrado{
+  position: relative;
+  top: 75px;
+  width: 100%;
+  padding-top: 30px;
+  text-align: center;
+}
+#producto{
+  text-align: center;
+  border: 1px solid black;
+  margin: 15px;
+  display: inline-block;
+  width: 47%;
+}
+.img-catalogo{
+  height: 200px !important;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+.img-detalle{
+  height: 200px !important;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  }
 .menu {
   position: fixed;
   z-index: 90;
@@ -55,6 +88,17 @@
     transform: translate(0%, -50%);
     font-size: 30px;
     cursor: pointer; }
+  .menu .carro {
+    position:absolute;
+    right: 90px;
+    color: white;
+    top: 50%;
+    -webkit-transform: translate(0%, -50%);
+    -ms-transform: translate(0%, -50%);
+    transform: translate(0%, -50%);
+    font-size: 30px;
+    cursor: pointer;
+  }
 
 .menu-lateral {
   position: absolute;

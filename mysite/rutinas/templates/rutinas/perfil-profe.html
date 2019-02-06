@@ -8,26 +8,18 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
-    {% endblock %}
+{% endblock %}
 {% block contenido %} <!-- Se define el bloque que encierra todo el contenido de esta vista -->
 {% block menu %}
 {{ block.super }} 
 {% endblock %} 
 {% block principal %}
-<div class="buscador">
-    <h2>Detalle pago</h2>
-    <ul id="listClient">
-        {% for det in detalle %}
-            <li class="row"><a class="nombre">{{det.articulo}},
-            {% if det.hasta %}
-               <b>Desde: </b>{{det.desde}}, <b>Hasta: </b>{{det.hasta}},
-            {% endif %}
-            {% if not det.hasta %}
-                <b>Cantidad: </b> {{det.cantidad}},
-            {% endif %}
-            ${{det.precio}}<a href="#" class="icono2"></a></a></li>
-        {% endfor %}
-    </ul>
+<div class="centrado">
+    <div class="perfil-camera">
+        <img src="{{profesor.foto.url}}" alt="" class="img-fluid calificacion img-perfil">
+    </div>
+    <h3>{{profesor.nombre}} {{profesor.apellido}}</h3>
+    {% ratings profesor %}
 </div>
 {% endblock%}
 {% endblock%}
