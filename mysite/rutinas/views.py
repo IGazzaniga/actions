@@ -19,7 +19,7 @@ def index_view(request):
         if usuario.groups.filter(name='Clientes').exists():
         #Si pertenece al grupo Clientes, va a inicio-alumno
                 cliente = Cliente.objects.get(user=usuario)
-                rutinas = RutinaCliente.objects.filter(cliente=cliente, actual=True)
+                rutinas = RutinaCliente.objects.filter(cliente=cliente, actual=True)[0]
                 rutina = rutinas.rutina.id
                 return render(request, "rutinas/inicio-alumno.html",
         {'cliente': cliente, 'usuario': usuario, 'rutina': rutina})
