@@ -106,7 +106,6 @@ class Ejercicio(models.Model):
 
 class Rutina(models.Model):
     id = models.AutoField(primary_key=True)
-    numero = models.IntegerField(default=0)
     nombre = models.CharField(max_length=30, default='')
     
     def __str__(self):
@@ -115,7 +114,6 @@ class Rutina(models.Model):
 class Dia(models.Model):
     ejercicios = models.ManyToManyField(Ejercicio)
     rutina = models.ForeignKey(Rutina, on_delete=models.CASCADE)
-
 
 class Cliente(models.Model):
     """Un cliente del gimnasio"""

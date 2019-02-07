@@ -43,7 +43,7 @@ class DiaInline(admin.TabularInline):
     min_num = 3
 
 class RutinaAdmin(admin.ModelAdmin):
-    fields = ['numero', 'nombre']
+    fields = ['nombre']
     inlines = [DiaInline] 
 admin.site.register(Rutina, RutinaAdmin)
 

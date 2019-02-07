@@ -1,5 +1,5 @@
 from django import forms
-from .models import Rutina, Cliente, Venta, DetalleVenta, FichaMedica, Registro
+from .models import Rutina, Cliente, Venta, DetalleVenta, FichaMedica, Registro, Dia, Ejercicio
 from django.forms import ModelForm, inlineformset_factory
 from django.utils.translation import ugettext_lazy as _
 
@@ -7,7 +7,18 @@ class RutinaForm(forms.ModelForm):
     class Meta:
         model = Rutina
         fields = '__all__'
+        labels = {
+            'nombre': _('Nombre')
+        }
 
+class DiaForm(forms.ModelForm):
+    ejercicios = forms.ModelMultipleChoiceField(queryset=Ejercicio.objects.all())
+    class Meta:
+        model = Dia
+        fields = ['ejercicios']
+        labels = {
+            'ejercicios': _('Ejercicios')
+        }
 
 class ClienteForm(forms.ModelForm):
     class Meta:

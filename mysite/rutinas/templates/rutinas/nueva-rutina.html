@@ -50,6 +50,12 @@
     <form method="POST">
         {% csrf_token %}
         {{ form }}
+        {{ dia_form_1.ejercicios.label }}
+<select name="ejercicios" required="" id="id_ejercicios" multiple="">
+{% for ej in dia_form_1.ejercicios %}
+<option value="{{ ej.id }}">{{ ej }}</option>
+{% endfor %}
+</select>
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
 </div>

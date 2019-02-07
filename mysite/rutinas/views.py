@@ -4,7 +4,7 @@ from rutinas.models import Cliente, Servicio, FichaMedica, Profesor, RutinaClien
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 import datetime
-from .forms import VentaForm
+from .forms import VentaForm, RutinaForm, DiaForm
 from django.template import RequestContext
 from dateutil.relativedelta import relativedelta
 
@@ -58,15 +58,35 @@ def calificar_view(request):
 def nueva_rutina_view(request):
     if request.method == "POST":
         form = RutinaForm(request.POST)
-        if form.is_valid():
+        dia_form_1 = DiaForm(request.POST)
+        dia_form_2 = DiaForm(request.POST)
+        dia_form_3 = DiaForm(request.POST)
+        if form.is_valid() and dia_form_1.is_valid() and dia_form_2.is_valid() and dia_form_3.is_valid():
             rutina = form.save(commit=False)
-            rutina.author = request.user
-            rutina.published_date = timezone.now()
+            dia1 = dia_form_1.save(commit=False)
+            dia2 = dia_form_2.save(commit=False)
+            dia3 = dia_form_3.save(commit=False)
             rutina.save()
-            return redirect('blog.views.rutina_detail', pk=rutina.pk)
+            dia1.rutina = rutina
+            dia2.rutina = rutina
+            dia3.rutina = rutina
+            ej = Ejercicio.objects.get(id=request.POST.get("ejercicios"))
+            dia1.save()
+            dia2.save()
+            dia3.save()
+            dia1.ejercicios.add(ej)
+            dia2.ejercicios.add(ej)
+            dia3.ejercicios.add(ej)
+            dia1.save()
+            dia2.save()
+            dia3.save()
+            return redirect(index_view)
     else:
-        form = RutinaForm()          
-    return render(request, 'rutinas/nueva-rutina.html', {'form': form})
+        form = RutinaForm()
+        dia_form_1 = DiaForm()
+        dia_form_2 = DiaForm()
+        dia_form_3 = DiaForm()        
+    return render(request, 'rutinas/nueva-rutina.html', {'form': form, 'dia_form_1': dia_form_1, 'dia_form_2': dia_form_2, 'dia_form_3': dia_form_3})
 
 @login_required
 def perfil_alumno_view(request):
@@ -90,7 +110,7 @@ def pagos_view(request):
     if request.user.is_authenticated:
         cliente = Cliente.objects.get(user=request.user)
         pagos = Venta.objects.filter(cliente=cliente).order_by('-fecha')
-        return render(request, 'rutinas/pagos.html', {'usuario': usuario, 'pagos': pagos})
+        return render(request, 'rutinas/pagos.html', {'cliente': cliente, 'pagos': pagos})
 
 @login_required
 def registro_view(request):
