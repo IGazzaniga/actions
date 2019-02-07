@@ -127,8 +127,8 @@
             <div class="full-container ejercicios">
                 {% for ejercicio in dia1 %}
                 <div class="full-container ejercicio">
-                    <span>{{ejercicio.nombre}} <i class="fas fa-check-circle"></i></span>
-                    <i class="fas fa-angle-right arrowE"></i>
+                    <a href="{% url 'detalle_ejercicio' ejercicio3.id %}"><span>{{ejercicio.nombre}} <i class="fas fa-check-circle"></i></span>
+                    <i class="fas fa-angle-right arrowE"></i></a>
                 </div>
                 {% endfor %}
             </div>
@@ -141,8 +141,8 @@
             <div class="full-container ejercicios">
                 {% for ejercicio2 in dia2 %}
                 <div class="full-container ejercicio">
-                    <span>{{ejercicio2.nombre}} <i class="fas fa-check-circle"></i></span>
-                    <i class="fas fa-angle-right arrowE"></i>
+                <a href="{% url 'detalle_ejercicio' ejercicio3.id %}"><span>{{ejercicio2.nombre}} <i class="fas fa-check-circle"></i></span>
+                    <i class="fas fa-angle-right arrowE"></i></a>
                 </div>
                 {% endfor %}
             </div>
@@ -153,8 +153,8 @@
             
             <div class="full-container ejercicios">
                 {% for ejercicio3 in dia3 %}
-                <div class="full-container ejercicio">
-                    <span>{{ejercicio3.nombre}}<i class="fas fa-check-circle"></i></span>
+                 <div class="full-container ejercicio" >
+                    <a href="{% url 'detalle_ejercicio' ejercicio3.id %}"><span>{{ejercicio3.nombre}}<i class="fas fa-check-circle"></i></span></a>
                     <i class="fas fa-angle-right arrowE"></i>
                 </div>
                 {% endfor %}

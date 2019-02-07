@@ -7,7 +7,7 @@
 {% block contenido %} <!-- Se define el bloque que encierra todo el contenido de esta vista -->
     {% block menu %}
         <div class="menu">
-                <span class="logo"><i class="fab fa-autoprefixer"></i></span>
+                <span class="logo"><img src="{% static 'rutinas\img\APPTincho.svg' %}" height="60px"></span>
                 <!-- <span><a class="carro" href="#"><i class="fas fa-shopping-cart"></i></a></span> --> 
                 <span><a class="exit" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a></span> 
                 <div class="burger-icon" onclick="openMenu()">
@@ -20,11 +20,7 @@
             <div class="menu-lateral">
                     <i class="fas fa-times" onclick="closeMenu()"></i>
                     <div class="image">
-<<<<<<< HEAD
                         <img src="{{ cliente.foto.url }}">
-=======
-                        <img src="{{cliente.foto.url}}">
->>>>>>> modulo_pago
                     </div>
                     <ul>
                         <li>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, render_to_response
 from django.contrib.auth.decorators import login_required
-from rutinas.models import Cliente, Servicio, FichaMedica, Profesor, RutinaCliente, Producto, Rutina, Venta, DetalleVenta, Dia, Articulo
+from rutinas.models import Cliente, Servicio, FichaMedica, Profesor, RutinaCliente, Producto, Rutina, Venta, DetalleVenta, Dia, Articulo, Ejercicio
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 import datetime
@@ -204,3 +204,8 @@ def pago_procesado_view(request):
 def perfil_profe_view(request,id):
     profesor = get_object_or_404(Profesor, id=id)
     return render(request, 'rutinas/perfil-profe.html', {'profesor': profesor})
+
+@login_required
+def detalle_ejercicio_view(request, id):
+        ejercicio = get_object_or_404(Ejercicio, id=id)
+        return render(request, 'rutinas/detalle-ejercicio.html', {'ejercicio': ejercicio})
