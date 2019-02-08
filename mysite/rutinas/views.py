@@ -70,13 +70,13 @@ def nueva_rutina_view(request):
             dia1.rutina = rutina
             dia2.rutina = rutina
             dia3.rutina = rutina
-            ej = Ejercicio.objects.get(id=request.POST.get("ejercicios"))
-            dia1.save()
+            dia1.save() #Guardo todos los días así su id no es vacío
             dia2.save()
             dia3.save()
-            dia1.ejercicios.add(ej)
-            dia2.ejercicios.add(ej)
-            dia3.ejercicios.add(ej)
+            #A continuación, en ej1 guardo la lista de los ejercicios que seleccioné para el día 1
+            ej1 = Ejercicio.objects.filter(id__in = request.POST.getlist('ejercicios'))
+            #Le asigno esa lista a los ejercicios del día 1
+            dia1.ejercicios.set(ej1)
             dia1.save()
             dia2.save()
             dia3.save()

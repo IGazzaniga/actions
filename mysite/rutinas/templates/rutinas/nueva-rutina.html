@@ -51,11 +51,17 @@
         {% csrf_token %}
         {{ form }}
         <br>
-        {{ dia_form_1.ejercicios.label }}
+        {{ dia_form_1.ejercicios.label }} dia 1
         <br>
-        {% for ej in dia_form_1.ejercicios %}
-            <input type="checkbox" name="{{ej.nombre}}" value="{{ej.nombre}}">{{ ej }}<br>
-        {% endfor %}
+        {{ dia_form_1.ejercicios }}
+        <br>
+        {{ dia_form_2.ejercicios.label }} dia 2
+        <br>
+        {{ dia_form_2.ejercicios }}
+        <br>
+        {{ dia_form_3.ejercicios.label }} dia 3
+        <br>
+        {{ dia_form_3.ejercicios }}
 
         <button type="submit" class="save btn btn-default">Save</button>
     </form>

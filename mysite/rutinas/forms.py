@@ -22,7 +22,10 @@ class RutinaForm(forms.ModelForm):
         }
 
 class DiaForm(forms.ModelForm):
-    ejercicios = forms.ModelMultipleChoiceField(queryset=Ejercicio.objects.all(), widget=forms.CheckboxSelectMultiple())
+    ejercicios = forms.ModelMultipleChoiceField(
+        queryset=Ejercicio.objects.all(), 
+        widget=forms.CheckboxSelectMultiple,
+    )
     class Meta:
         model = Dia
         fields = ['ejercicios']
