@@ -15,14 +15,17 @@
 {% endblock %} 
 {% block principal %}
 <div class="buscador">
-    <h2>Rutinas</h2>
-    <input type="text" id="myInput" onkeyup="searchClient()" placeholder="Busca por nombres..." title="Ingrese un nombre">
-    <ul id="listClient">
-        {% for rutina in rutinas %}
-            <li class="row"><a class="nombre" href="{% url 'rutinaAlumno' rutina.id %}">{{rutina.nombre}}</a><a href="#" class="icono2"><i class="fas fa-plus-circle"></i></a> </li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'asignar_rutina' cliente.id %}"><button type="button" class="col-sm-12 btn btn-success">Asignar nueva rutina</button></a>  
+    <h2>{{cliente.nombre}} {{cliente.apellido}}</h2>
+    <h2>Asignar rutina</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <h3><b>{{ form.rutina.label }}</b></h3>
+        {{ form.rutina }}
+        <br><br><br>
+        {{ form.actual.label }}
+        {{ form.actual }}
+        <button type="submit" class="col-sm-12 btn btn-success">Asignar</button>
+    </form>
 </div>
 {% endblock%}
 {% endblock%}

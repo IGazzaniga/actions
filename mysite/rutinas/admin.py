@@ -1,7 +1,8 @@
 from django.contrib import admin
 from .models import (Articulo, Proveedor, Sucursal, Producto, 
 Administrador, Profesor, Semana, Rutina, Dia, RutinaEjercicio, Ejercicio, Cliente, Venta, FichaMedica, DetalleVenta, Servicio, Registro, RutinaCliente, Serie)
-
+from django.db import models
+from django.forms import CheckboxSelectMultiple
 
 class AdministradorAdmin(admin.ModelAdmin):
     fields = ['user','nombre', 'apellido', 'sucursal']
@@ -41,6 +42,9 @@ class DiaInline(admin.TabularInline):
     fields = ['ejercicios']
     extra = 0
     min_num = 3
+    formfield_overrides = {
+        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+    }
 
 class RutinaAdmin(admin.ModelAdmin):
     fields = ['nombre']

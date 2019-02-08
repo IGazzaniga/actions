@@ -4,7 +4,7 @@ from rutinas.models import Cliente, Servicio, FichaMedica, Profesor, RutinaClien
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 import datetime
-from .forms import VentaForm, RutinaForm, DiaForm
+from .forms import VentaForm, RutinaForm, DiaForm, RutinaClienteForm
 from django.template import RequestContext
 from dateutil.relativedelta import relativedelta
 
@@ -98,11 +98,36 @@ def perfil_alumno_view(request):
         return render(request, 'rutinas/perfil-alumno.html', {'usuario': usuario, 'ficha':ficha, 'cliente': cliente})
 
 @login_required
-def historial_rutinas_view(request):
+def historial_rutinas_view(request,id):
+    usuario= None
+    if request.user.is_authenticated:
+        cliente = Cliente.objects.get(id=id)
+        rutinas = cliente.rutinas.all()
+        return render(request, 'rutinas/historial-rutinas.html', {'usuario': usuario, 'cliente':cliente, 'rutinas': rutinas})
+
+@login_required
+def historial_rutinas_cliente_view(request):
     usuario= None
     if request.user.is_authenticated:
         rutinas = Cliente.objects.get(user=request.user).rutinas.all()
-        return render(request, 'rutinas/historial-rutinas.html', {'usuario': usuario, 'rutinas': rutinas})
+        return render(request, 'rutinas/historial-rutinas-cliente.html', {'usuario': usuario, 'rutinas': rutinas})
+
+@login_required
+def asignar_rutina_view(request, id):
+    usuario= None
+    cliente = Cliente.objects.get(id=id)
+    if request.method == 'POST':
+        form = RutinaClienteForm(request.POST)
+        if form.is_valid():
+                form.save(commit=False)
+                form.cliente = cliente
+                form.rutina = request.POST('rutina')
+                form.actual = request.POST('actual')
+                form.save()
+                return redirect('rutinas')
+    else:
+        form = RutinaClienteForm()
+    return render(request, 'rutinas/asignar-rutina.html', {'form': form, 'cliente': cliente,})
 
 @login_required
 def pagos_view(request):
@@ -128,6 +153,7 @@ def registro_view(request):
     else:
         form = RegistroForm()          
     return render(request, 'rutinas/nueva-rutina.html', {'form': form})
+
 def detalle_pago_view(request,id):
     usuario= None
     if request.user.is_authenticated:

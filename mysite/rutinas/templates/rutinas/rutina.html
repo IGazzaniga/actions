@@ -127,7 +127,7 @@
             <div class="full-container ejercicios">
                 {% for ejercicio in dia1 %}
                 <div class="full-container ejercicio">
-                    <a href="{% url 'detalle_ejercicio' ejercicio3.id %}"><span>{{ejercicio.nombre}} <i class="fas fa-check-circle"></i></span>
+                    <a href="{% url 'detalle_ejercicio' ejercicio.id %}"><span>{{ejercicio.nombre}} <i class="fas fa-check-circle"></i></span>
                     <i class="fas fa-angle-right arrowE"></i></a>
                 </div>
                 {% endfor %}
@@ -141,7 +141,7 @@
             <div class="full-container ejercicios">
                 {% for ejercicio2 in dia2 %}
                 <div class="full-container ejercicio">
-                <a href="{% url 'detalle_ejercicio' ejercicio3.id %}"><span>{{ejercicio2.nombre}} <i class="fas fa-check-circle"></i></span>
+                <a href="{% url 'detalle_ejercicio' ejercicio2.id %}"><span>{{ejercicio2.nombre}} <i class="fas fa-check-circle"></i></span>
                     <i class="fas fa-angle-right arrowE"></i></a>
                 </div>
                 {% endfor %}

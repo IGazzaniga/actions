@@ -50,12 +50,13 @@
     <form method="POST">
         {% csrf_token %}
         {{ form }}
+        <br>
         {{ dia_form_1.ejercicios.label }}
-<select name="ejercicios" required="" id="id_ejercicios" multiple="">
-{% for ej in dia_form_1.ejercicios %}
-<option value="{{ ej.id }}">{{ ej }}</option>
-{% endfor %}
-</select>
+        <br>
+        {% for ej in dia_form_1.ejercicios %}
+            <input type="checkbox" name="{{ej.nombre}}" value="{{ej.nombre}}">{{ ej }}<br>
+        {% endfor %}
+
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
 </div>
