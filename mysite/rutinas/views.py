@@ -117,14 +117,13 @@ def asignar_rutina_view(request, id):
     usuario= None
     cliente = Cliente.objects.get(id=id)
     if request.method == 'POST':
-        form = RutinaClienteForm(request.POST)
-        if form.is_valid():
-                form.save(commit=False)
-                form.cliente = cliente
-                form.rutina = request.POST('rutina')
-                form.actual = request.POST('actual')
-                form.save()
-                return redirect('rutinas')
+        form = RutinaClienteForm()
+        rc = form.save(commit=False)
+        rc.cliente = cliente
+        rc.rutina = Rutina.objects.get(id = request.POST['rutina'])
+        rc.actual = True
+        rc.save()
+        return redirect('rutinas')
     else:
         form = RutinaClienteForm()
     return render(request, 'rutinas/asignar-rutina.html', {'form': form, 'cliente': cliente,})

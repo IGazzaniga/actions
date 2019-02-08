@@ -4,13 +4,13 @@ from django.forms import ModelForm, inlineformset_factory
 from django.utils.translation import ugettext_lazy as _
 
 class RutinaClienteForm(forms.ModelForm):
+    rutina = forms.ModelChoiceField(queryset=Rutina.objects.all())
     class Meta:
         model = RutinaCliente
-        fields = ['cliente', 'rutina', 'actual']
+        fields = ['cliente', 'rutina']
         labels = {
             'Cliente': _('Cliente'),
             'rutina': _('Rutina'),
-            'actual': _('¿Actual?')
         }
 
 class RutinaForm(forms.ModelForm):
