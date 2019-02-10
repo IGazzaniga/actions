@@ -8,6 +8,7 @@ class AdministradorAdmin(admin.ModelAdmin):
     fields = ['user','nombre', 'apellido', 'sucursal']
 admin.site.register(Administrador, AdministradorAdmin)
 
+
 class RutinaEjercicioAdmin(admin.ModelAdmin):
     model = RutinaEjercicio
 admin.site.register(RutinaEjercicio, RutinaEjercicioAdmin)
@@ -104,9 +105,8 @@ class SerieAdmin(admin.ModelAdmin):
     model = Serie
 admin.site.register(Serie, SerieAdmin)
 
-
-
 class RegistroAdmin(admin.ModelAdmin):
     fields = ['rutina_ejercicio', 'completado', 'semana']
+    inlines = [SerieInline]
 admin.site.register(Registro, RegistroAdmin)
 

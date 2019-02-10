@@ -255,6 +255,6 @@ def perfil_profe_view(request,id):
     return render(request, 'rutinas/perfil-profe.html', {'profesor': profesor})
 
 @login_required
-def detalle_ejercicio_view(request, id):
+def registro_ejercicio_view(request, id):
         ejercicio = get_object_or_404(Ejercicio, id=id)
-        return render(request, 'rutinas/detalle-ejercicio.html', {'ejercicio': ejercicio})
+        return render(request, 'rutinas/registro-ejercicio.html', {'ejercicio': ejercicio})

@@ -194,6 +194,11 @@ class RutinaEjercicio(models.Model):
     ejercicio = models.ForeignKey(Ejercicio, on_delete=models.PROTECT)
     rutina = models.ForeignKey(Rutina, on_delete=models.PROTECT)
     dia = models.ForeignKey(Dia, on_delete=models.PROTECT)
+    def save(self, *args, **kwargs):
+        is_new = not self.pk
+        super().save(*args, **kwargs)
+        if is_new:
+            Registro.objects.create(rutina_ejercicio=self, completado= False)
 
 class Semana(models.Model):
     numero= models.IntegerField(default=1)
@@ -204,7 +209,7 @@ class Registro(models.Model):
     id = models.AutoField(primary_key=True)
     rutina_ejercicio = models.ForeignKey(RutinaEjercicio, on_delete=models.PROTECT)
     completado = models.BooleanField(default=False)
-    semana = models.ForeignKey(Semana, on_delete=models.PROTECT)
+    semana = models.ForeignKey(Semana, on_delete=models.PROTECT, null=True)
 
 class Serie(models.Model):
     numero = models.IntegerField(default=1)

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Rutina, Cliente, RutinaCliente, Venta, DetalleVenta, FichaMedica, Registro, Dia, Ejercicio
+from .models import Rutina, Cliente, RutinaCliente, Venta, DetalleVenta, FichaMedica, Registro, Dia, Ejercicio, Serie
 from django.forms import ModelForm, inlineformset_factory
 from django.utils.translation import ugettext_lazy as _
 
@@ -96,3 +96,16 @@ class VentaForm(forms.ModelForm):
         super(VentaForm, self).__init__(*args, **kwargs)
         self.fields['medio_pago'].choices = (Venta.MEDIOS[1], Venta.MEDIOS[2])
         self.fields['num_tarjeta'].required = True
+
+class RegistroForm(forms.ModelForm):
+    class Meta:
+        model = Registro
+        fields = ['completado']
+        labels = {
+            'completado': _('¡Terminé!')
+        }
+        
+class SerieForm(forms.ModelForm):
+    class Meta:
+        model = Serie
+        fields = ['numero', 'repeticiones', 'peso_levantado']
