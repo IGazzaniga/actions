@@ -8,6 +8,10 @@ class AdministradorAdmin(admin.ModelAdmin):
     fields = ['user','nombre', 'apellido', 'sucursal']
 admin.site.register(Administrador, AdministradorAdmin)
 
+class RutinaEjercicioAdmin(admin.ModelAdmin):
+    model = RutinaEjercicio
+admin.site.register(RutinaEjercicio, RutinaEjercicioAdmin)
+
 class SucursalAdmin(admin.ModelAdmin):
     fields = ['nombre', 'domicilio', 'telefono']
 admin.site.register(Sucursal, SucursalAdmin)
@@ -89,7 +93,6 @@ class SemanaInline(admin.StackedInline):
 
 class SemanaAdmin(admin.ModelAdmin):
     model = Semana
-    inlines = [SerieInline]
 admin.site.register(Semana, SemanaAdmin)
 
 class RutinaClienteAdmin(admin.ModelAdmin):
@@ -104,6 +107,6 @@ admin.site.register(Serie, SerieAdmin)
 
 
 class RegistroAdmin(admin.ModelAdmin):
-    fields = ['cliente', 'rutina', 'ejercicio', 'completado']
+    fields = ['rutina_ejercicio', 'completado', 'semana']
 admin.site.register(Registro, RegistroAdmin)
 

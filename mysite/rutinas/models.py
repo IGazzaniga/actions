@@ -198,12 +198,11 @@ class RutinaEjercicio(models.Model):
 class Semana(models.Model):
     numero= models.IntegerField(default=1)
     rutina_cliente = models.ForeignKey(RutinaCliente, on_delete=models.PROTECT, null=True)
+    dias = models.ManyToManyField(Dia)
 
 class Registro(models.Model):
     id = models.AutoField(primary_key=True)
-    cliente = models.ForeignKey(Cliente, on_delete=models.PROTECT)
-    rutina = models.ForeignKey(Rutina, on_delete=models.PROTECT)
-    ejercicio = models.ForeignKey(Ejercicio, on_delete=models.PROTECT)
+    rutina_ejercicio = models.ForeignKey(RutinaEjercicio, on_delete=models.PROTECT)
     completado = models.BooleanField(default=False)
     semana = models.ForeignKey(Semana, on_delete=models.PROTECT)
 
@@ -211,4 +210,4 @@ class Serie(models.Model):
     numero = models.IntegerField(default=1)
     peso_levantado = models.IntegerField(default=0)
     repeticiones = models.IntegerField(default=0)
-    semana = models.ForeignKey(Semana, on_delete=models.CASCADE)
+    registro = models.ForeignKey(Registro, on_delete=models.CASCADE)
