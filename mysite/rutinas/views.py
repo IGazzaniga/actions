@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, render_to_response
 from django.contrib.auth.decorators import login_required
-from rutinas.models import Cliente, Servicio, FichaMedica, Profesor, RutinaCliente, Producto, Rutina, Venta, DetalleVenta, Dia, Articulo, Ejercicio
+from rutinas.models import RutinaEjercicio,Registro, Cliente, Semana, Servicio, FichaMedica, Profesor, RutinaCliente, Producto, Rutina, Venta, DetalleVenta, Dia, Articulo, Ejercicio
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 import datetime
@@ -37,6 +37,8 @@ def rutina_view(request, id):
     if request.user.is_authenticated:
         cliente = Cliente.objects.get(user=request.user)
         rutinas = Rutina.objects.get(id=id)
+        rc = RutinaCliente.objects.get(cliente=cliente, rutina=rutinas)[0]
+        semana = Semana.objects.filter(rutina_cliente=rc)[0]
         dia1 = Dia.objects.filter(rutina=rutinas)[0]
         dia1 = dia1.ejercicios.all()
         dia2 = Dia.objects.filter(rutina=rutinas)[1]
@@ -75,8 +77,14 @@ def nueva_rutina_view(request):
             dia3.save()
             #A continuación, en ej1 guardo la lista de los ejercicios que seleccioné para el día 1
             ej1 = Ejercicio.objects.filter(id__in = request.POST.getlist('dia1-ejercicios'))
+            for e in ej1:
+                RutinaEjercicio.objects.create(ejercicio=e,rutina=rutina,dia=dia1)
             ej2 = Ejercicio.objects.filter(id__in = request.POST.getlist('dia2-ejercicios'))
+            for e in ej2:
+                RutinaEjercicio.objects.create(ejercicio=e,rutina=rutina,dia=dia2)
             ej3 = Ejercicio.objects.filter(id__in = request.POST.getlist('dia3-ejercicios'))
+            for e in ej3:
+                RutinaEjercicio.objects.create(ejercicio=e,rutina=rutina,dia=dia3)
             #Le asigno esa lista a los ejercicios del día 1
             dia1.ejercicios.set(ej1)
             dia2.ejercicios.set(ej2)
