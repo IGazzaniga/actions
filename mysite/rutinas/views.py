@@ -4,7 +4,7 @@ from rutinas.models import RutinaEjercicio,Registro, Cliente, Semana, Servicio, 
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 import datetime
-from .forms import VentaForm, RutinaForm, DiaForm, RutinaClienteForm, SemanaForm
+from .forms import VentaForm, RutinaForm, DiaForm, RutinaClienteForm
 from django.template import RequestContext
 from dateutil.relativedelta import relativedelta
 
@@ -19,10 +19,10 @@ def index_view(request):
         if usuario.groups.filter(name='Clientes').exists():
         #Si pertenece al grupo Clientes, va a inicio-alumno
                 cliente = Cliente.objects.get(user=usuario)
-                rutinas = RutinaCliente.objects.filter(cliente=cliente, actual=True)[0]
-                rutina = rutinas.rutina.id
+                rutinas = RutinaCliente.objects.get(cliente=cliente, actual=True)
+                rutinacliente = rutinas.id
                 return render(request, "rutinas/inicio-alumno.html",
-        {'cliente': cliente, 'usuario': usuario, 'rutina': rutina})
+        {'cliente': cliente, 'usuario': usuario, 'rutinacliente': rutinacliente})
 
         elif usuario.groups.filter(name='Profesores').exists():
         #Si pertenece al grupo Profesores, va a inicio-profe
@@ -36,16 +36,9 @@ def rutina_view(request, id):
     usuario= None
     if request.user.is_authenticated:
         cliente = Cliente.objects.get(user=request.user)
-        rutinas = Rutina.objects.get(id=id)
-        rc = RutinaCliente.objects.filter(cliente=cliente, rutina=rutinas)[0]
-        semana = Semana.objects.filter(rutina_cliente=rc)[0]
-        dia1 = Dia.objects.filter(rutina=rutinas)[0]
-        dia1 = dia1.ejercicios.all()
-        dia2 = Dia.objects.filter(rutina=rutinas)[1]
-        dia2 = dia2.ejercicios.all()
-        dia3 = Dia.objects.filter(rutina=rutinas)[2]
-        dia3 = dia3.ejercicios.all()
-        return render(request, "rutinas/rutina.html", {'s': semana, 'cliente': cliente, 'dia1': dia1, 'dia2': dia2, 'dia3': dia3, 'rutinas': rutinas})
+        rc = RutinaCliente.objects.get(id=id)
+        semana = Semana.objects.filter(rutina_cliente=rc)
+        return render(request, "rutinas/rutina.html", {'s': semana, 'cliente': cliente, 'rc': rc})
 
 @login_required
 def info_ejercicio_view(request):
@@ -143,8 +136,7 @@ def asignar_rutina_view(request, id):
         return redirect('rutinas')
     else:
         form = RutinaClienteForm()
-        formsem = SemanaForm()
-    return render(request, 'rutinas/asignar-rutina.html', {'formsem': formsem, 'form': form, 'cliente': cliente,})
+    return render(request, 'rutinas/asignar-rutina.html', {'form': form, 'cliente': cliente,})
 
 @login_required
 def pagos_view(request):

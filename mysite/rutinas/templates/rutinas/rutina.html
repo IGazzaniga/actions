@@ -10,156 +10,38 @@
 {% block contenido %} <!-- Se define el bloque que encierra todo el contenido de esta vista -->
 {% block menu %}{{ block.super }}{% endblock %}
 {% block principal %}
-<div class="semana1">
+{% for semana in s %}
+<div class="semana{{semana.numero}}" >
         <div class="full-container semana">
-            <p>Semana 1</p>
-            <p>Semana 1</p>
-            <i class="fas fa-angle-right" onclick="cambiarSem('1','2')"></i>
+            <p>Semana {{semana.numero}}</p>
+            <p>Semana {{semana.numero}}</p>
+            {% ifequal semana.numero 1 %}
+            <i class="fas fa-angle-right" onclick="cambiarSem('{{semana.numero}}','{{semana.numero|add:"1" }}')"></i>
+            {% else %}
+            {% ifequal semana.numero 4 %}
+            <i class="fas fa-angle-left" onclick="cambiarSem('{{semana.numero}}','{{semana.numero|add:"-1" }}')"></i>
+            {% else %}
+            <i class="fas fa-angle-left" onclick="cambiarSem('{{semana.numero}}','{{semana.numero|add:"-1" }}')"></i>
+            <i class="fas fa-angle-right" onclick="cambiarSem('{{semana.numero}}','{{semana.numero|add:"1" }}')"></i>
+            {% endifequal %}
+            {% endifequal %}
         </div>
-
+        {% for dia in semana.dias.all %}
         <div class="container dia dia1" onclick="showExercise()">
-            <h1 onclick="showExercise()">Día 1 <i class="fas fa-angle-down"></i> </h1>
-        </div>
-
-        
-        <div class="full-container ejercicios">
-            {% for ejercicio in dia1 %}
-            <div class="full-container ejercicio">
-                <span>{{ejercicio.nombre}} {{s.rutina_cliente}} <i class="fas fa-check-circle"></i></span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-            {% endfor %}
-        </div>
-        
-
-        <div class="container dia dia2" onclick="showExercise()">
-            <h1 onclick="showExercise()">Día 2 <i class="fas fa-angle-down"></i> </h1>
-        </div>
-
-        <div class="full-container ejercicios">
-            {% for ejercicio2 in dia2 %}
-            <div class="full-container ejercicio">
-                <span>{{ejercicio2.nombre}} <i class="fas fa-check-circle"></i></span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-            {% endfor %}
-        </div>
-
-        <div class="container dia dia3" onclick="showExercise()">
-            <h1 onclick="showExercise()">Día 3 <i class="fas fa-angle-down"></i> </h1>
+            <h1 onclick="showExercise()">Día {{forloop.counter}} <i class="fas fa-angle-down"></i> </h1>
         </div>
         
         <div class="full-container ejercicios">
-            {% for ejercicio3 in dia3 %}
-            <div class="full-container ejercicio">
-                <span>{{ejercicio3.nombre}}<i class="fas fa-check-circle"></i></span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-            {% endfor %}
-        </div>
-</div>
-
-
-<div class="semana2">
-    <div class="full-container semana">
-        <p>Semana 2</p>
-        <p>Semana 2</p>
-
-        <i class="fas fa-angle-left" onclick="cambiarSem('2','1')"></i>
-        <i class="fas fa-angle-right" onclick="cambiarSem('2','3')"></i>
-    </div>
-
-    <div class="container dia dia1" onclick="showExercise()">
-            <h1 onclick="showExercise()">Día 1 <i class="fas fa-angle-down"></i> </h1>
-        </div>
-
-        
-        <div class="full-container ejercicios">
-            {% for ejercicio in dia1 %}
+            {% for ejercicio in dia.ejercicios.all %}
             <div class="full-container ejercicio">
                 <span>{{ejercicio.nombre}} <i class="fas fa-check-circle"></i></span>
                 <i class="fas fa-angle-right arrowE"></i>
             </div>
             {% endfor %}
         </div>
-        
-
-        <div class="container dia dia2" onclick="showExercise()">
-            <h1 onclick="showExercise()">Día 2 <i class="fas fa-angle-down"></i> </h1>
-        </div>
-
-        <div class="full-container ejercicios">
-            {% for ejercicio2 in dia2 %}
-            <div class="full-container ejercicio">
-                <span>{{ejercicio2.nombre}} <i class="fas fa-check-circle"></i></span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-            {% endfor %}
-        </div>
-
-        <div class="container dia dia3" onclick="showExercise()">
-            <h1 onclick="showExercise()">Día 3 <i class="fas fa-angle-down"></i> </h1>
-        </div>
-        
-        <div class="full-container ejercicios">
-            {% for ejercicio3 in dia3 %}
-            <div class="full-container ejercicio">
-                <span>{{ejercicio3.nombre}}<i class="fas fa-check-circle"></i></span>
-                <i class="fas fa-angle-right arrowE"></i>
-            </div>
-            {% endfor %}
-        </div>
+        {% endfor %}
 </div>
-
-    <div class="semana3">
-        <div class="full-container semana">
-            <p>Semana 3</p>
-            <p>Semana 3</p>
-
-            <i class="fas fa-angle-left" onclick="cambiarSem('3','2')"></i>
-        </div>
-    
-        <div class="container dia dia1" onclick="showExercise()">
-                <h1 onclick="showExercise()">Día 1 <i class="fas fa-angle-down"></i> </h1>
-            </div>
-    
-            
-            <div class="full-container ejercicios">
-                {% for ejercicio in dia1 %}
-                <div class="full-container ejercicio">
-                    <a href="{% url 'registro_ejercicio' ejercicio.id %}"><span>{{ejercicio.nombre}} <i class="fas fa-check-circle"></i></span>
-                    <i class="fas fa-angle-right arrowE"></i></a>
-                </div>
-                {% endfor %}
-            </div>
-            
-    
-            <div class="container dia dia2" onclick="showExercise()">
-                <h1 onclick="showExercise()">Día 2 <i class="fas fa-angle-down"></i> </h1>
-            </div>
-    
-            <div class="full-container ejercicios">
-                {% for ejercicio2 in dia2 %}
-                <div class="full-container ejercicio">
-                <a href="{% url 'registro_ejercicio' ejercicio2.id %}"><span>{{ejercicio2.nombre}} <i class="fas fa-check-circle"></i></span>
-                    <i class="fas fa-angle-right arrowE"></i></a>
-                </div>
-                {% endfor %}
-            </div>
-    
-            <div class="container dia dia3" onclick="showExercise()">
-                <h1 onclick="showExercise()">Día 3 <i class="fas fa-angle-down"></i> </h1>
-            </div>
-            
-            <div class="full-container ejercicios">
-                {% for ejercicio3 in dia3 %}
-                 <div class="full-container ejercicio" >
-                    <a href="{% url 'registro_ejercicio' ejercicio3.id %}"><span>{{ejercicio3.nombre}}<i class="fas fa-check-circle"></i></span></a>
-                    <i class="fas fa-angle-right arrowE"></i>
-                </div>
-                {% endfor %}
-            </div>
-    </div>
+{% endfor %}
 {% endblock %} <!-- Se cierra el bloque principal -->
 {% endblock %} <!-- Se cierra el bloque del contenido -->
 {% block scripts %}

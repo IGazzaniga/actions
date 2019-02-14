@@ -109,8 +109,3 @@ class SerieForm(forms.ModelForm):
     class Meta:
         model = Serie
         fields = ['numero', 'repeticiones', 'peso_levantado']
-
-class SemanaForm(forms.ModelForm):
-    class Meta:
-        model = Semana
-        fields = '__all__'
