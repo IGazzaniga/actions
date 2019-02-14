@@ -25,7 +25,7 @@
         <div class="full-container ejercicios">
             {% for ejercicio in dia1 %}
             <div class="full-container ejercicio">
-                <span>{{ejercicio.nombre}} <i class="fas fa-check-circle"></i></span>
+                <span>{{ejercicio.nombre}} {{s.rutina_cliente}} <i class="fas fa-check-circle"></i></span>
                 <i class="fas fa-angle-right arrowE"></i>
             </div>
             {% endfor %}

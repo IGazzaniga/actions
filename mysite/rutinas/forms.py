@@ -1,5 +1,5 @@
 from django import forms
-from .models import Rutina, Cliente, RutinaCliente, Venta, DetalleVenta, FichaMedica, Registro, Dia, Ejercicio, Serie
+from .models import Rutina, Semana, Cliente, RutinaCliente, Venta, DetalleVenta, FichaMedica, Registro, Dia, Ejercicio, Serie
 from django.forms import ModelForm, inlineformset_factory
 from django.utils.translation import ugettext_lazy as _
 
@@ -109,3 +109,8 @@ class SerieForm(forms.ModelForm):
     class Meta:
         model = Serie
         fields = ['numero', 'repeticiones', 'peso_levantado']
+
+class SemanaForm(forms.ModelForm):
+    class Meta:
+        model = Semana
+        fields = '__all__'

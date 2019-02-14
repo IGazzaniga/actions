@@ -4,7 +4,7 @@ from rutinas.models import RutinaEjercicio,Registro, Cliente, Semana, Servicio, 
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 import datetime
-from .forms import VentaForm, RutinaForm, DiaForm, RutinaClienteForm
+from .forms import VentaForm, RutinaForm, DiaForm, RutinaClienteForm, SemanaForm
 from django.template import RequestContext
 from dateutil.relativedelta import relativedelta
 
@@ -37,7 +37,7 @@ def rutina_view(request, id):
     if request.user.is_authenticated:
         cliente = Cliente.objects.get(user=request.user)
         rutinas = Rutina.objects.get(id=id)
-        rc = RutinaCliente.objects.get(cliente=cliente, rutina=rutinas)[0]
+        rc = RutinaCliente.objects.filter(cliente=cliente, rutina=rutinas)[0]
         semana = Semana.objects.filter(rutina_cliente=rc)[0]
         dia1 = Dia.objects.filter(rutina=rutinas)[0]
         dia1 = dia1.ejercicios.all()
@@ -45,7 +45,7 @@ def rutina_view(request, id):
         dia2 = dia2.ejercicios.all()
         dia3 = Dia.objects.filter(rutina=rutinas)[2]
         dia3 = dia3.ejercicios.all()
-        return render(request, "rutinas/rutina.html", {'cliente': cliente, 'dia1': dia1, 'dia2': dia2, 'dia3': dia3, 'rutinas': rutinas})
+        return render(request, "rutinas/rutina.html", {'s': semana, 'cliente': cliente, 'dia1': dia1, 'dia2': dia2, 'dia3': dia3, 'rutinas': rutinas})
 
 @login_required
 def info_ejercicio_view(request):
@@ -135,10 +135,16 @@ def asignar_rutina_view(request, id):
         rc.rutina = Rutina.objects.get(id = request.POST['rutina'])
         rc.actual = True
         rc.save()
+        d = Dia.objects.filter(rutina = rc.rutina.id)
+        for i in range(1, 5):
+               s = Semana.objects.create(numero=i,rutina_cliente=rc)
+               s.dias.set(d)
+               s.save()
         return redirect('rutinas')
     else:
         form = RutinaClienteForm()
-    return render(request, 'rutinas/asignar-rutina.html', {'form': form, 'cliente': cliente,})
+        formsem = SemanaForm()
+    return render(request, 'rutinas/asignar-rutina.html', {'formsem': formsem, 'form': form, 'cliente': cliente,})
 
 @login_required
 def pagos_view(request):
