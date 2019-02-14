@@ -25,6 +25,6 @@ urlpatterns = [
     url(r'^pagar/(?P<id>[\w-]+)$', pagar_view, name="pagar"),
     url(r'^perfil/(?P<id>[\w-]+)$', perfil_profe_view, name="perfil_profe"),
     url(r'^pago_procesado', pago_procesado_view, name="pago_procesado"),
-    url(r'^registro_ejercicio/(?P<id>[\w-]+)$', registro_ejercicio_view, name="registro_ejercicio"),
+    url(r'^registro_ejercicio/(?P<r>[\w-]+)-(?P<e>[\w-]+)-(?P<d>[\w-]+)-(?P<s>[\w-]+)$', registro_ejercicio_view, name="registro_ejercicio"),
     url(r'^asignar_rutina/(?P<id>[\w-]+)$', asignar_rutina_view, name="asignar_rutina"),   
 ]

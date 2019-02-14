@@ -4,7 +4,7 @@ from rutinas.models import RutinaEjercicio,Registro, Cliente, Semana, Servicio, 
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 import datetime
-from .forms import VentaForm, RutinaForm, DiaForm, RutinaClienteForm
+from .forms import VentaForm, RutinaForm, DiaForm, RutinaClienteForm, SerieForm
 from django.template import RequestContext
 from dateutil.relativedelta import relativedelta
 
@@ -261,6 +261,18 @@ def perfil_profe_view(request,id):
     return render(request, 'rutinas/perfil-profe.html', {'profesor': profesor})
 
 @login_required
-def registro_ejercicio_view(request, id):
-        ejercicio = get_object_or_404(Ejercicio, id=id)
-        return render(request, 'rutinas/registro-ejercicio.html', {'ejercicio': ejercicio})
+def registro_ejercicio_view(request, r, e, d, s):
+        cliente = Cliente.objects.get(user=request.user)
+        re = RutinaEjercicio.objects.get(ejercicio=e, rutina=r, dia=d)
+        sem = Semana.objects.get(id=s)
+        try:
+                reg = Registro.objects.get(rutina_ejercicio__ejercicio=e, rutina_ejercicio__rutina=r, rutina_ejercicio__dia=d, semana=s)
+        except Registro.DoesNotExist:
+                reg = Registro.objects.create(rutina_ejercicio=re, semana=sem)
+                form = SerieForm()
+                return render(request, 'rutinas/registro-ejercicio.html', {'form': form, 's': sem, 'reg': reg, 'cliente': cliente})
+        else:
+                form = SerieForm()
+                return render(request, 'rutinas/registro-ejercicio.html', {'form': form, 's':sem, 'reg': reg, 'cliente': cliente})
+        if request.method == 'POST':
+                form = SerieForm(request.POST)

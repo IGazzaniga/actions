@@ -33,9 +33,9 @@
         
         <div class="full-container ejercicios">
             {% for ejercicio in dia.ejercicios.all %}
-            <div class="full-container ejercicio">
-                <span>{{ejercicio.nombre}} <i class="fas fa-check-circle"></i></span>
-                <i class="fas fa-angle-right arrowE"></i>
+            <div class="full-container ejercicio" >
+               <a href="{% url 'registro_ejercicio' semana.rutina_cliente.rutina.id ejercicio.id dia.id semana.id %}"> <span>{{ejercicio.nombre}} <i class="fas fa-check-circle"></i></span>
+                <i class="fas fa-angle-right arrowE"></i></a>
             </div>
             {% endfor %}
         </div>
