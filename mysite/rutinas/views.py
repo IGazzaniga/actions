@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect, render_to_response
 from django.contrib.auth.decorators import login_required
-from rutinas.models import RutinaEjercicio,Registro, Cliente, Semana, Servicio, FichaMedica, Profesor, RutinaCliente, Producto, Rutina, Venta, DetalleVenta, Dia, Articulo, Ejercicio
+from rutinas.models import RutinaEjercicio,Registro, Cliente, Semana, Servicio, FichaMedica, Profesor, RutinaCliente, Producto, Rutina, Venta, DetalleVenta, Dia, Articulo, Ejercicio, Serie
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 import datetime
-from .forms import VentaForm, RutinaForm, DiaForm, RutinaClienteForm, SerieForm
+from .forms import VentaForm, RutinaForm, DiaForm, RutinaClienteForm, SerieForm, RegistroForm
 from django.template import RequestContext
 from dateutil.relativedelta import relativedelta
 
@@ -270,9 +270,33 @@ def registro_ejercicio_view(request, r, e, d, s):
         except Registro.DoesNotExist:
                 reg = Registro.objects.create(rutina_ejercicio=re, semana=sem)
                 form = SerieForm()
-                return render(request, 'rutinas/registro-ejercicio.html', {'form': form, 's': sem, 'reg': reg, 'cliente': cliente})
+                return render(request, 'rutinas/registro-ejercicio.html', {'r':r, 'e':e, 'd':d, 's':s, 'form': form, 'sem': sem, 'reg': reg, 'cliente': cliente})
         else:
+                if request.method == 'POST':
+                        if request.POST['completado'] == "True":
+                                rf = RegistroForm(instance=reg)
+                                rnew = rf.save(commit=False)
+                                rnew.completado = True
+                                rnew.save()
+                                rc = RutinaCliente.objects.get(cliente=cliente, actual=True)
+                                return redirect(rutina_view, id=rc.id)                               
+                        try:
+                                ser = Serie.objects.get(numero=request.POST['id_numero'], registro=reg)
+                        except Serie.DoesNotExist:
+                                form = SerieForm()
+                                serie = form.save(commit=False)
+                                serie.numero = request.POST['id_numero']
+                                serie.peso_levantado = request.POST['id_peso_levantado']
+                                serie.repeticiones = request.POST['id_repeticiones']
+                                serie.registro = reg
+                                serie.save()
+                                return redirect(registro_ejercicio_view, r=r, e=e, d=d, s=s)
+                        else:
+                                f = SerieForm(instance=ser)
+                                snew = f.save(commit=False)
+                                snew.peso_levantado = request.POST['id_peso_levantado']
+                                snew.repeticiones = request.POST['id_repeticiones']
+                                snew.save()
+                                return redirect(registro_ejercicio_view, r=r, e=e, d=d, s=s)
                 form = SerieForm()
-                return render(request, 'rutinas/registro-ejercicio.html', {'form': form, 's':sem, 'reg': reg, 'cliente': cliente})
-        if request.method == 'POST':
-                form = SerieForm(request.POST)
+                return render(request, 'rutinas/registro-ejercicio.html', {'r':r, 'e':e, 'd':d, 's':s, 'form': form, 'sem':sem, 'reg': reg, 'cliente': cliente})

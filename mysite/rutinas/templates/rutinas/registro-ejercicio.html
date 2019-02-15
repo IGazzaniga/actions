@@ -11,7 +11,7 @@
 
     <!-- texto y botones del banner -->
     <div class="full-container header">
-        <h3>Semana {{s.numero}} / Dia 1 <br> <span>{{reg.rutina_ejercicio.ejercicio.nombre}}</span></h3>
+        <h3>Semana {{sem.numero}} / Dia 1 <br> <span>{{reg.rutina_ejercicio.ejercicio.nombre}}</span></h3>
 
         <button type="button" class="btn btn-lg btn-info" data-toggle="modal" data-target="#infoEj">
             <i class="fas fa-info-circle"></i>
@@ -52,45 +52,40 @@
     
     <a id="add_row" class="btn btn-default pull-left"><i class="fas fa-plus"></i></a>
     <a id='delete_row' class="pull-right btn btn-default"><i class="fas fa-minus"></i></a>
+    <form method="post" action="{% url 'registro_ejercicio' r e d s %}">
+                    {% csrf_token %}
+                <button type="submit" class="finish" onclick="cambiarboton()">¡Terminé!</button>
+                <input type="text" name="completado" id="completed">
 
-    <span class="finish" onclick="window.open('miRutina.html', '_self')">Listo</span>
-
-
-    <table class="table" id="tab_logic" >
-        <form method="post" action=".">
-                {% csrf_token %}
-                {{ form }}
-        </form>
-        <thead>
-            <tr>
-                <th scope="col">Serie</th>
-                <th scope="col">Repeticion</th>
-                <th scope="col">Peso[kg]</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr id='addr0'>
-            <tr>
-                <th scope="row">1</th>
-                <td><input type="number" name="rep1" id="rep1" min="1" max="100"></td>
-                <td><input type="number" name="peso1" id="peso1" min="1" max="100"></td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td><input type="number" name="rep2" id="rep2" min="1" max="100"></td>
-                <td><input type="number" name="peso1" id="peso1" min="1" max="100"></td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td><input type="number" name="rep3" id="rep3" min="1" max="100"></td>
-                <td><input type="number" name="peso1" id="peso1" min="1" max="100"></td>
-            </tr>
-            <tr id='addr3'></tr>
-        </tbody>
-    </table>
+                <table class="table" id="tab_logic" >
+                    <thead>
+                        <tr>
+                            <th scope="col">Serie</th>
+                            <th scope="col">Repeticiones</th>
+                            <th scope="col">Peso[kg]</th>
+                            <th scope="col">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id='addr0'></tr>
+                        <tr>
+                            <th scope="row"><input style="border: none; text-align: center" type="number" name="id_numero" value="1" id="rep1" readonly></th>
+                            <td><input type="number" name="id_repeticiones" id="rep1" min="1" ></td>
+                            <td><input type="number" name="id_peso_levantado" id="peso1" min="1" ></td>
+                            <td><button type="submit" class="btn btn-success">Guardar</button></td>
+                        </tr>
+                        <tr id='addr3'></tr>
+                    </tbody>
+                </table>
+    </form>
 {% endblock%}
 {% block scripts %}
     <script language="JavaScript" type="text/javascript" src="{% static 'rutinas/js/effects.js' %}"></script>
     <script rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
-{% endblock %}
+<script>
+function cambiarboton(){
+    var i=document.getElementById("completed").value = "True";
+}
+</script>
+    {% endblock %}
