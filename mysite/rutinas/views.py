@@ -38,7 +38,8 @@ def rutina_view(request, id):
         cliente = Cliente.objects.get(user=request.user)
         rc = RutinaCliente.objects.get(id=id)
         semana = Semana.objects.filter(rutina_cliente=rc)
-        return render(request, "rutinas/rutina.html", {'s': semana, 'cliente': cliente, 'rc': rc})
+        rutina_ejercicio = RutinaEjercicio.objects.filter(rutina= rc.rutina)
+        return render(request, "rutinas/rutina.html", {'s': semana, 'cliente': cliente, 'rc': rc, 'rutina_ejercicio': rutina_ejercicio})
 
 @login_required
 def info_ejercicio_view(request):

@@ -34,8 +34,17 @@
         <div class="full-container ejercicios">
             {% for ejercicio in dia.ejercicios.all %}
             <div class="full-container ejercicio" >
-               <a href="{% url 'registro_ejercicio' semana.rutina_cliente.rutina.id ejercicio.id dia.id semana.id %}"> <span>{{ejercicio.nombre}} <i class="fas fa-check-circle"></i></span>
-                <i class="fas fa-angle-right arrowE"></i></a>
+               <a href="{% url 'registro_ejercicio' semana.rutina_cliente.rutina.id ejercicio.id dia.id semana.id %}"> <span>{{ejercicio.nombre}}
+                {% for r in semana.registro_set.all %}
+                {% ifequal r.rutina_ejercicio.dia.id dia.id %}
+                {% ifequal r.rutina_ejercicio.ejercicio.id ejercicio.id %}
+                {% ifequal r.completado True %} 
+                <i class="fas fa-check-circle"></i></span>
+                {% endifequal %}
+                {% endifequal %}
+                {% endifequal %}
+                {% endfor %}
+                <i style="color: black" class="fas fa-angle-right arrowE"></i></a>
             </div>
             {% endfor %}
         </div>
