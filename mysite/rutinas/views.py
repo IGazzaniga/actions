@@ -4,7 +4,7 @@ from rutinas.models import RutinaEjercicio,Registro, Cliente, Semana, Servicio, 
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 import datetime
-from .forms import VentaForm, RutinaForm, DiaForm, RutinaClienteForm, SerieForm, RegistroForm
+from .forms import VentaForm, RutinaForm, DiaForm, RutinaClienteForm, SerieForm, RegistroForm, ClienteForm, FichaForm
 from django.template import RequestContext
 from dateutil.relativedelta import relativedelta
 
@@ -94,14 +94,6 @@ def nueva_rutina_view(request):
         dia_form_3 = DiaForm(prefix='dia3')        
     return render(request, 'rutinas/nueva-rutina.html', {'form': form, 'dia_form_1': dia_form_1, 'dia_form_2': dia_form_2, 'dia_form_3': dia_form_3})
 
-@login_required
-def perfil_alumno_view(request):
-    usuario= None
-    if request.user.is_authenticated:
-        usuario = request.user
-        cliente = Cliente.objects.get(user=usuario)
-        ficha = FichaMedica.objects.get(cliente=cliente)
-        return render(request, 'rutinas/perfil-alumno.html', {'usuario': usuario, 'ficha':ficha, 'cliente': cliente})
 
 @login_required
 def historial_rutinas_view(request,id):
@@ -189,6 +181,29 @@ def detalle_servicio_view(request, id):
     desde = datetime.date.today()
     hasta = desde + relativedelta(months=1)
     return render(request, 'rutinas/detalle-servicio.html', {'desde':desde, 'hasta':hasta, 'servicio': servicio})
+
+@login_required
+def perfil_alumno_view(request):
+    usuario= None
+    if request.user.is_authenticated:
+        usuario = request.user
+        cliente = Cliente.objects.get(user=usuario)
+        ficha = FichaMedica.objects.get(cliente=cliente)
+        if request.method == 'POST':
+            form = ClienteForm(request.POST)
+            if form.is_valid():
+                    perfil = form.save(commit=False)
+                    perfil.nombre = cliente.nombre
+                    perfil.apellido = cliente.apellido
+                    perfil.foto = cliente.foto
+                    perfil.dni = cliente.dni
+                    perfil.telefono = cliente.telefono
+                    perfil.domicilio = cliente.domicilio
+                    perfil.save()
+                    return redirect('index_view')
+        else:
+            form = ClienteForm()
+        return render(request, 'rutinas/perfil-alumno.html', {'form': form, 'usuario': usuario, 'ficha':ficha, 'cliente': cliente})
 
 @login_required
 def comprar_view(request, id):

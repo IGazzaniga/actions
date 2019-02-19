@@ -26,7 +26,9 @@
     
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-personales" role="tabpanel" aria-labelledby="nav-personales-tab">
-            <div class="container-formulario"><br>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="container-formulario"><br>                
                 <div class="row row-formulario">
                     <div class="col-sm-4 col-12">
                         <label for="nombre">Nombre:</label>
@@ -61,7 +63,9 @@
                         <input type="email" value="{{ cliente.mail }}" class="form-control" id="email" name="email">
                     </div>
                 </div>
+                <button type="submit" class="col-sm-12 btn btn-success">Guardar</button>  
             </div>
+        </form>
         </div>
         <div class="tab-pane fade" id="nav-ficha" role="tabpanel" aria-labelledby="nav-ficha-tab">
             <div class="container-formulario"><br>

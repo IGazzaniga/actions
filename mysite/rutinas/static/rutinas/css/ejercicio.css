@@ -139,7 +139,10 @@
   background-repeat: no-repeat;
   background-position: 0 -30px;
   background-size: 140%; }
-
+.nombre-ej{
+  word-wrap: break-word;
+  max-width: 220px !important;
+}
 .header {
   position: absolute;
   width: 100%;
@@ -151,16 +154,17 @@
     text-align: left;
     color: white;
     font-size: 20px;
-    font-weight: 800;
+    font-weight: 500;
     margin-top: 10px;
     margin-left: 10px; }
     .header h3 span {
-      line-height: 80px;
-      font-size: 45px; }
+      line-height: 50px;
+      font-size: 30px;
+     }
   .header .btn-info {
     position: absolute;
     right: 0;
-    top: 50%;
+    top: 20%;
     -webkit-transform: translate(0%, -50%);
     -ms-transform: translate(0%, -50%);
     transform: translate(0%, -50%);
