@@ -17,111 +17,79 @@
             <img class="img-perfil" src="{{ cliente.foto.url }}" >
         </div>
     </div>
-    <nav>
-        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" id="nav-personales-tab" data-toggle="tab" href="#nav-personales" role="tab" aria-controls="nav-personales" aria-selected="true">Datos Personales</a>
-            <a class="nav-item nav-link" id="nav-ficha-tab" data-toggle="tab" href="#nav-ficha" role="tab" aria-controls="nav-ficha" aria-selected="false">Ficha Médica</a>
-        </div>
-    </nav>
-    
-    <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-personales" role="tabpanel" aria-labelledby="nav-personales-tab">
-        <form method="POST">
-            {% csrf_token %}
-            <div class="container-formulario"><br>                
-                <div class="row row-formulario">
-                    <div class="col-sm-4 col-12">
-                        <label for="nombre">Nombre:</label>
-                        <input type="text" size="26" value="{{ cliente.nombre }}" class="form-control" id="email" name="email">
-                    </div>
-                    <div class="col-sm-4 col-12">
-                        <label for="nombre">Apellido:</label>
-                        <input type="text" size="26" value="{{ cliente.apellido }}" class="form-control" id="email" name="email">
-                    </div>
-                    <div class="col-sm-4 col-12">
-                        <label for="nombre">DNI:</label>
-                        <input type="number" size="26" value="{{ cliente.dni }}" class="form-control" id="email" name="email">
-                    </div>
+        <form action="" method="POST">
+        {% csrf_token %}
+        <div class="container-formulario"><br>                
+            <div class="row row-formulario">
+                <div class="col-sm-4 col-12">
+                    <label for="id_nombre">Nombre:</label>
+                    <input type="text" size="26" value="{{ cliente.nombre }}" class="form-control" required id="id_nombre" name="nombre">
                 </div>
-                <div class="row row-formulario">
-                    <div class="col-sm-4 col-12">
-                        <label for="nombre">Foto de perfil:</label>
-                        <input type="file" value= "{{ cliente.foto }}" name="myImage" accept="image/*" />
-                    </div>
-                    <div class="col-sm-8 col-12">
-                        <label for="nombre">Telefono:</label>
-                        <input type="number" size="26" value="{{ cliente.telefono }}" class="form-control" id="email" name="email">
-                    </div>                    
+                <div class="col-sm-4 col-12">
+                    <label for="id_apellido">Apellido:</label>
+                    <input type="text" size="26" value="{{ cliente.apellido }}" class="form-control" required id="id_apellido" name="apellido">
                 </div>
-                <div class="row row-formulario">
-                    <div class="col-sm-6 col-12">
-                        <label for="localidad">Domicilio:</label>
-                        <input type="text" value="{{ cliente.domicilio }}" class="form-control" id="pwd" name="pwd">
-                    </div>
-                    <div class="col-sm-6 col-12" >
-                        <label for="email">E-mail:</label>
-                        <input type="email" value="{{ cliente.mail }}" class="form-control" id="email" name="email">
-                    </div>
+                <div class="col-sm-4 col-12">
+                    <label for="id_dni">DNI:</label>
+                    <input type="number" size="8" value="{{ cliente.dni }}" required class="form-control" id="id_dni" name="dni">
                 </div>
-                <button type="submit" class="col-sm-12 btn btn-success">Guardar</button>  
             </div>
-        </form>
-        </div>
-        <div class="tab-pane fade" id="nav-ficha" role="tabpanel" aria-labelledby="nav-ficha-tab">
-            <div class="container-formulario"><br>
-                <div class="row row-formulario">
-                    <div class="col-sm-4 col-12">
-                        <label for="nombre">Fecha de Nacimiento:</label>
-                        <input type="text" size="26" value="{{ ficha.fecha_nacimiento }}" class="form-control" id="email" name="email">
-                    </div>
-                    <div class="col-sm-4 col-12">
-                        <label for="apellido">Sexo:</label>
-                        <select>
-                                <option value="masculino">Masculino</option>
-                                <option value="femenino">Femenino</option>
-                        </select>                    
-                    </div>
-                    <div class="col-sm-4 col-12">
-                        <label for="dni">Peso:</label>
-                        <input type="number" value="{{ ficha.peso }}" class="form-control" id="dni" name="dni">
-                    </div>
+            <div class="row row-formulario">
+                <div class="col-sm-4 col-12">
+                    <label for="foto">Foto de perfil:</label>
+                    <input type="file" value= "{{ cliente.foto }}" id="id_foto" required name="foto" accept="image/*" />
+                </div>
+                <div class="col-sm-8 col-12">
+                    <label for="telefono">Telefono:</label>
+                    <input type="number" required size="26" value="{{ cliente.telefono }}" class="form-control" id="id_telefono" name="telefono">
+                </div>                    
+            </div>
+            <div class="row row-formulario">
+                <div class="col-sm-6 col-12">
+                    <label for="domicilio">Domicilio:</label>
+                    <input type="text" value="{{ cliente.domicilio }}" required class="form-control" id="id_domicilio" name="domicilio">
+                </div>
+                <div class="col-sm-6 col-12" >
+                    <label for="mail">E-mail:</label>
+                    <input type="email" required value="{{ cliente.mail }}" class="form-control" id="id_mail" name="mail">
+                </div>
+            </div><br>
+            <div class="row row-formulario">
+                <div class="col-sm-6 col-12">
+                    <label for="sexo">Sexo:</label>
+                    {{ ficha.sexo }}                    
+                </div>
+                <div class="col-sm-6 col-12">
+                    <label for="peso">Peso:</label>
+                    <input type="number" value="{{ cliente.fichamedica.peso }}" class="form-control" id="id_peso" name="peso" required >
                 </div>
                 <div class="row row-formulario">
                     <div class="col-sm-6 col-12">
-                        <label for="localidad">Altura:</label>
-                        <input type="text" value="1,75 cm" class="form-control" id="pwd" name="pwd">
+                        <label for="altura">Altura:</label>
+                        <input type="text" value="{{ cliente.fichamedica.altura }}" class="form-control" id="id_altura" name="altura" required >
                     </div>
                     <div class="col-sm-6 col-12" >
-                        <label for="email">Mutual/Obra Social:</label>
-                        <input type="email" value="AMFFA" class="form-control" id="email" name="email">
+                        <label for="mutual">Mutual/Obra Social:</label>
+                        <input type="text" value="{{ cliente.fichamedica.mutual }}" class="form-control" id="id_mutual" name="mutual" required>
                     </div>
                     <div class="col-sm-6 col-12" >
-                        <label for="email">Telefono de emergencia:</label>
-                        <input type="email" value="221 483 3239" class="form-control" id="email" name="email">
+                        <label for="telefono_emergencia">Telefono de emergencia:</label>
+                        <input type="number" value="{{ cliente.fichamedica.telefono_emergencia }}" class="form-control" id="id_telefono_emergencia" name="telefono_emergencia" required>
                     </div>
                     <div class="col-sm-6 col-12" >
-                        <label for="comment">Observaciones:</label>
-                        <textarea class="form-control" id="comment" style="height: 100%;">Tendinitis aguda rodilla izquierda. Desgarro mal curado cuadriceps pierna derecha</textarea>
+                        <label for="observaciones">Observaciones:</label>
+                        <input type="text" value="{{ cliente.fichamedica.observaciones }}" class="form-control" id="id_observaciones" name="observaciones" required>
                     </div>
                 </div>
-            </div>   
-        </div> 
-    </div>
+            </div>
+
+            {{form.errors}}
+            {{form.non_field_errors}}
+            {{ficha.errors}}
+            {{ficha.non_field_errors}}
+            <button type="submit" class="col-sm-12 btn btn-success">Guardar</button> <br>
+        </div>
+        </form>
 </div>
-<script>
-            
- 
-        $(function(){
-            $('.editText').dblclick( function(){
-                var text = $(this).text();
-                $(this).empty().html('<input type="text" value="'+text+'">').find('input').focus();
-            }).keypress( function(e){
-                if(e.keyCode == 13){
-                    var text = $('input', this).val();
-                    $(this).html( text );
-                }
-            });
-        });
-    </script>
 {% endblock%}
 {% endblock%}

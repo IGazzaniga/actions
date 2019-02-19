@@ -188,22 +188,41 @@ def perfil_alumno_view(request):
     if request.user.is_authenticated:
         usuario = request.user
         cliente = Cliente.objects.get(user=usuario)
-        ficha = FichaMedica.objects.get(cliente=cliente)
+        ficha_medica = FichaMedica.objects.get(cliente=cliente)
         if request.method == 'POST':
             form = ClienteForm(request.POST)
-            if form.is_valid():
-                    perfil = form.save(commit=False)
-                    perfil.nombre = cliente.nombre
-                    perfil.apellido = cliente.apellido
-                    perfil.foto = cliente.foto
-                    perfil.dni = cliente.dni
-                    perfil.telefono = cliente.telefono
-                    perfil.domicilio = cliente.domicilio
-                    perfil.save()
-                    return redirect('index_view')
+            ficha = FichaForm(request.POST, instance=ficha_medica)
+            if form.is_valid() and ficha.is_valid():
+                fm = ficha.save(commit=False)
+                fm.altura = request.POST.get('altura')
+                fm.peso = request.POST.get('peso')
+                fm.sexo = request.POST.get('sexo')
+                fm.mutual = request.POST.get('mutual')
+                fm.observaciones = request.POST.get('observaciones')
+                fm.telefono_emergencia = request.POST.get('telefono_emergencia')
+                fm.cliente = cliente
+                fm.save()
+                perfil = form.save(commit=False)
+                perfil.user = request.user
+                perfil.nombre = request.POST.get('nombre')
+                perfil.apellido = request.POST.get('apellido')
+                perfil.foto = request.POST.get('foto')
+                perfil.dni = request.POST.get('dni')
+                perfil.telefono = request.POST.get('telefono')
+                perfil.domicilio = request.POST.get('domicilio')
+                perfil.profesor = cliente.profesor
+                perfil.id = cliente.id
+                perfil.save()
+                return redirect(index_view)
+            else:
+                print(form.errors)
+                print(form.non_field_errors)
+                print(ficha.errors)
+                print(ficha.non_field_errors)
         else:
             form = ClienteForm()
-        return render(request, 'rutinas/perfil-alumno.html', {'form': form, 'usuario': usuario, 'ficha':ficha, 'cliente': cliente})
+            ficha = FichaForm()
+        return render(request, 'rutinas/perfil-alumno.html', {'ficha':ficha, 'form': form, 'usuario': usuario, 'cliente': cliente})
 
 @login_required
 def comprar_view(request, id):

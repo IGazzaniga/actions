@@ -2,6 +2,7 @@ from django import forms
 from .models import Rutina, Semana, Cliente, RutinaCliente, Venta, DetalleVenta, FichaMedica, Registro, Dia, Ejercicio, Serie
 from django.forms import ModelForm, inlineformset_factory
 from django.utils.translation import ugettext_lazy as _
+from mysite import settings
 
 class RutinaClienteForm(forms.ModelForm):
     rutina = forms.ModelChoiceField(queryset=Rutina.objects.all())
@@ -55,14 +56,16 @@ class ClienteForm(forms.ModelForm):
             'telefono': forms.NumberInput(),
             'domicilio': forms.TextInput()
         }
+    
+    def __init__(self, *args, **kwargs):
+        super(ClienteForm, self).__init__(*args, **kwargs)
+        self.fields['foto'].required = False
 
 class FichaForm(forms.ModelForm):
     class Meta:
         model = FichaMedica
-        fields = ('fecha_nacimiento', 'altura', 'peso', 'sexo', 'mutual', 'observaciones', 'telefono_emergencia')
-        labels = {
-            'fecha_nacimiento': _('Fecha de nacimiento'),
-            'altura': _('Altura'),
+        fields = ('altura', 'peso', 'sexo', 'mutual', 'observaciones', 'telefono_emergencia')
+        labels = {'altura': _('Altura'),
             'peso': _('Peso'),
             'sexo': _('Sexo'),
             'mutual': _('Mutual'),
@@ -70,7 +73,6 @@ class FichaForm(forms.ModelForm):
             'telefono_emergencia':  _('Teléfono de emergencia')
         }
         widgets = {
-            'fecha_nacimiento': forms.DateInput(),
             'altura': forms.NumberInput(),
             'peso': forms.NumberInput(),
             'sexo': forms.widgets.Select(),
@@ -78,6 +80,11 @@ class FichaForm(forms.ModelForm):
             'observaciones': forms.Textarea(),
             'telefono_emergencia': forms.NumberInput()
         }
+
+    def __init__(self, *args, **kwargs):
+        super(FichaForm, self).__init__(*args, **kwargs)
+        self.fields['sexo'].choices = (FichaMedica.SEXO[0], FichaMedica.SEXO[1])
+
     
 class VentaForm(forms.ModelForm):
     class Meta:
