@@ -190,8 +190,9 @@ def perfil_alumno_view(request):
         cliente = Cliente.objects.get(user=usuario)
         ficha_medica = FichaMedica.objects.get(cliente=cliente)
         if request.method == 'POST':
-            form = ClienteForm(request.POST)
+            form = ClienteForm(request.POST, request.FILES)
             ficha = FichaForm(request.POST, instance=ficha_medica)
+            foto = request.FILES['foto']
             if form.is_valid() and ficha.is_valid():
                 fm = ficha.save(commit=False)
                 fm.altura = request.POST.get('altura')
@@ -206,7 +207,6 @@ def perfil_alumno_view(request):
                 perfil.user = request.user
                 perfil.nombre = request.POST.get('nombre')
                 perfil.apellido = request.POST.get('apellido')
-                perfil.foto = request.POST.get('foto')
                 perfil.dni = request.POST.get('dni')
                 perfil.telefono = request.POST.get('telefono')
                 perfil.domicilio = request.POST.get('domicilio')

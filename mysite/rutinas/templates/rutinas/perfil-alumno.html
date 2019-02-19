@@ -17,9 +17,9 @@
             <img class="img-perfil" src="{{ cliente.foto.url }}" >
         </div>
     </div>
-        <form action="" method="POST">
-        {% csrf_token %}
-        <div class="container-formulario"><br>                
+    <div class="container-formulario"><br>
+        <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}                
             <div class="row row-formulario">
                 <div class="col-sm-4 col-12">
                     <label for="id_nombre">Nombre:</label>
@@ -37,7 +37,7 @@
             <div class="row row-formulario">
                 <div class="col-sm-4 col-12">
                     <label for="foto">Foto de perfil:</label>
-                    <input type="file" value= "{{ cliente.foto }}" id="id_foto" required name="foto" accept="image/*" />
+                    <input type="file" value= "{{ cliente.foto.url }}" id="id_foto" required name="foto" accept="image/*" />
                 </div>
                 <div class="col-sm-8 col-12">
                     <label for="telefono">Telefono:</label>
@@ -55,41 +55,37 @@
                 </div>
             </div><br>
             <div class="row row-formulario">
-                <div class="col-sm-6 col-12">
+                <div class="col-sm-3 col-12">
                     <label for="sexo">Sexo:</label>
                     {{ ficha.sexo }}                    
                 </div>
-                <div class="col-sm-6 col-12">
+                <div class="col-sm-3 col-12">
                     <label for="peso">Peso:</label>
                     <input type="number" value="{{ cliente.fichamedica.peso }}" class="form-control" id="id_peso" name="peso" required >
                 </div>
+                <div class="col-sm-3 col-12">
+                    <label for="altura">Altura:</label>
+                    <input type="text" value="{{ cliente.fichamedica.altura }}" class="form-control" id="id_altura" name="altura" required >
+                </div>
+                <div class="col-sm-3 col-12" >
+                    <label for="telefono_emergencia">Telefono de emergencia:</label>
+                    <input type="number" value="{{ cliente.fichamedica.telefono_emergencia }}" class="form-control" id="id_telefono_emergencia" name="telefono_emergencia" required>
+                </div>
+            </div>
                 <div class="row row-formulario">
-                    <div class="col-sm-6 col-12">
-                        <label for="altura">Altura:</label>
-                        <input type="text" value="{{ cliente.fichamedica.altura }}" class="form-control" id="id_altura" name="altura" required >
-                    </div>
                     <div class="col-sm-6 col-12" >
                         <label for="mutual">Mutual/Obra Social:</label>
                         <input type="text" value="{{ cliente.fichamedica.mutual }}" class="form-control" id="id_mutual" name="mutual" required>
-                    </div>
-                    <div class="col-sm-6 col-12" >
-                        <label for="telefono_emergencia">Telefono de emergencia:</label>
-                        <input type="number" value="{{ cliente.fichamedica.telefono_emergencia }}" class="form-control" id="id_telefono_emergencia" name="telefono_emergencia" required>
                     </div>
                     <div class="col-sm-6 col-12" >
                         <label for="observaciones">Observaciones:</label>
                         <input type="text" value="{{ cliente.fichamedica.observaciones }}" class="form-control" id="id_observaciones" name="observaciones" required>
                     </div>
                 </div>
-            </div>
-
-            {{form.errors}}
-            {{form.non_field_errors}}
-            {{ficha.errors}}
-            {{ficha.non_field_errors}}
+                <br>
             <button type="submit" class="col-sm-12 btn btn-success">Guardar</button> <br>
-        </div>
         </form>
+    </div>
 </div>
 {% endblock%}
 {% endblock%}
