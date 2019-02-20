@@ -117,55 +117,6 @@ def nueva_rutina_view(request):
         dia_form_3 = DiaForm(prefix='dia3')        
     return render(request, 'rutinas/nueva-rutina.html', {'profesor':profesor, 'form': form, 'dia_form_1': dia_form_1, 'dia_form_2': dia_form_2, 'dia_form_3': dia_form_3})
 
-@login_required
-def editar_rutina_view(request, id):
-    profesor = Profesor.objects.get(user=request.user)
-    rutina = Rutina.objects.get(id=id)
-    dia1 = Dia.objects.filter(rutina=rutina)[0]
-    dia2 = Dia.objects.filter(rutina=rutina)[1]
-    dia3 = Dia.objects.filter(rutina=rutina)[2]
-    if request.method == "POST":
-        form = RutinaForm(request.POST, instance=rutina)
-        dia_form_1 = DiaForm(request.POST, instance= dia1, prefix='dia1')
-        dia_form_2 = DiaForm(request.POST, instance= dia2, prefix='dia2')
-        dia_form_3 = DiaForm(request.POST, instance= dia3, prefix='dia3')
-        if form.is_valid() and dia_form_1.is_valid() and dia_form_2.is_valid() and dia_form_3.is_valid():
-            rutina = form.save(commit=False)
-            dia1 = dia_form_1.save(commit=False)
-            dia2 = dia_form_2.save(commit=False)
-            dia3 = dia_form_3.save(commit=False)
-            rutina.save()
-            dia1.rutina = rutina
-            dia2.rutina = rutina
-            dia3.rutina = rutina
-            dia1.save() #Guardo todos los días así su id no es vacío
-            dia2.save()
-            dia3.save()
-            #A continuación, en ej1 guardo la lista de los ejercicios que seleccioné para el día 1
-            ej1 = Ejercicio.objects.filter(id__in = request.POST.getlist('dia1-ejercicios'))
-            for e in ej1:
-                RutinaEjercicio.objects.create(ejercicio=e,rutina=rutina,dia=dia1)
-            ej2 = Ejercicio.objects.filter(id__in = request.POST.getlist('dia2-ejercicios'))
-            for e in ej2:
-                RutinaEjercicio.objects.create(ejercicio=e,rutina=rutina,dia=dia2)
-            ej3 = Ejercicio.objects.filter(id__in = request.POST.getlist('dia3-ejercicios'))
-            for e in ej3:
-                RutinaEjercicio.objects.create(ejercicio=e,rutina=rutina,dia=dia3)
-            #Le asigno esa lista a los ejercicios del día 1
-            dia1.ejercicios.set(ej1)
-            dia2.ejercicios.set(ej2)
-            dia3.ejercicios.set(ej3)
-            dia1.save()
-            dia2.save()
-            dia3.save()
-            return redirect(index_view)
-    else:
-        form = RutinaForm()
-        dia_form_1 = DiaForm(prefix='dia1')
-        dia_form_2 = DiaForm(prefix='dia2')
-        dia_form_3 = DiaForm(prefix='dia3')        
-    return render(request, 'rutinas/editar-rutina.html', {'rutina':rutina, 'dia1':dia1, 'dia2':dia2, 'dia3':dia3, 'profesor':profesor, 'form': form, 'dia_form_1': dia_form_1, 'dia_form_2': dia_form_2, 'dia_form_3': dia_form_3})
-
 
 @login_required
 def historial_rutinas_view(request,id):
