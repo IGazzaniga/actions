@@ -3,7 +3,7 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 from . import views
-from rutinas.views import editar_rutina_view ,rutina_detalle_view, ver_perfil_alumno_view, editar_perfil_profe_view, asignar_rutina_view, pago_procesado_view, detalle_servicio_view, comprar_view, historial_rutinas_cliente_view, perfil_profe_view, detalle_producto_view,catalog_view, pagar_view, detalle_pago_view, index_view, pagos_view, historial_rutinas_view, info_ejercicio_view, perfil_alumno_view, calificar_view, rutina_view, nueva_rutina_view, registro_ejercicio_view #Importamos las vistas
+from rutinas.views import rutina_detalle_view, ver_perfil_alumno_view, editar_perfil_profe_view, asignar_rutina_view, pago_procesado_view, detalle_servicio_view, comprar_view, historial_rutinas_cliente_view, perfil_profe_view, detalle_producto_view,catalog_view, pagar_view, detalle_pago_view, index_view, pagos_view, historial_rutinas_view, info_ejercicio_view, perfil_alumno_view, calificar_view, rutina_view, nueva_rutina_view, registro_ejercicio_view #Importamos las vistas
 
 
 
