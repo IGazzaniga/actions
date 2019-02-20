@@ -16,24 +16,29 @@
 {% block principal %}
 <div class="buscador">
     <h2>Comprar</h2>
-    <form method="POST">
-        {% csrf_token %}
-        <h3><b>Servicio:</b> {{servicio.nombre}}</h3>
-        <h3><b>Precio:</b> ${{servicio.precio}}</h3><br>
-        <h3><b>Desde: </b>{{desde}}</h3>
-        <h3><b>Hasta: </b>{{hasta}}</h3>
-        <h3>Paga con</h3>
-        <div class="form-check">
-                {{ form.medio_pago.label }}
-                {{ form.medio_pago }}
-        </div>
-        <br>
-        <div class="form-group">
-                {{ form.num_tarjeta.label }}
-                {{ form.num_tarjeta }}
-        </div>
-        <button type="submit" class="col-sm-12 btn btn-success">Pagar</button>  
-    </form>
+    {% if al_dia %}
+        <h3>Su última cuota vence el {{f.hasta}}</h3>
+        <h3>No puede contratar otro servicio hasta esa fecha</h3>
+    {% else %}
+        <form method="POST">
+            {% csrf_token %}
+            <h3><b>Servicio:</b> {{servicio.nombre}}</h3>
+            <h3><b>Precio:</b> ${{servicio.precio}}</h3><br>
+            <h3><b>Desde: </b>{{desde}}</h3>
+            <h3><b>Hasta: </b>{{hasta}}</h3>
+            <h3>Paga con</h3>
+            <div class="form-check">
+                    {{ form.medio_pago.label }}
+                    {{ form.medio_pago }}
+            </div>
+            <br>
+            <div class="form-group">
+                    {{ form.num_tarjeta.label }}
+                    {{ form.num_tarjeta }}
+            </div>
+            <button type="submit" class="col-sm-12 btn btn-success">Pagar</button>  
+        </form>
 </div>
+    {% endif %}
 {% endblock%}
 {% endblock%}
