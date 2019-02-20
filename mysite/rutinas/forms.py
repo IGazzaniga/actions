@@ -1,5 +1,5 @@
 from django import forms
-from .models import Rutina, Semana, Cliente, RutinaCliente, Venta, DetalleVenta, FichaMedica, Registro, Dia, Ejercicio, Serie
+from .models import Rutina, Semana, Profesor, Cliente, RutinaCliente, Venta, DetalleVenta, FichaMedica, Registro, Dia, Ejercicio, Serie
 from django.forms import ModelForm, inlineformset_factory
 from django.utils.translation import ugettext_lazy as _
 from mysite import settings
@@ -59,7 +59,32 @@ class ClienteForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
         super(ClienteForm, self).__init__(*args, **kwargs)
-        self.fields['foto'].required = False
+        self.fields['foto'].null = False
+
+class ProfesorForm(forms.ModelForm):
+    class Meta:
+        model = Profesor
+        fields = ['nombre','apellido','foto','mail', 'telefono', 'domicilio']
+        labels = {
+            'nombre': _('Nombre'),
+            'apellido': _('Apellido'),
+            'foto': _('Foto de perfil'),
+            'mail': _('E-mail'),
+            'telefono': _('Teléfono'),
+            'domicilio': _('Domicilio')
+        }
+        widgets = {
+            'nombre': forms.TextInput(),
+            'apellido': forms.TextInput(),
+            'foto': forms.widgets.ClearableFileInput(),
+            'mail': forms.EmailInput(),
+            'telefono': forms.NumberInput(),
+            'domicilio': forms.TextInput()
+        }
+    
+    def __init__(self, *args, **kwargs):
+        super(ProfesorForm, self).__init__(*args, **kwargs)
+        self.fields['foto'].null = False
 
 class FichaForm(forms.ModelForm):
     class Meta:

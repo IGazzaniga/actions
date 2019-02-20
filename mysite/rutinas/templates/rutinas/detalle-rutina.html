@@ -15,19 +15,19 @@
 {% endblock %} 
 {% block principal %}
 <div class="buscador">
-    <h2>{{cliente.nombre}} {{cliente.apellido}}</h2>
-    <h2>Asignar rutina</h2>
-    <form method="POST">
-        {% csrf_token %}
-        <h3><b>{{ form.rutina.label }}</b></h3>
-        {{ form.rutina }}
-        <br><br><br>
-        {{ form.actual.label }}
-        {{ form.actual }}
-        <br>
-        <button type="submit" class="col-sm-12 btn btn-success">Asignar</button>
-        
-    </form>
+    <h2 style="text-align: center;">{{rutina.nombre}}</h2>
+    {% for dia in dias reversed %}
+        <h3>Dia{{forloop.counter}}</h3>
+        <ul>
+        {% for ejercicio in ejercicios %}
+            {% ifequal ejercicio.dia dia %}
+               <li>{{ejercicio.ejercicio.nombre}}</li>
+            {% endifequal %}
+        {% endfor %}
+        </ul>
+    {% endfor %}
+    <a href="{% url 'editar_rutina' rutina.id %}"><button type="button" class="col-sm-12 btn btn-success">Editar rutina</button></a>  
+
 </div>
 {% endblock%}
 {% endblock%}

@@ -14,20 +14,15 @@
 {{ block.super }} 
 {% endblock %} 
 {% block principal %}
-<div class="buscador">
-    <h2>{{cliente.nombre}} {{cliente.apellido}}</h2>
-    <h2>Asignar rutina</h2>
-    <form method="POST">
-        {% csrf_token %}
-        <h3><b>{{ form.rutina.label }}</b></h3>
-        {{ form.rutina }}
-        <br><br><br>
-        {{ form.actual.label }}
-        {{ form.actual }}
-        <br>
-        <button type="submit" class="col-sm-12 btn btn-success">Asignar</button>
-        
-    </form>
+<div class="centrado">
+    <div class="perfil-camera">
+        <img src="{{cliente.foto.url}}" alt="" class="img-fluid calificacion img-perfil">
+    </div>
+    <h4>{{cliente.nombre}} {{cliente.apellido}}</h4>
+    Mail:<p>{{cliente.mail}}</p>
+    Teléfono:<p>{{cliente.telefono}}</p>
+    Domicilio:<p>{{cliente.domicilio}}</p>
+    <h2><a href="{% url 'historial_rutinas' cliente.id %}">Ver rutinas</a></h2>
 </div>
 {% endblock%}
 {% endblock%}

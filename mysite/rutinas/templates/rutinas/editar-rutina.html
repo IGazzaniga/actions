@@ -14,10 +14,11 @@
 {% block principal %}
 <div class="contenedor">
     <br><br><br><br>
-    <h1 style="text-align: center;">Nueva rutina</h1><br>
+    <h1 style="text-align: center;">Editar {{rutina.nombre}}</h1><br>
     <form method="POST">
         {% csrf_token %}
-        {{ form }}
+        {{ form.nombre.label }} 
+        <input type="text" value="{{rutina.nombre}}" name="nombre" maxlength="30" required="" id="id_nombre">       
         <br><br>
         <h4>{{ dia_form_1.ejercicios.label }} dia 1</h4>
         <br>
