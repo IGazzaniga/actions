@@ -19,12 +19,15 @@ def index_view(request):
         usuario = request.user
         if usuario.groups.filter(name='Clientes').exists():
         #Si pertenece al grupo Clientes, va a inicio-alumno
-                cliente = Cliente.objects.get(user=usuario)
+            cliente = Cliente.objects.get(user=usuario)
+            if cliente.rutinas.all():
                 rutinas = RutinaCliente.objects.get(cliente=cliente, actual=True)
                 rutinacliente = rutinas.id
                 return render(request, "rutinas/inicio-alumno.html",
-        {'cliente': cliente, 'usuario': usuario, 'rutinacliente': rutinacliente})
-
+            {'cliente': cliente, 'usuario': usuario, 'rutinacliente': rutinacliente})
+            else:
+                return render(request, "rutinas/inicio-alumno.html",
+            {'cliente': cliente, 'usuario': usuario})
         elif usuario.groups.filter(name='Profesores').exists():
         #Si pertenece al grupo Profesores, va a inicio-profe
                 profesor = Profesor.objects.get(user=usuario)
@@ -143,7 +146,7 @@ def historial_rutinas_view(request,id):
         usuario = request.user
         if usuario.groups.filter(name='Profesores').exists():
             cliente = Cliente.objects.get(id=id)
-            profesor = Profesor.objects.get(usuario)
+            profesor = Profesor.objects.get(user=usuario)
             rutinas = cliente.rutinas.all()
             return render(request, 'rutinas/historial-rutinas.html', {'profesor':profesor, 'usuario': usuario, 'cliente':cliente, 'rutinas': rutinas})
         else:
@@ -229,15 +232,23 @@ def catalog_view(request):
 
 @login_required
 def detalle_producto_view(request, id):
-    producto = get_object_or_404(Producto, id=id)
-    return render(request, 'rutinas/detalle-producto.html', {'producto': producto})
+    usuario= None
+    if request.user.is_authenticated:
+        usuario = request.user
+        cliente = Cliente.objects.get(user=usuario)
+        producto = get_object_or_404(Producto, id=id)
+        return render(request, 'rutinas/detalle-producto.html', {'cliente': cliente, 'producto': producto})
 
 @login_required
 def detalle_servicio_view(request, id):
-    servicio = get_object_or_404(Servicio, id=id)
-    desde = datetime.date.today()
-    hasta = desde + relativedelta(months=1)
-    return render(request, 'rutinas/detalle-servicio.html', {'desde':desde, 'hasta':hasta, 'servicio': servicio})
+    usuario= None
+    if request.user.is_authenticated:
+        usuario = request.user
+        cliente = Cliente.objects.get(user=usuario)
+        servicio = get_object_or_404(Servicio, id=id)
+        desde = datetime.date.today()
+        hasta = desde + relativedelta(months=1)
+        return render(request, 'rutinas/detalle-servicio.html', {'cliente':cliente, 'desde':desde, 'hasta':hasta, 'servicio': servicio})
 
 @login_required
 def perfil_alumno_view(request):
@@ -396,7 +407,11 @@ def pagar_view(request, id):
 
 @login_required
 def pago_procesado_view(request):
-    return render(request, 'rutinas/pago-procesado.html')
+    usuario= None
+    if request.user.is_authenticated:
+        usuario = request.user
+        cliente = Cliente.objects.get(user=usuario)
+        return render(request, 'rutinas/pago-procesado.html', {'cliente': cliente})
         
 @login_required
 def perfil_profe_view(request,id):
@@ -404,8 +419,9 @@ def perfil_profe_view(request,id):
     if request.user.is_authenticated:
         usuario = request.user
         if usuario.groups.filter(name="Clientes").exists():
+            cliente = Cliente.objects.get(user=usuario)
             profesor = get_object_or_404(Profesor, id=id)
-            return render(request, 'rutinas/perfil-profe.html', {'profesor': profesor})
+            return render(request, 'rutinas/perfil-profe.html', {'cliente':cliente, 'profesor': profesor})
         else:
             raise Http404("No tiene permiso para acceder aquí")
 
@@ -423,6 +439,9 @@ def registro_ejercicio_view(request, r, e, d, s):
                 except Registro.DoesNotExist:
                         reg = Registro.objects.create(rutina_ejercicio=re, semana=sem)
                         form = SerieForm()
+                        for i in range(1, 5):
+                            ser = Serie.objects.create(numero=i, peso_levantado=0, repeticiones=0, registro=reg)
+                            ser.save()
                         return render(request, 'rutinas/registro-ejercicio.html', {'r':r, 'e':e, 'd':d, 's':s, 'form': form, 'sem': sem, 'reg': reg, 'cliente': cliente})
                 else:
                         if request.method == 'POST':
@@ -432,25 +451,15 @@ def registro_ejercicio_view(request, r, e, d, s):
                                         rnew.completado = True
                                         rnew.save()
                                         rc = RutinaCliente.objects.get(cliente=cliente, actual=True)
-                                        return redirect(rutina_view, id=rc.id)                               
-                                try:
-                                        ser = Serie.objects.get(numero=request.POST['id_numero'], registro=reg)
-                                except Serie.DoesNotExist:
-                                        form = SerieForm()
-                                        serie = form.save(commit=False)
-                                        serie.numero = request.POST['id_numero']
-                                        serie.peso_levantado = request.POST['id_peso_levantado']
-                                        serie.repeticiones = request.POST['id_repeticiones']
-                                        serie.registro = reg
-                                        serie.save()
-                                        return redirect(registro_ejercicio_view, r=r, e=e, d=d, s=s)
-                                else:
-                                        f = SerieForm(instance=ser)
-                                        snew = f.save(commit=False)
-                                        snew.peso_levantado = request.POST['id_peso_levantado']
-                                        snew.repeticiones = request.POST['id_repeticiones']
-                                        snew.save()
-                                        return redirect(registro_ejercicio_view, r=r, e=e, d=d, s=s)
+                                        return redirect(rutina_view, id=rc.id)  
+                                for i in range(1, 5):                                
+                                    ser = Serie.objects.get(numero=request.POST['id_numero'+str(i)], registro=reg)
+                                    f = SerieForm(instance=ser)
+                                    snew = f.save(commit=False)
+                                    snew.peso_levantado = request.POST['id_peso_levantado'+str(i)]
+                                    snew.repeticiones = request.POST['id_repeticiones'+str(i)]
+                                    snew.save()
+                                return redirect(registro_ejercicio_view, r=r, e=e, d=d, s=s)
                         form = SerieForm()
                         return render(request, 'rutinas/registro-ejercicio.html', {'r':r, 'e':e, 'd':d, 's':s, 'form': form, 'sem':sem, 'reg': reg, 'cliente': cliente})
             else:

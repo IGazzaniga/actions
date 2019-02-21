@@ -33,12 +33,28 @@
             </div>
             <br>
             <div class="form-group">
-                    {{ form.num_tarjeta.label }}
-                    {{ form.num_tarjeta }}
+                    Número de tarjeta
+                    <input onchange=valida() type="number" name="num_tarjeta" required id="id_num_tarjeta">
+                    <p style="color:red; display:none" id="alerta">El número de tarjeta debe contener 16 dígitos</p>    
             </div>
-            <button type="submit" class="col-sm-12 btn btn-success">Pagar</button>  
+            <button id="procesar" type="button" class="col-sm-12 btn btn-success">Pagar</button>  
         </form>
 </div>
     {% endif %}
 {% endblock%}
+{% block scripts %}
+    <script language="JavaScript" type="text/javascript" src="{% static 'rutinas/js/effects.js' %}"></script>
+    <script rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+<script>
+function valida(){
+    var i=document.getElementById("id_num_tarjeta").value;
+    if (i.toString().length != 16){
+        document.getElementById("alerta").style.display = "block";
+    }else {
+        document.getElementById("procesar").type = "submit";
+    }
+}
+</script>
+    {% endblock %}
 {% endblock%}

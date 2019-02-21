@@ -59,7 +59,7 @@ class ClienteForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
         super(ClienteForm, self).__init__(*args, **kwargs)
-        self.fields['foto'].null = False
+        self.fields['foto'].null = True
 
 class ProfesorForm(forms.ModelForm):
     class Meta:
@@ -84,7 +84,7 @@ class ProfesorForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
         super(ProfesorForm, self).__init__(*args, **kwargs)
-        self.fields['foto'].null = False
+        self.fields['foto'].null = True
 
 class FichaForm(forms.ModelForm):
     class Meta:

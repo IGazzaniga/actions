@@ -55,7 +55,11 @@
             <p> <span>Go</span> <br> <span>hard</span> <br> <span>or</span> <br> <span>Go</span> <br> <span>home</span></p>
             <p> <span>Go</span> <br> <span>hard</span> <br> <span>or</span> <br> <span>Go</span> <br> <span>home</span></p>   
             {% block acceder_rutina %}
-            <h1><a href="{% url 'rutinaAlumno' rutinacliente %}">Mi Rutina</a></h1>
+            {% if rutinacliente %}
+                <h1><a href="{% url 'rutinaAlumno' rutinacliente %}">Mi Rutina</a></h1>
+            {% else %}
+                <h1><a href="#">Sin rutinas asignadas</a></h1>
+            {% endif %}
             {% endblock %}
         </div>    
     {% endblock%} <!-- Se cierra el bloque principal -->
