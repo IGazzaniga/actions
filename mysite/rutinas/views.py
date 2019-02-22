@@ -147,9 +147,13 @@ def historial_rutinas_view(request,id):
         if usuario.groups.filter(name='Profesores').exists():
             cliente = Cliente.objects.get(id=id)
             profesor = Profesor.objects.get(user=usuario)
-            rutinas = cliente.rutinas.all()
-            return render(request, 'rutinas/historial-rutinas.html', {'profesor':profesor, 'usuario': usuario, 'cliente':cliente, 'rutinas': rutinas})
-        else:
+            try:
+                rutinas = RutinaCliente.objects.filter(cliente=cliente)
+                actual = RutinaCliente.objects.get(actual=True, cliente=cliente)
+                return render(request, 'rutinas/historial-rutinas.html', {'actual':actual, 'profesor':profesor, 'usuario': usuario, 'cliente':cliente, 'rutinas': rutinas})
+            except RutinaCliente.DoesNotExist:
+                no_hay = True
+                return render(request, 'rutinas/historial-rutinas.html', {'no_hay':no_hay, 'profesor':profesor, 'usuario': usuario, 'cliente':cliente})
             raise Http404("No tiene permiso para acceder aquí")
 
 @login_required
@@ -300,7 +304,7 @@ def editar_perfil_profe_view(request):
     usuario= None
     if request.user.is_authenticated:
         usuario = request.user
-        if usuario.groups.filter(name="Clientes").exists():
+        if usuario.groups.filter(name="Profesores").exists():
             profesor = Profesor.objects.get(user=usuario)
             if request.method == 'POST':
                 form = ProfesorForm(request.POST, request.FILES)

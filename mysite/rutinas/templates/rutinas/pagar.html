@@ -19,6 +19,8 @@
     {% if al_dia %}
         <h3>Su última cuota vence el {{f.hasta}}</h3>
         <h3>No puede contratar otro servicio hasta esa fecha</h3>
+        <button onclick="window.location.href='/rutinas/';" class="col-sm-12 btn btn-success">INICIO</button>
+
     {% else %}
         <form method="POST">
             {% csrf_token %}

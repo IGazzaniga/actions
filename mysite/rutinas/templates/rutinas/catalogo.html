@@ -34,6 +34,7 @@
         {% endfor %}
     </div>
     <div id="Servicios" class="centrado tabcontent">
+    <h2>Servicios</h2>
     {% for servicio in servicios %}
     <div class="col-sm-12 col-md-12 col-lg-6 col-lg-6" id="producto">
         <a class="nombre" href="{% url 'detalle_servicio' servicio.id %}">

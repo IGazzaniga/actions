@@ -206,10 +206,10 @@
         width: 70%;
         border-radius: 200px 0 0 200px;
         background-color: #f6f6f6;
-        padding: 12px  0 12px 12px;
+        padding: 12px  0 12px 5px;
         margin-bottom: 10px;
         text-decoration: none;
-        font-size: 18px;
+        font-size: 15px;
         color: #687480; }
       .buscador #listClient li .icono1 {
         width: 15%;
