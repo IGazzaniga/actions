@@ -20,12 +20,12 @@ def index_view(request):
         if usuario.groups.filter(name='Clientes').exists():
         #Si pertenece al grupo Clientes, va a inicio-alumno
             cliente = Cliente.objects.get(user=usuario)
-            if cliente.rutinas.all():
+            try:
                 rutinas = RutinaCliente.objects.get(cliente=cliente, actual=True)
                 rutinacliente = rutinas.id
                 return render(request, "rutinas/inicio-alumno.html",
             {'cliente': cliente, 'usuario': usuario, 'rutinacliente': rutinacliente})
-            else:
+            except RutinaCliente.DoesNotExist:
                 return render(request, "rutinas/inicio-alumno.html",
             {'cliente': cliente, 'usuario': usuario})
         elif usuario.groups.filter(name='Profesores').exists():
