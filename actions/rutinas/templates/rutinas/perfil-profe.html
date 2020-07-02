@@ -1,0 +1,25 @@
+{% extends "../rutinas/inicio-alumno.html" %}
+
+{% load static %}
+{% load ratings %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'rutinas/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'rutinas/css/inicioProfe.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+{% endblock %}
+{% block contenido %} <!-- Se define el bloque que encierra todo el contenido de esta vista -->
+{% block menu %}
+{{ block.super }} 
+{% endblock %} 
+{% block principal %}
+<div class="centrado">
+    <div class="perfil-camera">
+        <img src="{{profesor.foto.url}}" alt="" class="img-fluid calificacion img-perfil">
+    </div>
+    <h3>{{profesor.nombre}} {{profesor.apellido}}</h3>
+    {% ratings profesor %}
+</div>
+{% endblock%}
+{% endblock%}

@@ -1,0 +1,26 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+ipython = "==7.2.0"
+isort = "==4.3.4"
+black = "==19.10b"
+
+[packages]
+django-star-ratings = "==0.9.1"
+pytz = "==2020.1"
+requests = "==2.24.0"
+urllib3 = "==1.24.1"
+Django = "==3.0"
+django-widget-tweaks = "==1.4.8"
+python-dateutil="==2.8.1"
+Pillow="==7.2.0"
+six = "==1.15.0"
+djangorestframework = "*"
+markdown = "*"
+django-filter = "*"
+
+[requires]
+python_version = "3.8"
