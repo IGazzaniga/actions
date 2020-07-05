@@ -1,27 +1,25 @@
-# import datetime
-#
-# from dateutil.relativedelta import relativedelta
-# from django.contrib.auth.decorators import login_required
-# from django.http import Http404
-# from django.shortcuts import get_object_or_404, redirect, render
-# from django.template import RequestContext
-# from django.urls import reverse
-#
-# from .models import (
-#    Day,
-#    Exercise,
-#    Register,
-#    Routine,
-#    RoutineClient,
-#    RoutineExercise,
-#    Serie,
-#    Week,
-# )
+import datetime
+from dateutil.relativedelta import relativedelta
+from django.contrib.auth.decorators import login_required
+from django.http import Http404
+from django.shortcuts import get_object_or_404, redirect, render
+from django.template import RequestContext
+from django.urls import reverse
+from .models import (
+    Day,
+    Exercise,
+    Register,
+    Routine,
+    RoutineClient,
+    RoutineExercise,
+    Serie,
+    Week,
+)
 
 # Create your views here.
 
 
-""" @login_required
+@login_required
 def index_view(request):
     user = None
     if request.user.is_authenticated:
@@ -54,6 +52,7 @@ def index_view(request):
         )
 
 
+""" 
 @login_required
 def rutina_view(request, id):
     user = None

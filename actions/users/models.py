@@ -11,7 +11,7 @@ class BranchManager(models.Model):
     """
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    branch = models.ForeignKey("users.Branch", on_delete=models.PROTECT)
+    branch = models.ForeignKey("stock.Branch", on_delete=models.PROTECT)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
