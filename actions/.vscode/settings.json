@@ -1,4 +1,6 @@
 {
-    "python.linting.enabled": true,
-    "python.pythonPath": "/home/ignacio/actions/env/bin/python"
+    "python.pythonPath": "/home/ignacio/.local/share/virtualenvs/actions-e4cC3I1M/bin/python",
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true
 }

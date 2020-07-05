@@ -1,0 +1,61 @@
+{% extends "../routines/inicio-alumno.html" %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'routines/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'routines/css/inicioProfe.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+{% endblock %}
+{% block contenido %} <!-- Se define el bloque que encierra todo el contenido de esta vista -->
+{% block menu %} <!-- En este bloque se define el menú lateral -->
+<div class="menu">
+    <span class="logo"><img src="../../static/routines/img/APPTincho.svg" height="60px"></span>
+    <span><a class="exit" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a></span>
+    <div class="burger-icon" onclick="openMenu()">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+    </div>
+</div>
+
+<div class="menu-lateral">
+    <i class="fas fa-times" onclick="closeMenu()"></i>
+
+    <div class="image">
+        <img src="{{ profesor.foto.url }}">
+    </div>
+
+    <ul>
+        <li>
+            <i class="fas fa-home"></i>
+            <span><a href="{% url 'routines' %}">Home</a></span>
+        </li>
+        <li>
+            <i class="fas fa-user"></i>
+            <span><a href="{% url 'editar_perfil_profe' %}">Perfil</a></span>
+        </li>
+        <br>
+        <li>
+            <i class="fas fa-dumbbell"></i>
+            <span><a href="{% url 'nueva_rutina' %}">Añadir Rutinas</a></span>
+        </li>
+    </ul>
+</div>
+{% endblock %} <!-- Se cierra el bloque del menú -->
+{% block principal %}
+<div class="buscador">
+    <h2>Clientes</h2>
+    <input type="text" id="myInput" onkeyup="searchClient()" placeholder="Busca por nombres..." title="Ingrese un nombre">
+    <ul id="listClient">
+        {% for cliente in lista_clientes %}
+        <li class="row">
+            <a class="nombre" href="{% url 'ver_perfil_alumno' cliente.id%}">{{cliente.nombre}} {{cliente.apellido}}</a>
+            <a href="{% url 'historial_rutinas' cliente.id %}" class="icono1"><i class="fas fa-book"></i></a>
+            <a href="{% url 'asignar_rutina' cliente.id %}" class="icono2"><i class="fas fa-plus-circle"></i></a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock%}
+{% endblock%}

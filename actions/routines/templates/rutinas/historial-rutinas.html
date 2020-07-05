@@ -1,0 +1,36 @@
+{% extends "../routines/inicio-profe.html" %}
+
+{% load static %}
+{% load ratings %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'routines/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'routines/css/inicioProfe.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+{% endblock %}
+{% block contenido %} <!-- Se define el bloque que encierra todo el contenido de esta vista -->
+{% block menu %}
+{{ block.super }}
+{% endblock %}
+{% block principal %}
+<div class="buscador">
+    <h2>Rutinas</h2>
+    {% if no_hay %}
+        <h3>El cliente no tiene routines</h3>
+    {% else %}
+    <input type="text" id="myInput" onkeyup="searchClient()" placeholder="Busca por nombres..." title="Ingrese un nombre">
+    <ul id="listClient">
+        {% for rutina in routines %}
+            {% ifequal rutina.id actual.id %}
+                <li class="row"><a class="nombre" href="{% url 'detalle_rutina' rutina.id %}">{{rutina.rutina.nombre}}</a><a href="#" class="icono2"><i class="fas fa-check-circle"></i></a> </li>
+            {% else %}
+                <li class="row"><a class="nombre" href="{% url 'detalle_rutina' rutina.id %}">{{rutina.rutina.nombre}}</a><a href="#" class="icono2"><i></i></a> </li>
+            {% endifequal %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <a href="{% url 'asignar_rutina' cliente.id %}"><button type="button" class="col-sm-12 btn btn-success">Asignar nueva rutina</button></a>
+</div>
+{% endblock%}
+{% endblock%}

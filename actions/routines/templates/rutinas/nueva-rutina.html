@@ -1,0 +1,38 @@
+{% extends "../routines/inicio-profe.html" %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'routines/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'routines/css/perfil.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+{% endblock %}
+{% block contenido %} <!-- Se define el bloque que encierra todo el contenido de esta vista -->
+{% block menu %} <!-- En este bloque se define el menú lateral -->
+    {{block.super}}
+{% endblock %} <!-- Se cierra el bloque del menú -->
+{% block principal %}
+<div class="contenedor">
+    <br><br><br><br>
+    <h1 style="text-align: center;">Nueva rutina</h1><br>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <br><br>
+        <h4>{{ dia_form_1.ejercicios.label }} dia 1</h4>
+        <br>
+        {{ dia_form_1.ejercicios }}
+        <br>
+        <h4>{{ dia_form_2.ejercicios.label }} dia 2</h4>
+        <br>
+        {{ dia_form_2.ejercicios }}
+        <br>
+        <h4>{{ dia_form_3.ejercicios.label }} dia 3</h4>
+        <br>
+        {{ dia_form_3.ejercicios }}
+
+        <button type="submit" class="col-sm-12 btn btn-success">Guardar</button>
+    </form>
+</div>
+{% endblock%}
+{% endblock%}

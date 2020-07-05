@@ -8,7 +8,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-For running your project, you first need to install Pipenv.  
+For running your project, you first need to install Pipenv.
 
 ```
 pip install pipenv
@@ -47,7 +47,7 @@ python manage.py runserver
 
 ## Authors
 
-* **Ignacio Gazzaniga** 
-* **Martín Lucena** 
-* **Ulises Perez Rodriguez** 
-* **Iván Steger** 
+* **Ignacio Gazzaniga**
+* **Martín Lucena**
+* **Ulises Perez Rodriguez**
+* **Iván Steger**

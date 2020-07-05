@@ -10,7 +10,7 @@
 
     {% load static %}
     {% block styles %}
-    <link rel="stylesheet" href="{% static 'rutinas/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'routines/css/style.css' %}">
     {% endblock %}
     <!-- Bootstrap CSS -->
     {% block bootstrap %}
@@ -28,10 +28,10 @@
 
 <body>
     {% block contenido %} <!-- Se define el bloque que encierra todo el contenido de esta vista -->
-    <h1>Bienvenido a tus rutinas</h1>
+    <h1>Bienvenido a tus routines</h1>
     {% endblock %}
 
-    
+
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -41,7 +41,7 @@
         crossorigin="anonymous"></script>
     <!-- Optional JavaScript -->
     {% block scripts %}
-    
+
     {% endblock %}
 </body>
 

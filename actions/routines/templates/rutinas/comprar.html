@@ -1,0 +1,57 @@
+{% extends "../routines/inicio-alumno.html" %}
+{% load static %}
+{% load ratings %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'routines/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'routines/css/inicioProfe.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+    {% endblock %}
+{% block contenido %} <!-- Se define el bloque que encierra todo el contenido de esta vista -->
+{% block menu %}
+{{ block.super }}
+{% endblock %}
+{% block principal %}
+<div class="buscador">
+    <h2>Comprar</h2>
+    {% ifequal producto.stock 0 %}
+        <h3>No hay stock de este producto</h3>
+        <button onclick="window.location.href='/routines/catalogo/';" class="col-sm-12 btn btn-success">VOLVER</button>
+
+    {% else %}
+    <form method="POST">
+        {% csrf_token %}
+        <h3><b>Producto:</b> {{producto.nombre}}</h3>
+        <h3><b>Precio unitario:</b> ${{producto.precio}}</h3><br>
+        <div class="form-check">
+            {{ form.medio_pago.label }}
+            {{ form.medio_pago }}
+        </div>
+        <br>
+        <div class="form-group">
+                Número de tarjeta
+                <input onchange=valida() type="number" name="num_tarjeta" required id="id_num_tarjeta">
+                <p style="color:red; display:none" id="alerta">El número de tarjeta debe contener 16 dígitos</p>
+        </div>
+        <button id="procesar" type="button" class="col-sm-12 btn btn-success">Pagar</button>
+    </form>
+    {% endifequal %}
+</div>
+{% endblock%}
+{% block scripts %}
+    <script language="JavaScript" type="text/javascript" src="{% static 'routines/js/effects.js' %}"></script>
+    <script rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+<script>
+function valida(){
+    var i=document.getElementById("id_num_tarjeta").value;
+    if (i.toString().length != 16){
+        document.getElementById("alerta").style.display = "block";
+    }else {
+        document.getElementById("procesar").type = "submit";
+    }
+}
+</script>
+{% endblock %}
+{% endblock%}
