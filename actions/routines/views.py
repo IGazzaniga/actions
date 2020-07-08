@@ -1,58 +1,23 @@
 import datetime
+
 from dateutil.relativedelta import relativedelta
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template import RequestContext
 from django.urls import reverse
-from .models import (
-    Day,
-    Exercise,
-    Register,
-    Routine,
-    RoutineClient,
-    RoutineExercise,
-    Serie,
-    Week,
-)
+
+from .models import Day, Exercise, Register, Routine, RoutineClient, RoutineExercise, Serie, Week
 
 # Create your views here.
 
 
 @login_required
 def index_view(request):
-    user = None
-    if request.user.is_authenticated:
-        user = request.user
-        if user.groups.filter(name="Clients").exists():
-            # Si pertenece al grupo Clients, va a inicio-alumno
-            client = Client.objects.get(user=user)
-            try:
-                routine = RoutineClient.objects.get(client=client, is_current=True)
-                routine_client = routines.id
-                return render(
-                    request,
-                    "routines/inicio-alumno.html",
-                    {"client": client, "user": user, "routine_client": routine_client,},
-                )
-            except RoutineClient.DoesNotExist:
-                return render(
-                    request,
-                    "routines/inicio-alumno.html",
-                    {"client": client, "user": user},
-                )
-        elif user.groups.filter(name="Profesores").exists():
-            # Si pertenece al grupo Profesores, va a inicio-profe
-            # profesor = Profesor.objects.get(user=user)
-            lista_clients = Client.objects.filter(profesor=profesor)
-        return render(
-            request,
-            "routines/inicio-profe.html",
-            {"user": user, "profesor": profesor, "lista_clients": lista_clients,},
-        )
+    pass
 
 
-""" 
+"""
 @login_required
 def rutina_view(request, id):
     user = None

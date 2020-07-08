@@ -4,6 +4,10 @@ from django.db import models
 
 
 class Exercise(models.Model):
+    """
+    An exerice of a routine
+    """
+
     name = models.CharField(max_length=30, default="")
     description = models.TextField(default="")
     gif = models.ImageField(default="")
@@ -13,6 +17,10 @@ class Exercise(models.Model):
 
 
 class Routine(models.Model):
+    """
+    A routine, that can be a generic one
+    """
+
     name = models.CharField(max_length=30, default="")
 
     def __str__(self):
@@ -20,11 +28,19 @@ class Routine(models.Model):
 
 
 class Day(models.Model):
+    """
+    A day of the routine
+    """
+
     exercises = models.ManyToManyField(Exercise)
     routine = models.ForeignKey(Routine, on_delete=models.CASCADE)
 
 
 class RoutineClient(models.Model):
+    """
+    Intermediate table
+    """
+
     client = models.ForeignKey("users.Client", on_delete=models.PROTECT)
     routine = models.ForeignKey(Routine, on_delete=models.PROTECT)
     is_current = models.BooleanField()
@@ -42,20 +58,30 @@ class RoutineExercise(models.Model):
 
 
 class Week(models.Model):
+    """
+    A week of the routine
+    """
+
     number = models.IntegerField(default=1)
-    routine_client = models.ForeignKey(
-        RoutineClient, on_delete=models.PROTECT, null=True
-    )
+    routine_client = models.ForeignKey(RoutineClient, on_delete=models.PROTECT, null=True)
     days = models.ManyToManyField(Day)
 
 
 class Register(models.Model):
+    """
+    A register, in which the comments about an exercise are going to be made
+    """
+
     routine_exercise = models.ForeignKey(RoutineExercise, on_delete=models.PROTECT)
     is_completed = models.BooleanField(default=False)
     week = models.ForeignKey(Week, on_delete=models.PROTECT, null=True)
 
 
 class Serie(models.Model):
+    """
+    A serie of the routine
+    """
+
     number = models.IntegerField(default=1)
     weight_lifted = models.IntegerField(default=0)
     reps = models.IntegerField(default=0)
