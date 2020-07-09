@@ -1,0 +1,92 @@
+[
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$180000$PoowCHwsfmiF$HEcVeVTm1CUSHLKNbkk+RtVSo/kL97A8ev+wJmt1RY8=",
+        "last_login": "2020-07-08T22:53:52.561Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2020-07-08T22:53:46.178Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$180000$ctAAOIVCLZwn$oNK5ZaBT7rZUytAiQV4MI3m66zCWEz4Vff/QwL7pe4o=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "cliente_1",
+        "first_name": "Juan",
+        "last_name": "P\u00e9rez",
+        "email": "cliente@uno.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2020-07-08T23:29:34.281Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$180000$QRS8FlfqN3cq$MQRxJaCRB1q1/UEoypn3BE9BKuqicf9XktHkhPAMowc=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "cliente_2",
+        "first_name": "Carlos",
+        "last_name": "Garc\u00eda",
+        "email": "cliente@dos.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2020-07-08T23:39:54.794Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$180000$IDy60hzKkS7I$NgAqG2E85zxSp0uu/hwQdFpLFxUkj+QFtDt1iBt9ndA=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "trainer_1",
+        "first_name": "July",
+        "last_name": "Trainer",
+        "email": "trainer@uno.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2020-07-08T23:42:40.073Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$180000$WaPA2eebd1AW$piEH2RUgbicnFOYzdC+yNPrim7DUmXs8pmPiDHyv3gg=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "manager_1",
+        "first_name": "María",
+        "last_name": "Gómez",
+        "email": "manager@uno.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2020-07-08T23:43:42Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

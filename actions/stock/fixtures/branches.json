@@ -1,0 +1,11 @@
+[
+{
+    "model": "stock.branch",
+    "pk": 1,
+    "fields": {
+        "name": "Sucursal 1",
+        "address": "Calle 5 876",
+        "phone": 112251351
+    }
+}
+]

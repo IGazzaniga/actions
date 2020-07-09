@@ -1,0 +1,10 @@
+[
+{
+    "model": "users.branchmanager",
+    "pk": 1,
+    "fields": {
+        "user": 5,
+        "branch": 1
+    }
+}
+]

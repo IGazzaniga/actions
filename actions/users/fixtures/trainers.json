@@ -1,0 +1,18 @@
+[
+{
+    "model": "users.trainer",
+    "pk": 1,
+    "fields": {
+        "user": 5,
+        "birth_date": "1978-11-20",
+        "dni": "25712145",
+        "gender": "Female",
+        "profile_picture": "",
+        "phone": 2381125678,
+        "address": "Calle 5 876",
+        "is_active": true,
+        "employee_since": "2020-07-08",
+        "employee_until": null
+    }
+}
+]
